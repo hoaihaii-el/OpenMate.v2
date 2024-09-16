@@ -1,0 +1,22 @@
+﻿<Application x:Class="OpenMate.Work.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:OpenMate.Work"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Page.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Button.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Image.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Text.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/Color.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <FontFamily x:Key="Nunito">./Resources/Fonts/Nunito-SemiBold.ttf#Nunito</FontFamily>
+            <FontFamily x:Key="NunitoLight">./Resources/Fonts/Nunito-Regular.ttf#Nunito</FontFamily>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

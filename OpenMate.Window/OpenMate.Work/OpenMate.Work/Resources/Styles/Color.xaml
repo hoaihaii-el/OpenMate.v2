@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="Primary">#3C6255</SolidColorBrush>
+    <SolidColorBrush x:Key="Secondary">#FFB000</SolidColorBrush>
+    <SolidColorBrush x:Key="TextColor">#004225</SolidColorBrush>
+    <SolidColorBrush x:Key="TextColor2">#EAE7B1</SolidColorBrush>
+    <SolidColorBrush x:Key="CardColor">#EEEEEE</SolidColorBrush>
+    <SolidColorBrush x:Key="DeleteColor">#BF3131</SolidColorBrush>
+</ResourceDictionary>
