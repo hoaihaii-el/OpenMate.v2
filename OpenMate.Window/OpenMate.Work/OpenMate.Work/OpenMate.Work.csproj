@@ -69,6 +69,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\Task.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Resources\Uitilities\BaseViewModel.cs" />
     <Compile Include="Resources\Uitilities\NavigateButton.cs" />
@@ -76,7 +78,15 @@
     <Compile Include="UCNavigator\MainNavigator.xaml.cs">
       <DependentUpon>MainNavigator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\BoardVM.cs" />
+    <Compile Include="ViewModel\ChatVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
+    <Compile Include="Views\BoardContent.xaml.cs">
+      <DependentUpon>BoardContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChatContent.xaml.cs">
+      <DependentUpon>ChatContent.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -89,9 +99,17 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\Styles\BoardDataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\ChatDataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\Color.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -114,6 +132,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UCNavigator\MainNavigator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BoardContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChatContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

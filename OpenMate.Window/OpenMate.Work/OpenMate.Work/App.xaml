@@ -12,6 +12,8 @@
                 <ResourceDictionary Source="Resources/Styles/Text.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Color.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/ChatDataTemplates.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/BoardDataTemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <FontFamily x:Key="Nunito">./Resources/Fonts/Nunito-SemiBold.ttf#Nunito</FontFamily>

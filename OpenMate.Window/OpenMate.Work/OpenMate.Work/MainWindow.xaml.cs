@@ -14,24 +14,31 @@ namespace OpenMate.Work
         {
             InitializeComponent();
             this.DataContext = new MainVM();
+            ChatContent.DataContext = new ChatVM();
+            BoardContent.DataContext = new BoardVM();
         }
 
-        private Color _MainTabColor = (Color)ColorConverter.ConvertFromString("#134B70");
-        private Color _TempTabColor = (Color)ColorConverter.ConvertFromString("#508C9B");
+        private Color _MainTabColor = (Color)ColorConverter.ConvertFromString("#e1e1e1");
+        private Color _TempTabColor = (Color)ColorConverter.ConvertFromString("#fff");
 
         private void ChatTab_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ChatTab.Background = new SolidColorBrush(_MainTabColor);
             BoardTab.Background = new SolidColorBrush(_TempTabColor);
-            ChatPanel.Visibility = Visibility.Visible;
-            BoardPanel.Visibility = Visibility.Hidden;
+            ChatContent.Visibility = Visibility.Visible;
+            BoardContent.Visibility = Visibility.Hidden;
         }
         private void BoardTab_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ChatTab.Background = new SolidColorBrush(_TempTabColor);
             BoardTab.Background = new SolidColorBrush(_MainTabColor);
-            ChatPanel.Visibility = Visibility.Hidden;
-            BoardPanel.Visibility = Visibility.Visible;
+            ChatContent.Visibility = Visibility.Hidden;
+            BoardContent.Visibility = Visibility.Visible;
+        }
+
+        private void PowerOff_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
         }
     }
 }
