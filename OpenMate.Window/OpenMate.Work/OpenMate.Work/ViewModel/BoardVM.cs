@@ -40,60 +40,72 @@ namespace OpenMate.Work.ViewModel
             {
                 new Task()
                 {
-                    Name = "Task1"
+                    Name = "Task1",
+                    Status = "Log"
                 },
                 new Task()
                 {
-                    Name = "Task2"
+                    Name = "Task2",
+                    Status = "Log"
                 },
                 new Task()
                 {
-                    Name = "Task1"
+                    Name = "Task1",
+                    Status = "Log"
                 }
             };
             Doing = new ObservableCollection<Task>
             {
                 new Task()
                 {
-                    Name = "Task1"
+                    Name = "Task1",
+                    Status = "Doing"
                 },
                 new Task()
                 {
-                    Name = "Task1"
+                    Name = "Task1",
+                    Status = "Doing"
                 }
             };
             Review = new ObservableCollection<Task>
             {
                 new Task()
                 {
-                    Name = "Task1"
+                    Name = "Task1",
+                    Status = "Review"
                 },
                 new Task()
                 {
-                    Name = "Task2"
+                    Name = "Task2",
+                    Status = "Review"
                 },
                 new Task()
                 {
-                    Name = "Task3"
+                    Name = "Task3",
+                    Status = "Review"
                 }
             };
             Finish = new ObservableCollection<Task>
             {
                 new Task()
                 {
-                    Name = "Task1"
+                    Name = "Task1",
+                    Status = "Finish"
                 },
                 new Task()
                 {
-                    Name = "Task2"
+                    Name = "Task2",
+                    Status = "Finish"
                 },
                 new Task()
                 {
-                    Name = "Task3"
+                    Name = "Task3",
+                    Status = "Finish"
                 },
                 new Task()
                 {
-                    Name = "Task4"
+                    Name = "Task4",
+                    Status = "Finish"
                 }
             };
         }

@@ -67,6 +67,7 @@
                     HorizontalContentAlignment="Center" 
                     VerticalContentAlignment="Center"/>
                 <ListBox
+                    x:Name="LogColumn"
                     AllowDrop="True"
                     Background="Transparent" 
                     BorderThickness="0"
@@ -91,6 +92,7 @@
                     HorizontalContentAlignment="Center" 
                     VerticalContentAlignment="Center"/>
                 <ListBox
+                    x:Name="DoingColumn"
                     AllowDrop="True"
                     Background="Transparent" 
                     BorderThickness="0"
@@ -114,6 +116,7 @@
                     HorizontalContentAlignment="Center" 
                     VerticalContentAlignment="Center"/>
                 <ListBox
+                    x:Name="ReviewColumn"
                     AllowDrop="True"
                     Background="Transparent" 
                     BorderThickness="0"
@@ -137,6 +140,7 @@
                     HorizontalContentAlignment="Center" 
                     VerticalContentAlignment="Center"/>
                 <ListBox
+                    x:Name="FinishColumn"
                     AllowDrop="True"
                     Background="Transparent" 
                     BorderThickness="0"
