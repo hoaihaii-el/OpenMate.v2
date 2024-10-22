@@ -125,7 +125,9 @@
                 <ControlTemplate TargetType="{x:Type Button}">
 
                     <Border x:Name="border"
-                            BorderThickness="0">
+                            BorderThickness="0"
+                            Margin="5 0"
+                            CornerRadius="5">
 
                         <Border.Background>
                             <SolidColorBrush 
@@ -133,10 +135,10 @@
                                 Color="#004225" />
                         </Border.Background>
 
-                        <ContentPresenter />
-                        
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
                     </Border>
-                    
+
 
                     <ControlTemplate.Triggers>
 
@@ -188,15 +190,10 @@
                                 Value="#739072" />
 
                         </Trigger>
-
                     </ControlTemplate.Triggers>
-
                 </ControlTemplate>
-
             </Setter.Value>
-
         </Setter>
-
     </Style>
 
     <Style
@@ -210,5 +207,18 @@
                 Value="Center"/>
         <Setter Property="VerticalAlignment"
                 Value="Center"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="RoundButton">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Height" Value="45"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="5 0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="6" />
+            </Style>
+        </Style.Resources>
     </Style>
 </ResourceDictionary>

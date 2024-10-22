@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="OpenMate.Work.Views.Boards.KanbanBoard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenMate.Work.Views.Boards"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1310">
+    <UserControl.Resources>
+        <Style TargetType="Label" x:Key="ColumnHeader">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="6" />
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="BorderThickness" Value="0"/>
+            <EventSetter Event="Drop" Handler="ListBoxItem_Drop"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="Border" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="Transparent">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="Transparent"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="Transparent"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0">
+            <Label 
+                Height="45" 
+                Margin="5" 
+                Content="BackLog" 
+                FontSize="16"
+                Background="#F95454"
+                Style="{StaticResource ColumnHeader}"
+                HorizontalContentAlignment="Center" 
+                VerticalContentAlignment="Center"/>
+            <ListBox
+                x:Name="LogColumn"
+                AllowDrop="True"
+                Background="Transparent" 
+                BorderThickness="0"
+                Height="640"
+                Drop="ListBox_Drop"
+                PreviewMouseMove="ListBox_PreviewMouseMove"
+                PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown"
+                MouseLeftButtonUp="ListBox_MouseLeftButtonUp"
+                ItemsSource="{Binding Log, Mode=TwoWay}" 
+                ItemTemplate="{StaticResource CardTemplate}" 
+                d:ItemsSource="{d:SampleData ItemCount=5}">
+            </ListBox>
+            <Button
+                Style="{StaticResource NormalButton}"
+                Content="Add BackLog"
+                Background="#7AB2D3"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1">
+            <Label 
+                Height="45" 
+                Margin="5" 
+                Content="Doing" 
+                FontSize="16"
+                Background="#F6EFBD"
+                Style="{StaticResource ColumnHeader}"
+                HorizontalContentAlignment="Center" 
+                VerticalContentAlignment="Center"/>
+            <ListBox
+                x:Name="DoingColumn"
+                AllowDrop="True"
+                Background="Transparent" 
+                BorderThickness="0"
+                Height="650"
+                Drop="ListBox_Drop"
+                PreviewMouseMove="ListBox_PreviewMouseMove"
+                PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown"
+                MouseLeftButtonUp="ListBox_MouseLeftButtonUp"
+                ItemsSource="{Binding Doing, Mode=TwoWay}" 
+                ItemTemplate="{StaticResource CardTemplate}" 
+                d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="2">
+            <Label 
+                Height="45" 
+                Margin="5" 
+                Content="Review" 
+                FontSize="16"
+                Background="#C9E9D2"
+                Style="{StaticResource ColumnHeader}"
+                HorizontalContentAlignment="Center" 
+                VerticalContentAlignment="Center"/>
+            <ListBox
+                x:Name="ReviewColumn"
+                AllowDrop="True"
+                Background="Transparent" 
+                BorderThickness="0"
+                Height="650"
+                Drop="ListBox_Drop"
+                PreviewMouseMove="ListBox_PreviewMouseMove"
+                PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown"
+                MouseLeftButtonUp="ListBox_MouseLeftButtonUp"
+                ItemsSource="{Binding Review, Mode=TwoWay}" 
+                ItemTemplate="{StaticResource CardTemplate}" 
+                d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="3">
+            <Label 
+                Height="45" 
+                Margin="5" 
+                Content="Finish" 
+                FontSize="16"
+                Background="#f1f1f1"
+                Style="{StaticResource ColumnHeader}"
+                HorizontalContentAlignment="Center" 
+                VerticalContentAlignment="Center"/>
+            <ListBox
+                x:Name="FinishColumn"
+                AllowDrop="True"
+                Background="Transparent" 
+                BorderThickness="0"
+                Height="650"
+                Drop="ListBox_Drop"
+                PreviewMouseMove="ListBox_PreviewMouseMove"
+                PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown"
+                MouseLeftButtonUp="ListBox_MouseLeftButtonUp"
+                ItemsSource="{Binding Finish, Mode=TwoWay}" 
+                ItemTemplate="{StaticResource CardTemplate}" 
+                d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

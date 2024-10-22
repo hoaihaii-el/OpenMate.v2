@@ -49,6 +49,7 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -83,6 +84,9 @@
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="Views\BoardContent.xaml.cs">
       <DependentUpon>BoardContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Boards\KanbanBoard.xaml.cs">
+      <DependentUpon>KanbanBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ChatContent.xaml.cs">
       <DependentUpon>ChatContent.xaml</DependentUpon>
@@ -136,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BoardContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Boards\KanbanBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
