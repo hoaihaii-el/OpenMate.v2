@@ -29,10 +29,11 @@
 
                 <menu:NavigateButton
                     Cursor="Hand"
+                    x:Name="ActiveSprint"
                     GroupName="Sprint"
                     Style="{StaticResource ButtonStyle}"
-                    Command="{Binding MenuCM}"
-                    IsChecked="True">
+                    IsChecked="True"
+                    Checked="NavigateButton_Checked">
                     <Grid>
                         <TextBlock
                             Text="Active Sprint"
@@ -42,9 +43,10 @@
 
                 <menu:NavigateButton
                     Cursor="Hand"
+                    x:Name="Sprints"
                     GroupName="Sprint"
                     Style="{StaticResource ButtonStyle}"
-                    Command="{Binding OrderCM}">
+                    Checked="NavigateButton_Checked">
                     <Grid>
                         <TextBlock
                             Text="Sprints"
@@ -54,9 +56,10 @@
 
                 <menu:NavigateButton
                     Cursor="Hand"
+                    x:Name="Chart"
                     GroupName="Sprint"
                     Style="{StaticResource ButtonStyle}"
-                    Command="{Binding OrderCM}">
+                    Checked="NavigateButton_Checked">
                     <Grid>
                         <TextBlock
                             Text="Chart"
@@ -64,7 +67,8 @@
                     </Grid>
                 </menu:NavigateButton>
             </StackPanel>
-            <board:KanbanBoard Grid.Column="1"/>
+            <board:KanbanBoard x:Name="Board" Grid.Column="1"/>
+            <board:Sprints x:Name="SprintList" Grid.Column="1" Visibility="Hidden"/>
         </Grid>
     </Border>
 </UserControl>

@@ -34,6 +34,13 @@ namespace OpenMate.Work.ViewModel
             set => SetProperty(ref _Finish, value);
         }
 
+        private ObservableCollection<Sprint> _SprintCol;
+        public ObservableCollection<Sprint> SprintCol
+        {
+            get => _SprintCol;
+            set => SetProperty(ref _SprintCol, value);
+        }
+
         public BoardVM()
         {
             Log = new ObservableCollection<Task>
@@ -106,6 +113,59 @@ namespace OpenMate.Work.ViewModel
                 {
                     Name = "Task4",
                     Status = "Finish"
+                }
+            };
+
+            SprintCol = new ObservableCollection<Sprint>
+            {
+                new Sprint()
+                {
+                    SprintName = "Sprint 1",
+                    StartDate = "1/1/2024",
+                    EndDate = "10/2/2024",
+                    Status = "Complete"
+                },
+                new Sprint()
+                {
+                    SprintName = "Sprint 2",
+                    StartDate = "1/1/2024",
+                    EndDate = "10/2/2024",
+                    Status = "Complete"
+                },
+                new Sprint()
+                {
+                    SprintName = "Sprint 3",
+                    StartDate = "1/1/2024",
+                    EndDate = "10/2/2024",
+                    Status = "Complete"
+                },
+                new Sprint()
+                {
+                    SprintName = "Sprint 4",
+                    StartDate = "1/1/2024",
+                    EndDate = "10/2/2024",
+                    Status = "Active"
+                },
+                new Sprint()
+                {
+                    SprintName = "Sprint 5",
+                    StartDate = "1/1/2024",
+                    EndDate = "10/2/2024",
+                    Status = "Not Start"
+                },
+                new Sprint()
+                {
+                    SprintName = "Sprint 6",
+                    StartDate = "1/1/2024",
+                    EndDate = "10/2/2024",
+                    Status = "Not Start"
+                },
+                new Sprint()
+                {
+                    SprintName = "Sprint 7",
+                    StartDate = "1/1/2024",
+                    EndDate = "10/2/2024",
+                    Status = "Not Start"
                 }
             };
         }

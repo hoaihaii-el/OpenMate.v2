@@ -71,6 +71,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\Sprint.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Resources\Uitilities\BaseViewModel.cs" />
@@ -87,6 +88,9 @@
     </Compile>
     <Compile Include="Views\Boards\KanbanBoard.xaml.cs">
       <DependentUpon>KanbanBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Boards\Sprints.xaml.cs">
+      <DependentUpon>Sprints.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ChatContent.xaml.cs">
       <DependentUpon>ChatContent.xaml</DependentUpon>
@@ -144,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Boards\KanbanBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Boards\Sprints.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

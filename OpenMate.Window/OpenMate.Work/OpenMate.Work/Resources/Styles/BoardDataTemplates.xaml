@@ -171,4 +171,103 @@
         </Setter>
     </Style>
 
+
+    <DataTemplate x:Key="SprintCard">
+        <Border CornerRadius="8" Margin="5" Cursor="Hand">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="#f0f0f0"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Status}" Value="Complete">
+                            <Setter Property="Background" Value="#fafae1"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Status}" Value="Active">
+                            <Setter Property="Background" Value="#E2F1E7"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Grid Width="230" Height="300">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Content="{Binding SprintName}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Grid Grid.Row="1" Margin="0 0 0 8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="BackLog:" Foreground="#F95454" Margin="5 0 0 0"/>
+                        <Label Grid.Column="1" Content="{Binding BackLogCount}" Foreground="#F95454" Margin="5 0 0 0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Doing:" Foreground="#E6C767" Margin="5 0 0 0"/>
+                        <Label Grid.Column="1" Content="{Binding DoingCount}" Foreground="#E6C767" Margin="5 0 0 0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Review:" Foreground="#006A67" Margin="5 0 0 0"/>
+                        <Label Grid.Column="1" Content="{Binding ReviewCount}" Foreground="#006A67" Margin="5 0 0 0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Finish:" Foreground="#133E87" Margin="5 0 0 0"/>
+                        <Label Grid.Column="1" Content="{Binding FinishCount}" Foreground="#133E87" Margin="5 0 0 0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Start:" Foreground="#000" Margin="5 0 0 0"/>
+                        <Label Grid.Column="1" Content="{Binding StartDate}" Foreground="#000" Margin="5 0 0 0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="End:" Foreground="#000" Margin="5 0 0 0"/>
+                        <Label Grid.Column="1" Content="{Binding EndDate}" Foreground="#000" Margin="5 0 0 0"/>
+                    </Grid>
+
+                    <Grid Grid.Row="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Status:" Foreground="#000" Margin="5 0 0 0"/>
+                        <Label Grid.Column="1" Content="{Binding Status}" Foreground="#000" Margin="5 0 0 0"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </DataTemplate>
 </ResourceDictionary>
