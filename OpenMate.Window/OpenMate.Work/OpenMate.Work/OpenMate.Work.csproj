@@ -80,6 +80,7 @@
     <Compile Include="UCNavigator\MainNavigator.xaml.cs">
       <DependentUpon>MainNavigator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Boards\BoardDetailVM.cs" />
     <Compile Include="ViewModel\BoardVM.cs" />
     <Compile Include="ViewModel\ChatVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
@@ -88,6 +89,9 @@
     </Compile>
     <Compile Include="Views\Boards\KanbanBoard.xaml.cs">
       <DependentUpon>KanbanBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Boards\SprintDetail.xaml.cs">
+      <DependentUpon>SprintDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Boards\Sprints.xaml.cs">
       <DependentUpon>Sprints.xaml</DependentUpon>
@@ -148,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Boards\KanbanBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Boards\SprintDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

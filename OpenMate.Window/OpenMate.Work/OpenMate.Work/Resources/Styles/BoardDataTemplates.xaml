@@ -3,10 +3,16 @@
                     xmlns:fa="http://schemas.fontawesome.io/icons/">
     <DataTemplate x:Key="CardTemplate">
         <Border AllowDrop="True" Width="308" Cursor="Hand" Margin="5 2" CornerRadius="6" Background="#f1f1f1">
-            <Label 
-                Content="{Binding Name}" FontSize="16"
-                VerticalContentAlignment="Center"
-                Margin="8 4"/>
+            <StackPanel>
+                <Label 
+                    Content="{Binding Name}" FontSize="16"
+                    VerticalContentAlignment="Center"
+                    Margin="8 4 8 0"/>
+                <Label 
+                    Content="Asignee: Hoài Hải" FontSize="16"
+                    VerticalContentAlignment="Center"
+                    Margin="8 0 8 4"/>
+            </StackPanel>
         </Border>
     </DataTemplate>
 
@@ -187,6 +193,14 @@
                     </Style.Triggers>
                 </Style>
             </Border.Style>
+
+            <Border.InputBindings>
+                <MouseBinding 
+                    Gesture="LeftClick"
+                    Command="{Binding DataContext.SprintItemClickCM, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                    CommandParameter="{Binding}" />
+            </Border.InputBindings>
+
             <Grid Width="230" Height="300">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>

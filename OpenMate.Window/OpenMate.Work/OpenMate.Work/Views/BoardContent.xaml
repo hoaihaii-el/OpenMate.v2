@@ -16,16 +16,28 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Vertical">
+                <Label 
+                    Height="50"
+                    Content="PROJECT:"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"/>
+
                 <ComboBox
                     Height="45"
                     BorderThickness="0"
                     Margin="5"
-                    FontSize="17"
+                    FontSize="19"
                     Style="{StaticResource ComboBoxFlatStyle}">
                     <ComboBoxItem Content="SharkTank" IsSelected="True"/>
                     <ComboBoxItem Content="ParadiseIsland"/>
                     <ComboBoxItem Content="MoneyBag"/>
                 </ComboBox>
+
+                <Label 
+                    Height="50"
+                    Content="Status: In progress"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"/>
 
                 <menu:NavigateButton
                     Cursor="Hand"
@@ -54,18 +66,12 @@
                     </Grid>
                 </menu:NavigateButton>
 
-                <menu:NavigateButton
-                    Cursor="Hand"
-                    x:Name="Chart"
-                    GroupName="Sprint"
-                    Style="{StaticResource ButtonStyle}"
-                    Checked="NavigateButton_Checked">
-                    <Grid>
-                        <TextBlock
-                            Text="Chart"
-                            Style="{StaticResource Text_Style}"/>
-                    </Grid>
-                </menu:NavigateButton>
+                <Grid Height="30"/>
+
+                <Button
+                    Content="Add New Project"
+                    Style="{StaticResource NormalButton}"
+                    Margin="10 5"/>
             </StackPanel>
             <board:KanbanBoard x:Name="Board" Grid.Column="1"/>
             <board:Sprints x:Name="SprintList" Grid.Column="1" Visibility="Hidden"/>

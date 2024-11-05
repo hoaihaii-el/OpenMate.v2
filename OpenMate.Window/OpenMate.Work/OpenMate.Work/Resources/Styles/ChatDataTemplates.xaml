@@ -79,23 +79,42 @@
                         <ImageBrush ImageSource="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <Label Content="{Binding Text}" Margin="4 0">
-                    <Label.Style>
-                        <Style TargetType="Label">
-                            <Setter Property="Background" Value="#fff"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsFromUser}" Value="True">
-                                    <Setter Property="Background" Value="#E2F1E7"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                            <Style.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="4"/>
-                                </Style>
-                            </Style.Resources>
-                        </Style>
-                    </Label.Style>
-                </Label>
+                <Grid x:Name="MessageGrid">
+                    <Label Content="{Binding Text}" Margin="4 0">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Setter Property="Background" Value="#fff"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsFromUser}" Value="True">
+                                        <Setter Property="Background" Value="#E2F1E7"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                                <Style.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="4"/>
+                                    </Style>
+                                </Style.Resources>
+                            </Style>
+                        </Label.Style>
+                    </Label>
+                    <StackPanel x:Name="EmojiPanel" Orientation="Horizontal" Margin="0 -5 -130 0" VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=MessageGrid, Path=IsMouseOver}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                        <Button Content="👍" Foreground="#FFE31A" Command="{Binding AddEmojiCommand}" CommandParameter="👍" Style="{StaticResource IconButtonStyle}" />
+                        <Button Content="❤️" Foreground="Red" Command="{Binding AddEmojiCommand}" CommandParameter="❤️" Style="{StaticResource IconButtonStyle}" />
+                        <Button Content="😆" Foreground="Green" Command="{Binding AddEmojiCommand}" CommandParameter="😊" Style="{StaticResource IconButtonStyle}" />
+                        <Button Content="😲" Foreground="Green" Command="{Binding AddEmojiCommand}" CommandParameter="😊" Style="{StaticResource IconButtonStyle}" />
+                        <Button Content="😞" Foreground="Green" Command="{Binding AddEmojiCommand}" CommandParameter="😊" Style="{StaticResource IconButtonStyle}" />
+                    </StackPanel>
+                </Grid>
             </StackPanel>
         </Border>
     </DataTemplate>

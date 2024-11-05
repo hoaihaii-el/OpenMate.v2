@@ -1,6 +1,8 @@
 ﻿using OpenMate.Work.Model;
 using OpenMate.Work.Resources.Uitilities;
+using OpenMate.Work.Views.Boards;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace OpenMate.Work.ViewModel
 {
@@ -41,8 +43,15 @@ namespace OpenMate.Work.ViewModel
             set => SetProperty(ref _SprintCol, value);
         }
 
+        public ICommand SprintItemClickCM { get; set; }
+
         public BoardVM()
         {
+            SprintItemClickCM = new RelayCommand<Sprint>((p) => true, (p) =>
+            {
+                OpenSprintDetail(p);
+            });
+
             Log = new ObservableCollection<Task>
             {
                 new Task()
@@ -168,6 +177,12 @@ namespace OpenMate.Work.ViewModel
                     Status = "Not Start"
                 }
             };
+        }
+
+        private void OpenSprintDetail(Sprint spr)
+        {
+            var detailSprint = new SprintDetail(spr);
+            detailSprint.ShowDialog();
         }
     }
 }
