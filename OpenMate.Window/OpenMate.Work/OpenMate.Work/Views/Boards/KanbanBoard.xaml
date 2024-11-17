@@ -50,7 +50,7 @@
             <Label 
                 Height="45" 
                 Margin="5" 
-                Content="BackLog" 
+                Content="To do" 
                 FontSize="16"
                 Background="#F95454"
                 Style="{StaticResource ColumnHeader}"
@@ -73,7 +73,7 @@
             <Button
                 Style="{StaticResource NormalButton}"
                 Content="Add BackLog"
-                Background="#7AB2D3"/>
+                Command="{Binding AddBackLogCM}"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <Label 

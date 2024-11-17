@@ -1,0 +1,119 @@
+﻿<Window x:Class="OpenMate.Work.Views.Boards.AddBackLog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenMate.Work.Views.Boards"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        FontFamily="{StaticResource Nunito}"
+        TextElement.FontFamily="{StaticResource Nunito}"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="AddBackLog" 
+        Height="750" 
+        Width="1380">
+    <Border
+        Background="White" 
+        CornerRadius="5"
+        BorderBrush="#004225"
+        BorderThickness="4">
+        <Grid Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0 0 0 7">
+                <Border Background="#EEEEEE"
+                    CornerRadius="5"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        x:Name="LabelTitle"
+                        Content="NEW BACKLOG"
+                        Margin="10 0 0 0"
+                        FontSize="17"
+                        Foreground="{StaticResource Primary}"
+                        VerticalAlignment="Center"/>
+                    <Label
+                        Grid.Column="1"
+                        Style="{StaticResource CloseWindow}"
+                        MouseDown="Label_MouseDown">
+                        <fa:ImageAwesome
+                            Icon="PowerOff"
+                            Foreground="{StaticResource Primary}"/>
+                    </Label>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Background="#eeeeee" Grid.Column="0" CornerRadius="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="70"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label
+                            FontSize="18"
+                            VerticalContentAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            Content="Information"/>
+                        <TextBox
+                            Grid.Row="1"
+                            md:HintAssist.Hint="Assignee"
+                            Style="{StaticResource FloatingTextBox}"/>
+                        <TextBox
+                            Grid.Row="2"
+                            md:HintAssist.Hint="Code Reviewer"
+                            Style="{StaticResource FloatingTextBox}"/>
+                        <TextBox
+                            Grid.Row="3"
+                            md:HintAssist.Hint="Tester"
+                            Style="{StaticResource FloatingTextBox}"/>
+                        <DatePicker
+                            Grid.Row="4"
+                            md:HintAssist.Hint="Start Date"
+                            Style="{StaticResource FloatingDatePicker}"/>
+                        <DatePicker
+                            Grid.Row="5"
+                            md:HintAssist.Hint="Due Date"
+                            Style="{StaticResource FloatingDatePicker}"/>
+                        <ComboBox
+                            Grid.Row="6"
+                            md:HintAssist.Hint="Ticket Type"
+                            Style="{StaticResource FloatingComboBox}">
+                            <ComboBoxItem Content="Task"/>
+                            <ComboBoxItem Content="Issue"/>
+                        </ComboBox>
+                        <ComboBox
+                            Grid.Row="7"
+                            md:HintAssist.Hint="Priority"
+                            Style="{StaticResource FloatingComboBox}">
+                            <ComboBoxItem Content="Low"/>
+                            <ComboBoxItem Content="Medium"/>
+                            <ComboBoxItem Content="High Priority"/>
+                        </ComboBox>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

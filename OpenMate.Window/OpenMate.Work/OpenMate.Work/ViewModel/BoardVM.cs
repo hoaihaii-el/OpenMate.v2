@@ -44,12 +44,28 @@ namespace OpenMate.Work.ViewModel
         }
 
         public ICommand SprintItemClickCM { get; set; }
+        public ICommand NewProjectCM { get; set; }
+        public ICommand AddBackLogCM { get; set; }
 
         public BoardVM()
         {
             SprintItemClickCM = new RelayCommand<Sprint>((p) => true, (p) =>
             {
                 OpenSprintDetail(p);
+            });
+
+            NewProjectCM = new RelayCommand<object>((p) => true, (p) =>
+            {
+                var newProject = new NewProject();
+                newProject.DataContext = this;
+                newProject.ShowDialog();
+            });
+
+            AddBackLogCM = new RelayCommand<object>((p) => true, (p) =>
+            {
+                var newBackLog = new AddBackLog();
+                newBackLog.DataContext = this;
+                newBackLog.ShowDialog();
             });
 
             Log = new ObservableCollection<Task>

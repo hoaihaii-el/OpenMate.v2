@@ -87,8 +87,14 @@
     <Compile Include="Views\BoardContent.xaml.cs">
       <DependentUpon>BoardContent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Boards\AddBackLog.xaml.cs">
+      <DependentUpon>AddBackLog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Boards\KanbanBoard.xaml.cs">
       <DependentUpon>KanbanBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Boards\NewProject.xaml.cs">
+      <DependentUpon>NewProject.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Boards\SprintDetail.xaml.cs">
       <DependentUpon>SprintDetail.xaml</DependentUpon>
@@ -127,6 +133,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\Styles\CustomComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\CustomMaterialDesign.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Styles\Image.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -151,7 +165,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Boards\AddBackLog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Boards\KanbanBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Boards\NewProject.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

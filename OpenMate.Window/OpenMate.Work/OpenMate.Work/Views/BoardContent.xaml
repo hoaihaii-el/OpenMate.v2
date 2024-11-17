@@ -6,8 +6,9 @@
              xmlns:local="clr-namespace:OpenMate.Work.Views"
              xmlns:menu="clr-namespace:OpenMate.Work.Resources.Uitilities"
              xmlns:board="clr-namespace:OpenMate.Work.Views.Boards"
-             xmlns:matd="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             FontFamily="{StaticResource Nunito}"
              d:DesignHeight="750" d:DesignWidth="1540">
     <Border Background="#e1e1e1" CornerRadius="6">
         <Grid>
@@ -16,18 +17,20 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Vertical">
-                <Label 
+                <!--<Label 
                     Height="50"
                     Content="PROJECT:"
                     VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"/>
+                    HorizontalContentAlignment="Center"/>-->
 
                 <ComboBox
                     Height="45"
                     BorderThickness="0"
-                    Margin="5"
-                    FontSize="19"
-                    Style="{StaticResource ComboBoxFlatStyle}">
+                    Margin="0 20 0 0"
+                    FontSize="17"
+                    Width="200"
+                    md:HintAssist.Hint="Project:"
+                    Style="{StaticResource NonFloatingComboBox}">
                     <ComboBoxItem Content="SharkTank" IsSelected="True"/>
                     <ComboBoxItem Content="ParadiseIsland"/>
                     <ComboBoxItem Content="MoneyBag"/>
@@ -35,6 +38,7 @@
 
                 <Label 
                     Height="50"
+                    FontSize="18"
                     Content="Status: In progress"
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"/>
@@ -66,11 +70,25 @@
                     </Grid>
                 </menu:NavigateButton>
 
+                <menu:NavigateButton
+                    Cursor="Hand"
+                    x:Name="Information"
+                    GroupName="Sprint"
+                    Style="{StaticResource ButtonStyle}"
+                    Checked="NavigateButton_Checked">
+                    <Grid>
+                        <TextBlock
+                            Text="Information"
+                            Style="{StaticResource Text_Style}"/>
+                    </Grid>
+                </menu:NavigateButton>
+
                 <Grid Height="30"/>
 
                 <Button
                     Content="Add New Project"
                     Style="{StaticResource NormalButton}"
+                    Command="{Binding NewProjectCM}"
                     Margin="10 5"/>
             </StackPanel>
             <board:KanbanBoard x:Name="Board" Grid.Column="1"/>

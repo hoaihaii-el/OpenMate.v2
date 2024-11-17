@@ -13,7 +13,7 @@
         AllowsTransparency="True"
         Background="Transparent"
         WindowStyle="None"
-        TextElement.FontFamily="{StaticResource Nunito}"
+        FontFamily="{StaticResource Nunito}"
         TextElement.FontSize="20"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
