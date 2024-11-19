@@ -70,6 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Sprint.cs" />
     <Compile Include="Model\Task.cs" />

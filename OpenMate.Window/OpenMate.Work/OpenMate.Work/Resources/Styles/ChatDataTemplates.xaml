@@ -51,71 +51,50 @@
     </DataTemplate>
 
     <DataTemplate x:Key="MessageTemplate">
-        <Border Margin="0 3" Width="1255">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <StackPanel Orientation="Vertical" Width="1255">
+            <TextBlock Text="{Binding Sender}" FontSize="12" Margin="5 3">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="Visibility" Value="Visible"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsFromUser}" Value="True">
-                                <Setter Property="FlowDirection" Value="RightToLeft"/>
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Border CornerRadius="5" Padding="5 3">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Background" Value="#fff"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsFromUser}" Value="True">
+                                <Setter Property="Background" Value="#e2f1e7"/>
                                 <Setter Property="HorizontalAlignment" Value="Right"/>
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </StackPanel.Style>
-                <Rectangle Width="22" Height="22" RadiusX="11" RadiusY="11" Margin="5 0">
-                    <Rectangle.Style>
-                        <Style TargetType="Rectangle">
-                            <Setter Property="Visibility" Value="Visible"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsFromUser}" Value="True">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Rectangle.Style>
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"/>
-                    </Rectangle.Fill>
-                </Rectangle>
-                <Grid x:Name="MessageGrid">
-                    <Label Content="{Binding Text}" Margin="4 0">
-                        <Label.Style>
-                            <Style TargetType="Label">
-                                <Setter Property="Background" Value="#fff"/>
+                </Border.Style>
+                <StackPanel Orientation="Vertical" Margin="4">
+                    <TextBlock Text="{Binding Text}" TextWrapping="Wrap" MaxWidth="1000"/>
+                    <Image Source="{Binding ImageUrl}" MaxWidth="500" Stretch="UniformToFill" HorizontalAlignment="Center">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Setter Property="Margin" Value="5"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsFromUser}" Value="True">
-                                        <Setter Property="Background" Value="#E2F1E7"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                                <Style.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="4"/>
-                                    </Style>
-                                </Style.Resources>
-                            </Style>
-                        </Label.Style>
-                    </Label>
-                    <StackPanel x:Name="EmojiPanel" Orientation="Horizontal" Margin="0 -5 -130 0" VerticalAlignment="Top" HorizontalAlignment="Right">
-                        <StackPanel.Style>
-                            <Style TargetType="StackPanel">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ElementName=MessageGrid, Path=IsMouseOver}" Value="True">
-                                        <Setter Property="Visibility" Value="Visible"/>
+                                    <DataTrigger Binding="{Binding ImageUrl}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </StackPanel.Style>
-                        <Button Content="👍" Foreground="#FFE31A" Command="{Binding AddEmojiCommand}" CommandParameter="👍" Style="{StaticResource IconButtonStyle}" />
-                        <Button Content="❤️" Foreground="Red" Command="{Binding AddEmojiCommand}" CommandParameter="❤️" Style="{StaticResource IconButtonStyle}" />
-                        <Button Content="😆" Foreground="Green" Command="{Binding AddEmojiCommand}" CommandParameter="😊" Style="{StaticResource IconButtonStyle}" />
-                        <Button Content="😲" Foreground="Green" Command="{Binding AddEmojiCommand}" CommandParameter="😊" Style="{StaticResource IconButtonStyle}" />
-                        <Button Content="😞" Foreground="Green" Command="{Binding AddEmojiCommand}" CommandParameter="😊" Style="{StaticResource IconButtonStyle}" />
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
-        </Border>
+                        </Image.Style>
+                    </Image>
+                </StackPanel>
+            </Border>
+        </StackPanel>
     </DataTemplate>
 </ResourceDictionary>

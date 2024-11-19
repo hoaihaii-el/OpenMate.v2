@@ -8,6 +8,8 @@ namespace OpenMate.Work.Model
         public int Id { get; set; }
         public string Text { get; set; }
         public int SenderId { get; set; }
+        public string Sender { get; set; }
+        public string ImageUrl { get; set; }
 
         public string SenderUrl { get; set; }
 

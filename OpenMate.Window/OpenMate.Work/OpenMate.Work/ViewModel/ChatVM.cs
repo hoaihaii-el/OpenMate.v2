@@ -90,22 +90,27 @@ namespace OpenMate.Work.ViewModel
                 new Message()
                 {
                     IsFromUser = false,
-                    Text = "Message 01"
+                    Text = "Task YUN-019 sao rồi chú??",
+                    Sender = "Sếp"
                 },
                 new Message()
                 {
                     IsFromUser = true,
-                    Text = "Message 02"
+                    Text = "Dạ em bắt đầu start từ chiều hôm qua rồi ạ",
+                    Sender = "Culi"
                 },
                 new Message()
                 {
                     IsFromUser = false,
-                    Text = "Message 03"
+                    Text = "Thế có blocker gì không ???",
+                    Sender = "Sếp",
+                    ImageUrl = "https://kenh14cdn.com/2017/images685542-a-1489655177057.jpg"
                 },
                 new Message()
                 {
                     IsFromUser = true,
-                    Text = "Message abcxyz 04"
+                    Text = "Dạ đang ổn anh ơi, có gì em báo ngay ạ",
+                    Sender = "Culi"
                 },
             };
         }
