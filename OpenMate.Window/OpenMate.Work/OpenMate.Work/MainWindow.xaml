@@ -8,7 +8,7 @@
         xmlns:views="clr-namespace:OpenMate.Work.Views"
         mc:Ignorable="d"
         Title="MainWindow"
-        Height="800" 
+        Height="810" 
         Width="1540"
         AllowsTransparency="True"
         Background="Transparent"
@@ -26,7 +26,9 @@
         </Style>
     </Window.Resources>
     <Border Background="#fff"
-            CornerRadius="8">
+            CornerRadius="8"
+            BorderBrush="#004225"
+            BorderThickness="4">
         <Grid Margin="6">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -34,6 +36,7 @@
             </Grid.RowDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140"/>
                     <ColumnDefinition Width="140"/>
                     <ColumnDefinition Width="140"/>
                     <ColumnDefinition/>
@@ -60,9 +63,19 @@
                     VerticalContentAlignment="Center"
                     HorizontalContentAlignment="Center"
                     FontSize="18"/>
+                <Label 
+                    Content="CALENDAR"
+                    x:Name="CalendarTab"
+                    Grid.Column="2"
+                    Cursor="Hand"
+                    MouseDown="CalendarTab_MouseDown"
+                    Style="{StaticResource TabButton}"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    FontSize="18"/>
                 <fa:FontAwesome
                     MouseDown="PowerOff_MouseDown"
-                    Grid.Column="3"
+                    Grid.Column="4"
                     VerticalAlignment="Center"
                     FontSize="24"
                     Cursor="Hand"
@@ -72,6 +85,7 @@
                 <Grid>
                     <views:ChatContent x:Name="ChatContent"/>
                     <views:BoardContent x:Name="BoardContent" Visibility="Hidden"/>
+                    <views:CalendarContent x:Name="CalendarContent" Visibility="Hidden"/>
                 </Grid>
             </Border>
         </Grid>

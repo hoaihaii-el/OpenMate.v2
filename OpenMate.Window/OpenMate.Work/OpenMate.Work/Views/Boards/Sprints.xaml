@@ -26,7 +26,7 @@
             <ComboBox
                 Grid.Column="1"
                 FontSize="18"
-                Style="{StaticResource OMComboboxStyle}">
+                Style="{StaticResource NonFloatingComboBox}">
                 <ComboBoxItem Content="Complete"/>
                 <ComboBoxItem Content="Active"/>
                 <ComboBoxItem Content="Not Start"/>

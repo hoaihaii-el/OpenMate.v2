@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate x:Key="HourTemplate">
+        <Label Content="{Binding}" Padding="0" VerticalContentAlignment="Bottom" HorizontalAlignment="Center" Height="60"/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SlotTimeLine">
+        <Border>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="BorderThickness" Value="1 1 0 0"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding}" Value="LastHour">
+                            <Setter Property="BorderThickness" Value="1 1 0 1"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding}" Value="LastDay">
+                            <Setter Property="BorderThickness" Value="1 1 1 0"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding}" Value="LastSlot">
+                            <Setter Property="BorderThickness" Value="1 1 1 1"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+    </DataTemplate>
+    
+</ResourceDictionary>

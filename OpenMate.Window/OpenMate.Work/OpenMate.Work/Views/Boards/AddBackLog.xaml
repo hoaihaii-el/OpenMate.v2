@@ -62,13 +62,15 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="70"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label
@@ -78,33 +80,41 @@
                             Content="Information"/>
                         <TextBox
                             Grid.Row="1"
-                            md:HintAssist.Hint="Assignee"
+                            md:HintAssist.Hint="ID"
                             Style="{StaticResource FloatingTextBox}"/>
                         <TextBox
                             Grid.Row="2"
-                            md:HintAssist.Hint="Code Reviewer"
+                            md:HintAssist.Hint="Title"
                             Style="{StaticResource FloatingTextBox}"/>
                         <TextBox
                             Grid.Row="3"
+                            md:HintAssist.Hint="Assignee"
+                            Style="{StaticResource FloatingTextBox}"/>
+                        <TextBox
+                            Grid.Row="4"
+                            md:HintAssist.Hint="Code Reviewer"
+                            Style="{StaticResource FloatingTextBox}"/>
+                        <TextBox
+                            Grid.Row="5"
                             md:HintAssist.Hint="Tester"
                             Style="{StaticResource FloatingTextBox}"/>
                         <DatePicker
-                            Grid.Row="4"
+                            Grid.Row="6"
                             md:HintAssist.Hint="Start Date"
                             Style="{StaticResource FloatingDatePicker}"/>
                         <DatePicker
-                            Grid.Row="5"
+                            Grid.Row="7"
                             md:HintAssist.Hint="Due Date"
                             Style="{StaticResource FloatingDatePicker}"/>
                         <ComboBox
-                            Grid.Row="6"
+                            Grid.Row="8"
                             md:HintAssist.Hint="Ticket Type"
                             Style="{StaticResource FloatingComboBox}">
                             <ComboBoxItem Content="Task"/>
                             <ComboBoxItem Content="Issue"/>
                         </ComboBox>
                         <ComboBox
-                            Grid.Row="7"
+                            Grid.Row="9"
                             md:HintAssist.Hint="Priority"
                             Style="{StaticResource FloatingComboBox}">
                             <ComboBoxItem Content="Low"/>
@@ -125,7 +135,17 @@
                             VerticalContentAlignment="Center"
                             HorizontalContentAlignment="Center"
                             Content="User story"/>
-                        <RichTextBox Grid.Row="1" FontSize="18"/>
+                        <DockPanel Grid.Row="1">
+                            <ToolBar DockPanel.Dock="Top">
+                                <Button Content="B" FontWeight="UltraBlack" Click="Bold_Click"/>
+                                <Button Content="I" FontStyle="Italic" Click="Italic_Click"/>
+                                <Button Click="Underline_Click">
+                                    <TextBlock Text="U" TextDecorations="Underline"/>
+                                </Button>
+                            </ToolBar>
+
+                            <RichTextBox x:Name="richTextBox" FontFamily="Nunito" FontSize="14" Margin="10" VerticalScrollBarVisibility="Auto"/>
+                        </DockPanel>
                     </Grid>
                 </Border>
 

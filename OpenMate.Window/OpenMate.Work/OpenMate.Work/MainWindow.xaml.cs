@@ -16,6 +16,7 @@ namespace OpenMate.Work
             this.DataContext = new MainVM();
             ChatContent.DataContext = new ChatVM();
             BoardContent.DataContext = new BoardVM();
+            CalendarContent.DataContext = new CalendarVM();
         }
 
         private Color _MainTabColor = (Color)ColorConverter.ConvertFromString("#e1e1e1");
@@ -25,20 +26,34 @@ namespace OpenMate.Work
         {
             ChatTab.Background = new SolidColorBrush(_MainTabColor);
             BoardTab.Background = new SolidColorBrush(_TempTabColor);
+            CalendarTab.Background = new SolidColorBrush(_TempTabColor);
             ChatContent.Visibility = Visibility.Visible;
             BoardContent.Visibility = Visibility.Hidden;
+            CalendarContent.Visibility = Visibility.Hidden;
         }
         private void BoardTab_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ChatTab.Background = new SolidColorBrush(_TempTabColor);
             BoardTab.Background = new SolidColorBrush(_MainTabColor);
+            CalendarTab.Background = new SolidColorBrush(_TempTabColor);
             ChatContent.Visibility = Visibility.Hidden;
             BoardContent.Visibility = Visibility.Visible;
+            CalendarContent.Visibility = Visibility.Hidden;
         }
 
         private void PowerOff_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();
+        }
+
+        private void CalendarTab_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ChatTab.Background = new SolidColorBrush(_TempTabColor);
+            BoardTab.Background = new SolidColorBrush(_TempTabColor);
+            CalendarTab.Background = new SolidColorBrush(_MainTabColor);
+            ChatContent.Visibility = Visibility.Hidden;
+            BoardContent.Visibility = Visibility.Hidden;
+            CalendarContent.Visibility = Visibility.Visible;
         }
     }
 }

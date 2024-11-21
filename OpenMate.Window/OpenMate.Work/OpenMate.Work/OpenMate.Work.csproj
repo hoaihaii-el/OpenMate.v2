@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="ViewModel\Boards\BoardDetailVM.cs" />
     <Compile Include="ViewModel\BoardVM.cs" />
+    <Compile Include="ViewModel\CalendarVM.cs" />
     <Compile Include="ViewModel\ChatVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="Views\BoardContent.xaml.cs">
@@ -102,6 +103,9 @@
     </Compile>
     <Compile Include="Views\Boards\Sprints.xaml.cs">
       <DependentUpon>Sprints.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CalendarContent.xaml.cs">
+      <DependentUpon>CalendarContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ChatContent.xaml.cs">
       <DependentUpon>ChatContent.xaml</DependentUpon>
@@ -125,6 +129,10 @@
     <Page Include="Resources\Styles\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles\CalendarDataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\ChatDataTemplates.xaml">
       <SubType>Designer</SubType>
@@ -183,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Boards\Sprints.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CalendarContent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
