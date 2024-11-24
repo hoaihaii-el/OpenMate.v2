@@ -70,6 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\Helper.cs" />
+    <Compile Include="Model\CustomDateTime.cs" />
+    <Compile Include="Model\Event.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Message.cs" />
     <Compile Include="Model\Sprint.cs" />
@@ -106,6 +109,9 @@
     </Compile>
     <Compile Include="Views\CalendarContent.xaml.cs">
       <DependentUpon>CalendarContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Calendars\EventDetail.xaml.cs">
+      <DependentUpon>EventDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ChatContent.xaml.cs">
       <DependentUpon>ChatContent.xaml</DependentUpon>
@@ -195,6 +201,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CalendarContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Calendars\EventDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

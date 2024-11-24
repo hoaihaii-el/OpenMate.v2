@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenMate.Work.ViewModel;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace OpenMate.Work.Views
 {
@@ -23,19 +15,19 @@ namespace OpenMate.Work.Views
         public CalendarContent()
         {
             InitializeComponent();
+            _Timer = new DispatcherTimer();
+            _Timer.Interval = TimeSpan.FromSeconds(60);
+            _Timer.Tick += _Timer_Tick;
+            _Timer.Start();
+            Canvas.SetTop(TimeLine, DateTime.Now.Hour * 60 + DateTime.Now.Minute);
         }
 
-        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void _Timer_Tick(object sender, EventArgs e)
         {
-            var clickedPosition = e.GetPosition((IInputElement)sender);
-
-            double rowHeight = 60;
-            double columnWidth = ((Grid)sender).ActualWidth / 7;
-
-            int dayIndex = (int)(clickedPosition.X / columnWidth); 
-            int hourIndex = (int)(clickedPosition.Y / rowHeight);
-            double minute = (clickedPosition.Y % rowHeight) / rowHeight * 60;
+            Canvas.SetTop(TimeLine, DateTime.Now.Hour * 60 + DateTime.Now.Minute);
         }
+
+        private DispatcherTimer _Timer;
 
         private void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -47,6 +39,40 @@ namespace OpenMate.Work.Views
             int dayIndex = (int)(clickedPosition.X / columnWidth);
             int hourIndex = (int)(clickedPosition.Y / rowHeight);
             double minute = (clickedPosition.Y % rowHeight) / rowHeight * 60;
+
+            if (minute > 15 && minute <= 45)
+            {
+                minute = 30;
+            }
+            else
+            {
+                minute = 0;
+            }
+
+            var vm = this.DataContext as CalendarVM;
+            vm.AddEvent(dayIndex, hourIndex, (int) minute);
+        }
+
+        private void PrevWeek_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var vm = this.DataContext as CalendarVM;
+            var dt = vm.PrevWeek();
+
+            if (dt.Month != Calendar.DisplayDate.Month)
+            {
+                Calendar.DisplayDate = Calendar.DisplayDate.AddMonths(-1);
+            }
+        }
+
+        private void NextWeek_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var vm = this.DataContext as CalendarVM;
+            var dt = vm.NextWeek();
+
+            if (dt.Month != Calendar.DisplayDate.Month)
+            {
+                Calendar.DisplayDate = Calendar.DisplayDate.AddMonths(1);
+            }
         }
     }
 }

@@ -13,6 +13,12 @@
                     VerticalContentAlignment="Center"
                     Margin="8 0 8 4"/>
             </StackPanel>
+            <Border.InputBindings>
+                <MouseBinding 
+                    Gesture="LeftClick"
+                    Command="{Binding DataContext.CardItemClickCM, RelativeSource={RelativeSource AncestorType=ListBox}}"
+                    CommandParameter="{Binding}" />
+            </Border.InputBindings>
         </Border>
     </DataTemplate>
 
@@ -124,12 +130,36 @@
     </DataTemplate>
 
     <DataTemplate x:Key="LogTemplate">
-        <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding LogOwner}" FontSize="12" Margin="5 3"/>
-            <Border CornerRadius="5" Padding="5 3">
+        <StackPanel Orientation="Vertical" Width="443">
+            <TextBlock Text="{Binding LogOwner}" FontSize="12" Margin="5 3">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsFromSender}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Border CornerRadius="5" Padding="5 3" Margin="3">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Background" Value="#fff"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsFromSender}" Value="True">
+                                <Setter Property="Background" Value="#C7F2E3"/>
+                                <Setter Property="HorizontalAlignment" Value="Right"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
                 <StackPanel Orientation="Vertical" Margin="4">
-                    <TextBlock Text="{Binding Comment}" TextWrapping="Wrap" MaxWidth="390"/>
-                    <Image Source="{Binding ImageUrl}" MaxWidth="380" Stretch="UniformToFill" HorizontalAlignment="Center">
+                    <TextBlock Text="{Binding Comment}" FontSize="16" TextWrapping="Wrap" MaxWidth="350"/>
+                    <Image Source="{Binding ImageUrl}" MaxWidth="330" Stretch="UniformToFill" HorizontalAlignment="Center">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Visible"/>
@@ -146,5 +176,5 @@
             </Border>
         </StackPanel>
     </DataTemplate>
-    
+
 </ResourceDictionary>

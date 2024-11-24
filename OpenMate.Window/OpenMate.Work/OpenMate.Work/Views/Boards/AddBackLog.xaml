@@ -17,6 +17,34 @@
         Title="AddBackLog" 
         Height="750" 
         Width="1380">
+    <Window.Resources>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="Border" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="Transparent">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="Transparent"/>
+                            </Trigger>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="Transparent"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Border
         Background="White" 
         CornerRadius="5"
@@ -37,7 +65,7 @@
                     </Grid.ColumnDefinitions>
                     <Label 
                         x:Name="LabelTitle"
-                        Content="NEW BACKLOG"
+                        Content="NEW TASK"
                         Margin="10 0 0 0"
                         FontSize="17"
                         Foreground="{StaticResource Primary}"
@@ -62,15 +90,16 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
-                            <RowDefinition Height="65"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Label
@@ -88,39 +117,47 @@
                             Style="{StaticResource FloatingTextBox}"/>
                         <TextBox
                             Grid.Row="3"
-                            md:HintAssist.Hint="Assignee"
+                            md:HintAssist.Hint="Owner"
                             Style="{StaticResource FloatingTextBox}"/>
                         <TextBox
                             Grid.Row="4"
-                            md:HintAssist.Hint="Code Reviewer"
+                            md:HintAssist.Hint="Assignee"
                             Style="{StaticResource FloatingTextBox}"/>
                         <TextBox
                             Grid.Row="5"
+                            md:HintAssist.Hint="Code Reviewer"
+                            Style="{StaticResource FloatingTextBox}"/>
+                        <TextBox
+                            Grid.Row="6"
                             md:HintAssist.Hint="Tester"
                             Style="{StaticResource FloatingTextBox}"/>
                         <DatePicker
-                            Grid.Row="6"
+                            Grid.Row="7"
                             md:HintAssist.Hint="Start Date"
                             Style="{StaticResource FloatingDatePicker}"/>
                         <DatePicker
-                            Grid.Row="7"
+                            Grid.Row="8"
                             md:HintAssist.Hint="Due Date"
                             Style="{StaticResource FloatingDatePicker}"/>
                         <ComboBox
-                            Grid.Row="8"
+                            Grid.Row="9"
                             md:HintAssist.Hint="Ticket Type"
                             Style="{StaticResource FloatingComboBox}">
                             <ComboBoxItem Content="Task"/>
-                            <ComboBoxItem Content="Issue"/>
+                            <ComboBoxItem Content="Bug"/>
                         </ComboBox>
                         <ComboBox
-                            Grid.Row="9"
+                            Grid.Row="10"
                             md:HintAssist.Hint="Priority"
                             Style="{StaticResource FloatingComboBox}">
                             <ComboBoxItem Content="Low"/>
                             <ComboBoxItem Content="Medium"/>
                             <ComboBoxItem Content="High Priority"/>
                         </ComboBox>
+                        <TextBox
+                            Grid.Row="11"
+                            md:HintAssist.Hint="Effort"
+                            Style="{StaticResource FloatingTextBox}"/>
                     </Grid>
                 </Border>
 
@@ -150,7 +187,17 @@
                 </Border>
 
                 <Border Background="#eeeeee" Margin="5 0 0 0" Grid.Column="2" CornerRadius="5">
-                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="100"/>
+                        </Grid.RowDefinitions>
+                        <ListBox
+                            ItemsSource="{Binding Logs}"
+                            
+                            ItemTemplate="{StaticResource LogTemplate}"/>
+                        <RichTextBox Grid.Row="1" Margin="5" Background="White"/>
+                    </Grid>
                 </Border>
             </Grid>
         </Grid>

@@ -196,6 +196,98 @@
         </Setter>
     </Style>
 
+    <Style x:Key="DeleteButton"
+           TargetType="{x:Type Button}">
+
+        <Setter Property="Height"
+                Value="45" />
+        <Setter Property="Cursor"
+                Value="Hand"/>
+        <Setter Property="FontSize"
+                Value="18"/>
+        <Setter Property="BorderThickness"
+                Value="0"/>
+        <Setter Property="Foreground"
+                Value="White"/>
+
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <Border x:Name="border"
+                            BorderThickness="0"
+                            Margin="5 0"
+                            CornerRadius="5">
+
+                        <Border.Background>
+                            <SolidColorBrush 
+                                x:Name="BorderBackground"
+                                Color="#D32D2D" />
+                        </Border.Background>
+
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    </Border>
+
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger 
+                            Property="IsMouseOver"
+                            Value="True">
+                        </Trigger>
+
+                        <EventTrigger 
+                            RoutedEvent="Border.MouseEnter"
+                            SourceName="border">
+
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation 
+                                        Storyboard.TargetName="BorderBackground"
+                                        Storyboard.TargetProperty="Color"
+                                        From="#D32D2D"
+                                        To="#FF9C73"
+                                        Duration="0:0:0.15" />
+                                </Storyboard>
+                            </BeginStoryboard>
+
+                        </EventTrigger>
+
+                        <EventTrigger 
+                            RoutedEvent="Border.MouseLeave"
+                            SourceName="border">
+
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="BorderBackground"
+                                Storyboard.TargetProperty="Color"
+                                From="#FF9C73"
+                                To="#D32D2D"
+                                Duration="0:0:0.15" />
+                                </Storyboard>
+                            </BeginStoryboard>
+
+                        </EventTrigger>
+
+                        <Trigger 
+                            Property="IsPressed"
+                            Value="True">
+
+                            <Setter 
+                                Property="Background"
+                                TargetName="border"
+                                Value="#FF9C73" />
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style
         x:Key="NormalTextBlock"
         TargetType="{x:Type TextBlock}">

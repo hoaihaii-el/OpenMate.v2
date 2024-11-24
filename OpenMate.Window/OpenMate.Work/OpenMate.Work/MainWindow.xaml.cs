@@ -14,9 +14,17 @@ namespace OpenMate.Work
         {
             InitializeComponent();
             this.DataContext = new MainVM();
+            this.PreviewMouseLeftButtonDown += MainWindow_PreviewMouseLeftButtonDown;
             ChatContent.DataContext = new ChatVM();
             BoardContent.DataContext = new BoardVM();
             CalendarContent.DataContext = new CalendarVM();
+        }
+
+        public static Point LastMouseClickPostition { get; private set; }
+
+        private void MainWindow_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            LastMouseClickPostition = PointToScreen(e.GetPosition(this));
         }
 
         private Color _MainTabColor = (Color)ColorConverter.ConvertFromString("#e1e1e1");

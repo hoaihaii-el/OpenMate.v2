@@ -43,7 +43,15 @@ namespace OpenMate.Work.ViewModel
             set => SetProperty(ref _SprintCol, value);
         }
 
+        private ObservableCollection<Log> _Logs;
+        public ObservableCollection<Log> Logs
+        {
+            get => _Logs;
+            set => SetProperty(ref _Logs, value);
+        }
+
         public ICommand SprintItemClickCM { get; set; }
+        public ICommand CardItemClickCM { get; set; }
         public ICommand NewProjectCM { get; set; }
         public ICommand AddBackLogCM { get; set; }
 
@@ -52,6 +60,13 @@ namespace OpenMate.Work.ViewModel
             SprintItemClickCM = new RelayCommand<Sprint>((p) => true, (p) =>
             {
                 OpenSprintDetail(p);
+            });
+
+            CardItemClickCM = new RelayCommand<object>((p) => true, (p) =>
+            {
+                var newBackLog = new AddBackLog();
+                newBackLog.DataContext = this;
+                newBackLog.ShowDialog();
             });
 
             NewProjectCM = new RelayCommand<object>((p) => true, (p) =>
@@ -192,6 +207,22 @@ namespace OpenMate.Work.ViewModel
                     EndDate = "10/2/2024",
                     Status = "Not Start"
                 }
+            };
+
+            Logs = new ObservableCollection<Log>
+            {
+                new Log
+                {
+                    LogOwner = "Hoài Nhân",
+                    Comment = "Development done. Ready for test."
+                },
+                new Log
+                {
+                    LogOwner = "Hoài Hải",
+                    Comment = "Bug nè. Xem OM-120 nhé.",
+                    IsFromSender = true,
+                    ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Abstract_Kanban_Board.svg/1200px-Abstract_Kanban_Board.svg.png"
+                },
             };
         }
 

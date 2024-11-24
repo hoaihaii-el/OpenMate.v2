@@ -21,38 +21,82 @@
                     <RowDefinition Height="330"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Calendar/>
+                <Calendar x:Name="Calendar"/>
+                <Grid Grid.Row="1">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Event Type:" Margin="15 0"/>
+                        <CheckBox Content="General" Margin="30 5"/>
+                        <CheckBox Content="Personal" Margin="30 5"/>
+                        <Label Content="Day type:" Margin="15 0"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Current Day" Margin="40 0 0 0"/>
+                            <Border Grid.Column="1" Background="#EEE2B5" Margin="20 2" CornerRadius="5"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Holiday" Margin="40 0 0 0"/>
+                            <Border Grid.Column="1" Background="#7ED7C1" Margin="20 2" CornerRadius="5"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </Border>
         <Border Background="#eeeeee" Grid.Column="1" Margin="3 6 6 6" CornerRadius="4">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="50"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="70"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="90"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="SUN-10" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="MON-11" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="TUE-12" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="WED-13" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="THU-14" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="FRI-15" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock Text="SAT-16" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            x:Name="PrevWeek"
+                            Grid.Column="0"
+                            MouseDown="PrevWeek_MouseDown"
+                            HorizontalContentAlignment="Center"
+                            Style="{StaticResource CloseWindow}">
+                            <fa:ImageAwesome Icon="ChevronLeft"/>
+                        </Label>
+                        <Label
+                            x:Name="NextWeek"
+                            Grid.Column="1"
+                            MouseDown="NextWeek_MouseDown"
+                            HorizontalContentAlignment="Center"
+                            Style="{StaticResource CloseWindow}">
+                            <fa:ImageAwesome Icon="ChevronRight"/>
+                        </Label>
+                    </Grid>
+                    <ItemsControl 
+                        Grid.Column="1"
+                        ItemsSource="{Binding CurrentWeek}"
+                        ItemTemplate="{StaticResource DayHeaderTemplate}"
+                        d:ItemsSource="{d:SampleData ItemCount=7}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </Grid>
                 <ScrollViewer Grid.Row="1" FontSize="14">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="90"/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -82,10 +126,26 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                        </Grid>
-                        <Label Grid.Column="1" Grid.ColumnSpan="7" Padding="0" MouseDown="Label_MouseDown"/>
-                        <Grid x:Name="Events" Grid.Column="1" Grid.ColumnSpan="7">
-                            
+                            <Label MouseDown="Label_MouseDown"/>
+                            <Canvas>
+                                <Border x:Name="TimeLine" Background="Red" Width="1150" CornerRadius="4" Height="2"/>
+                            </Canvas>
+                            <ItemsControl 
+                                ItemsSource="{Binding Events}"
+                                ItemTemplate="{StaticResource EventTemplate}"
+                                d:ItemsSource="{d:SampleData ItemCount=10}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style TargetType="ContentPresenter">
+                                        <Setter Property="Canvas.Left" Value="{Binding Left}"/>
+                                        <Setter Property="Canvas.Top" Value="{Binding Top}"/>
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
+                            </ItemsControl>
                         </Grid>
                     </Grid>
                 </ScrollViewer>
