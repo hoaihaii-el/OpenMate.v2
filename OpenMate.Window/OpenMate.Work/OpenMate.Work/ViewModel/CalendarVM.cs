@@ -50,7 +50,20 @@ namespace OpenMate.Work.ViewModel
                 Title = "Checking todo list",
                 StartTime = new DateTime(2024, 11, 20, 7, 00, 0),
                 EndTime = new DateTime(2024, 11, 20, 7, 30, 0),
-                EventType = "Personal"
+                EventType = "Personal",
+                Attendees = new ObservableCollection<Attendee>
+                {
+                    new Attendee()
+                    {
+                        ID = "1",
+                        Name = "Alex"
+                    },
+                    new Attendee()
+                    {
+                        ID = "2",
+                        Name = "Hoai Hai"
+                    }
+                }
             });
             Events.Add(new Event()
             {
@@ -76,6 +89,7 @@ namespace OpenMate.Work.ViewModel
         public void OpenEventDetail(Event e)
         {
             var eventDetail = new EventDetail(e);
+            eventDetail.DataContext = e;
             eventDetail.Left = e.Left + 140;
 
             var screenHeight = SystemParameters.PrimaryScreenHeight;

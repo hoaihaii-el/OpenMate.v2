@@ -1,6 +1,9 @@
 ﻿using OpenMate.Work.Helpers;
 using OpenMate.Work.Resources.Uitilities;
+using OpenMate.Work.Views.Boards;
 using System;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace OpenMate.Work.Model
 {
@@ -59,6 +62,15 @@ namespace OpenMate.Work.Model
             set => SetProperty(ref _MeetingURL, value);
         }
 
+        private ObservableCollection<Attendee> _Attendees;
+        public ObservableCollection<Attendee> Attendees
+        {
+            get => _Attendees;
+            set => SetProperty(ref _Attendees, value);
+        }
+
+        public ICommand RemoveAttendeeCM { get; set; }
+
         private string _EventType = "General";
         public string EventType
         {
@@ -93,6 +105,14 @@ namespace OpenMate.Work.Model
                     return (EndTime.Hour * 60 + EndTime.Minute) - (StartTime.Hour * 60 + StartTime.Minute) - 5;
                 }
             }
+        }
+
+        public Event()
+        {
+            RemoveAttendeeCM = new RelayCommand<Attendee>((p) => true, (p) =>
+            {
+                Attendees.Remove(p);
+            });
         }
     }
 }

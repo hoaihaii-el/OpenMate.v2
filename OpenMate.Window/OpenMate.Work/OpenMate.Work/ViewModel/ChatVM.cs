@@ -50,8 +50,17 @@ namespace OpenMate.Work.ViewModel
                 new User()
                 {
                     Id = 1,
-                    Name = "Hoai Hai",
-                    IsSelected = true,
+                    Name = "BOARD"
+                },
+                new User()
+                {
+                    Id = 1,
+                    Name = "CALENDAR"
+                },
+                new User()
+                {
+                    Id = 1,
+                    Name = "Hoai Hai"
                 },
                 new User()
                 {

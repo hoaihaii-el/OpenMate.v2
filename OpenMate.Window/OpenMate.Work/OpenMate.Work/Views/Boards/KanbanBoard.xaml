@@ -17,6 +17,7 @@
         <Style TargetType="ListBoxItem">
             <Setter Property="BorderThickness" Value="0"/>
             <EventSetter Event="Drop" Handler="ListBoxItem_Drop"/>
+            <EventSetter Event="MouseLeftButtonUp" Handler="ListBoxItem_MouseLeftButtonUp"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">

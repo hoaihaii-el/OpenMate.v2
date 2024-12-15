@@ -71,6 +71,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\Helper.cs" />
+    <Compile Include="Model\Attendee.cs" />
     <Compile Include="Model\CustomDateTime.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\Log.cs" />

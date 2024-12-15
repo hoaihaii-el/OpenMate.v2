@@ -169,5 +169,16 @@ namespace OpenMate.Work.Views.Boards
             }
             return -1;
         }
+
+        private void ListBoxItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var vm = this.DataContext as BoardVM;
+            if (vm == null)
+            {
+                return;
+            }
+
+            vm.OpenTicketDetail(sender as Task);
+        }
     }
 }

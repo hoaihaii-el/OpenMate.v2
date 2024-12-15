@@ -99,13 +99,50 @@
                         Margin="10 0"
                         Style="{StaticResource FloatingTextBox}"
                         md:HintAssist.Hint="Meeting URL"/>
-                    <ComboBox
-                        x:Name="Attendees"
-                        Grid.Row="4"
-                        Margin="10 0"
-                        IsEditable="True"
-                        Style="{StaticResource FloatingComboBox}"
-                        md:HintAssist.Hint="Attendees"/>
+                    <Grid Grid.Row="4">
+                        <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                            <StackPanel Orientation="Horizontal">
+                                <ItemsControl ItemsSource="{Binding Attendees}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Margin="5 0" CornerRadius="5" Height="40" Background="#d1d1d1">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                                    <Button 
+                                                        Command="{Binding DataContext.RemoveAttendeeCM, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                        CommandParameter="{Binding}"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        Width="30"
+                                                        Padding="0">
+                                                        <fa:FontAwesome
+                                                            Margin="0"
+                                                            Padding="0"
+                                                            FontSize="15"
+                                                            Icon="Times"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <TextBox
+                                    x:Name="NewAttendee"
+                                    md:TextFieldAssist.UnderlineBrush="Transparent"
+                                    md:HintAssist.Hint="Add Attendee"
+                                    Margin="10 0"
+                                    Width="120"
+                                    BorderThickness="0"
+                                    Background="Transparent"
+                                    VerticalContentAlignment="Center"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
                     <Grid Grid.Row="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>

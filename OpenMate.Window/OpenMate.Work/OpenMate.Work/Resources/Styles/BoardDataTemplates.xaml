@@ -13,12 +13,12 @@
                     VerticalContentAlignment="Center"
                     Margin="8 0 8 4"/>
             </StackPanel>
-            <Border.InputBindings>
+            <!--<Border.InputBindings>
                 <MouseBinding 
                     Gesture="LeftClick"
                     Command="{Binding DataContext.CardItemClickCM, RelativeSource={RelativeSource AncestorType=ListBox}}"
                     CommandParameter="{Binding}" />
-            </Border.InputBindings>
+            </Border.InputBindings>-->
         </Border>
     </DataTemplate>
 

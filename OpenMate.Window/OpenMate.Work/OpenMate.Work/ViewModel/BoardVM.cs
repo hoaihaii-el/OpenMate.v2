@@ -231,5 +231,12 @@ namespace OpenMate.Work.ViewModel
             var detailSprint = new SprintDetail(spr);
             detailSprint.ShowDialog();
         }
+
+        public void OpenTicketDetail(Task task)
+        {
+            var newBackLog = new AddBackLog();
+            newBackLog.DataContext = this;
+            newBackLog.ShowDialog();
+        }
     }
 }
