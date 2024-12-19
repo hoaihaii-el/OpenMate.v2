@@ -1,6 +1,5 @@
 ﻿using OpenMate.Work.Helpers;
 using OpenMate.Work.Resources.Uitilities;
-using OpenMate.Work.Views.Boards;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -58,7 +57,7 @@ namespace OpenMate.Work.Model
         private string _MeetingURL;
         public string MeetingURL
         {
-            get => _MeetingURL; 
+            get => _MeetingURL;
             set => SetProperty(ref _MeetingURL, value);
         }
 
@@ -105,6 +104,29 @@ namespace OpenMate.Work.Model
                     return (EndTime.Hour * 60 + EndTime.Minute) - (StartTime.Hour * 60 + StartTime.Minute) - 5;
                 }
             }
+        }
+
+
+        private string _NewAttendee;
+        public string NewAttendee
+        {
+            get => _NewAttendee;
+            set
+            {
+                if (value != null)
+                {
+                    _NewAttendee = value;
+                    OnPropertyChanged(nameof(NewAttendee));
+                    AttendeeSuggestions.Add(value);
+                }
+            }
+        }
+
+        private ObservableCollection<string> _AttendeeSuggestions = new ObservableCollection<string>();
+        public ObservableCollection<string> AttendeeSuggestions
+        {
+            get => _AttendeeSuggestions;
+            set => SetProperty(ref _AttendeeSuggestions, value);
         }
 
         public Event()

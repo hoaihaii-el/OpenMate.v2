@@ -100,9 +100,20 @@
                         Style="{StaticResource FloatingTextBox}"
                         md:HintAssist.Hint="Meeting URL"/>
                     <Grid Grid.Row="4">
+                        <ComboBox
+                            Margin="10 0"
+                            Text="{Binding NewAttendee, UpdateSourceTrigger=PropertyChanged}"
+                            md:TextFieldAssist.UnderlineBrush="Transparent"
+                            ItemsSource="{Binding AttendeeSuggestions, UpdateSourceTrigger=PropertyChanged}"
+                            IsEditable="True"
+                            SelectionChanged="ComboBox_SelectionChanged"
+                            IsDropDownOpen="True"/>
+                        <Border Background="#eeeeee" Width="350" HorizontalAlignment="Left" Height="43" VerticalAlignment="Top"/>
+                    </Grid>
+                    <Grid Grid.Row="4" Width="350" HorizontalAlignment="Left">
                         <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
                             <StackPanel Orientation="Horizontal">
-                                <ItemsControl ItemsSource="{Binding Attendees}">
+                                <ItemsControl Margin="0 -5 0 0" ItemsSource="{Binding Attendees}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Horizontal"/>
@@ -110,7 +121,7 @@
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Border Margin="5 0" CornerRadius="5" Height="40" Background="#d1d1d1">
+                                            <Border Margin="5 0 0 0" CornerRadius="5" Height="35" Background="#d1d1d1">
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="{Binding Name}" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                                     <Button 
@@ -133,6 +144,7 @@
                                 </ItemsControl>
                                 <TextBox
                                     x:Name="NewAttendee"
+                                    Text="{Binding NewAttendee, UpdateSourceTrigger=PropertyChanged}"
                                     md:TextFieldAssist.UnderlineBrush="Transparent"
                                     md:HintAssist.Hint="Add Attendee"
                                     Margin="10 0"

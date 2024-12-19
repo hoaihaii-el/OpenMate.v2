@@ -1,5 +1,6 @@
 ﻿using OpenMate.Work.Model;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace OpenMate.Work.Views.Calendars
@@ -51,6 +52,22 @@ namespace OpenMate.Work.Views.Calendars
         {
             IsDelete = true;
             this.Close();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var combo = sender as ComboBox;
+            if (combo.SelectedItem == null)
+            {
+                return;
+            }
+
+            var vm = this.DataContext as Event;
+            vm.Attendees.Add(new Attendee
+            {
+                ID = "1",
+                Name = combo.SelectedItem.ToString()
+            });
         }
     }
 }
