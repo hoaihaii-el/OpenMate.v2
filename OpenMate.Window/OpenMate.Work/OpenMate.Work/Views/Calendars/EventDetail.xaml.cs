@@ -54,7 +54,7 @@ namespace OpenMate.Work.Views.Calendars
             this.Close();
         }
 
-        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var combo = sender as ComboBox;
             if (combo.SelectedItem == null)
@@ -68,6 +68,27 @@ namespace OpenMate.Work.Views.Calendars
                 ID = "1",
                 Name = combo.SelectedItem.ToString()
             });
+
+            vm.NewAttendee = "";
+        }
+
+        private void NewAttendee_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var txtBox = sender as TextBox;
+
+            if (txtBox == null)
+            {
+                return;
+            }
+
+            if (txtBox.Text.Length > 0)
+            {
+                SuggestionCombo.IsDropDownOpen = true;
+            }
+            else
+            {
+                SuggestionCombo.IsDropDownOpen = false;
+            }
         }
     }
 }

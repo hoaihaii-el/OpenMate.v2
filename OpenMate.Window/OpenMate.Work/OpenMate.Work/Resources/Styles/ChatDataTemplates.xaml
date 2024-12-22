@@ -4,14 +4,26 @@
     <DataTemplate x:Key="ChatTemplate">
         <Border Cursor="Hand" Margin="10 0 0 0">
             <StackPanel Orientation="Horizontal">
-                <Rectangle Width="22" Height="22" RadiusX="11" RadiusY="11" Margin="10 7 0 7">
-                    <Rectangle.Fill>
-                        <ImageBrush ImageSource="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"/>
-                    </Rectangle.Fill>
-                </Rectangle>
+                <Viewbox Width="20" Height="20" Margin="5 0 5 2">
+                    <Path Fill="Black">
+                        <Path.Style>
+                            <Style TargetType="Path">
+                                <Setter Property="Data" Value="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Name}" Value="BOARD">
+                                        <Setter Property="Data" Value="M20,4H4A3,3,0,0,0,1,7V17a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V7A3,3,0,0,0,20,4Zm1,13a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1V7A1,1,0,0,1,4,6H20a1,1,0,0,1,1,1ZM16,9a3,3,0,0,0-2.82,4H10.82A3,3,0,1,0,8,15h8a3,3,0,0,0,0-6ZM8,13a1,1,0,1,1,1-1A1,1,0,0,1,8,13Zm8,0a1,1,0,1,1,1-1A1,1,0,0,1,16,13Z"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Name}" Value="CALENDAR">
+                                        <Setter Property="Data" Value="M20,4H4A3,3,0,0,0,1,7V17a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V7A3,3,0,0,0,20,4Zm1,13a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1V7A1,1,0,0,1,4,6H20a1,1,0,0,1,1,1ZM16,9a3,3,0,0,0-2.82,4H10.82A3,3,0,1,0,8,15h8a3,3,0,0,0,0-6ZM8,13a1,1,0,1,1,1-1A1,1,0,0,1,8,13Zm8,0a1,1,0,1,1,1-1A1,1,0,0,1,16,13Z"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </Viewbox>
                 <Label 
                     Content="{Binding Name}" FontSize="16"
-                    Width="160" VerticalContentAlignment="Center"
+                    Width="155" VerticalContentAlignment="Center"
                     Margin="10 0 0 0">
                     <Label.Style>
                         <Style TargetType="Label">
@@ -24,16 +36,28 @@
                         </Style>
                     </Label.Style>
                 </Label>
+                <Border Width="10" Height="10" CornerRadius="5" VerticalAlignment="Center">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="{StaticResource Primary}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsRead}" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
             </StackPanel>
         </Border>
     </DataTemplate>
     <DataTemplate x:Key="SpaceTemplate">
         <Border Cursor="Hand" Margin="10 0 0 0">
             <StackPanel Orientation="Horizontal">
-                <fa:FontAwesome Margin="10 7 0 7" Icon="Globe" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <fa:FontAwesome Margin="10 7 0 7" Icon="Globe" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <Label 
                     Content="{Binding Name}" FontSize="16"
-                    Width="160" VerticalContentAlignment="Center"
+                    Width="155" VerticalContentAlignment="Center"
                     Margin="10 0 0 0">
                     <Label.Style>
                         <Style TargetType="Label">
@@ -46,6 +70,18 @@
                         </Style>
                     </Label.Style>
                 </Label>
+                <Border Width="10" Height="10" CornerRadius="5" VerticalAlignment="Center">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="{StaticResource Primary}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsRead}" Value="True">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
             </StackPanel>
         </Border>
     </DataTemplate>
@@ -79,7 +115,18 @@
                     </Style>
                 </Border.Style>
                 <StackPanel Orientation="Vertical" Margin="4">
-                    <TextBlock Text="{Binding Text}" TextWrapping="Wrap" MaxWidth="1000"/>
+                    <TextBlock Text="{Binding Text}" TextWrapping="Wrap" MaxWidth="1000">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Visible"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                     <Image Source="{Binding ImageUrl}" MaxWidth="500" Stretch="UniformToFill" HorizontalAlignment="Center">
                         <Image.Style>
                             <Style TargetType="Image">

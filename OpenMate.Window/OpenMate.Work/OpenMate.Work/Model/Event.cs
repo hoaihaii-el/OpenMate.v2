@@ -61,7 +61,7 @@ namespace OpenMate.Work.Model
             set => SetProperty(ref _MeetingURL, value);
         }
 
-        private ObservableCollection<Attendee> _Attendees;
+        private ObservableCollection<Attendee> _Attendees = new ObservableCollection<Attendee>();
         public ObservableCollection<Attendee> Attendees
         {
             get => _Attendees;

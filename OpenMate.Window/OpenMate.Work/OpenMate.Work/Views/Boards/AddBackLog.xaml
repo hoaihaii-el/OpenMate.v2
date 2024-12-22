@@ -156,7 +156,7 @@
                         </ComboBox>
                         <TextBox
                             Grid.Row="11"
-                            md:HintAssist.Hint="Effort"
+                            md:HintAssist.Hint="Story Point"
                             Style="{StaticResource FloatingTextBox}"/>
                     </Grid>
                 </Border>
@@ -173,15 +173,32 @@
                             HorizontalContentAlignment="Center"
                             Content="User story"/>
                         <DockPanel Grid.Row="1">
-                            <ToolBar DockPanel.Dock="Top">
-                                <Button Content="B" FontWeight="UltraBlack" Click="Bold_Click"/>
-                                <Button Content="I" FontStyle="Italic" Click="Italic_Click"/>
-                                <Button Click="Underline_Click">
-                                    <TextBlock Text="U" TextDecorations="Underline"/>
-                                </Button>
-                            </ToolBar>
+                            <Grid DockPanel.Dock="Top">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="140"/>
+                                </Grid.ColumnDefinitions>
+                                <ToolBar>
+                                    <Button Content="B" FontWeight="UltraBlack" Click="Bold_Click"/>
+                                    <Button Content="I" FontStyle="Italic" Click="Italic_Click"/>
+                                    <Button Click="Underline_Click">
+                                        <TextBlock Text="U" TextDecorations="Underline"/>
+                                    </Button>
+                                </ToolBar>
+                                <Button 
+                                    Grid.Column="1" Margin="5" Content="Update" Height="35"
+                                    Style="{StaticResource NormalButton}"/>
+                            </Grid>
 
-                            <RichTextBox x:Name="richTextBox" FontFamily="Nunito" FontSize="14" Margin="10" VerticalScrollBarVisibility="Auto"/>
+                            <RichTextBox 
+                                x:Name="richTextBox" 
+                                FontFamily="Nunito" 
+                                FontSize="15" Margin="10" 
+                                DataObject.Pasting="richTextBox_Pasting"
+                                VerticalScrollBarVisibility="Auto" 
+                                md:HintAssist.Hint="Description"
+                                md:TextFieldAssist.DecorationVisibility="Hidden"
+                                BorderThickness="0"/>
                         </DockPanel>
                     </Grid>
                 </Border>
@@ -190,13 +207,17 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="80"/>
                         </Grid.RowDefinitions>
                         <ListBox
                             ItemsSource="{Binding Logs}"
-                            
                             ItemTemplate="{StaticResource LogTemplate}"/>
-                        <RichTextBox Grid.Row="1" Margin="5" Background="White"/>
+                        <Border Grid.Row="1" Margin="4" Background="White" CornerRadius="4">
+                            <RichTextBox 
+                                Margin="3" Background="Transparent"
+                                FontSize="15" md:HintAssist.Hint="Comment"
+                                md:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"/>
+                        </Border>
                     </Grid>
                 </Border>
             </Grid>

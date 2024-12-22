@@ -15,8 +15,20 @@ namespace OpenMate.Work.Model
             set
             {
                 _IsSelected = value;
+                if (_IsSelected == true)
+                {
+                    IsRead = true;
+                    OnPropertyChanged(nameof(IsRead));
+                }
                 OnPropertyChanged(nameof(IsSelected));
             }
+        }
+
+        private bool _IsRead;
+        public bool IsRead
+        {
+            get => _IsRead;
+            set => SetProperty(ref _IsRead, value);
         }
     }
 }

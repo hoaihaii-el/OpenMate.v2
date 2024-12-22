@@ -1,5 +1,9 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.IO;
+using System.Windows.Media.Imaging;
+using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace OpenMate.Work.Helpers
 {
@@ -17,5 +21,30 @@ namespace OpenMate.Work.Helpers
             { DayOfWeek.Friday, 5 * CeelWidth },
             { DayOfWeek.Saturday, 6 * CeelWidth }
         };
+
+        public static string ConvertImageToBase64(BitmapSource bitmapSource)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                BitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                encoder.Save(stream);
+
+                return Convert.ToBase64String(stream.ToArray());
+            }
+        }
+
+        public static void ResizeImage(RichTextBox richTxtBox)
+        {
+            foreach (var block in richTxtBox.Document.Blocks)
+            {
+                if (block is BlockUIContainer blockUI && blockUI.Child is Image image)
+                {
+                    var rate = image.Height / image.Width;
+                    image.MaxWidth = 550;
+                    image.MaxHeight = rate * image.MaxWidth;
+                }
+            }
+        }
     }
 }

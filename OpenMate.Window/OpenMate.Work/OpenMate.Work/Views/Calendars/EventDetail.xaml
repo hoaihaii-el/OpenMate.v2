@@ -101,13 +101,14 @@
                         md:HintAssist.Hint="Meeting URL"/>
                     <Grid Grid.Row="4">
                         <ComboBox
+                            x:Name="SuggestionCombo"
                             Margin="10 0"
                             Text="{Binding NewAttendee, UpdateSourceTrigger=PropertyChanged}"
                             md:TextFieldAssist.UnderlineBrush="Transparent"
                             ItemsSource="{Binding AttendeeSuggestions, UpdateSourceTrigger=PropertyChanged}"
                             IsEditable="True"
-                            SelectionChanged="ComboBox_SelectionChanged"
-                            IsDropDownOpen="True"/>
+                            IsTextSearchEnabled="True"
+                            SelectionChanged="ComboBox_SelectionChanged"/>
                         <Border Background="#eeeeee" Width="350" HorizontalAlignment="Left" Height="43" VerticalAlignment="Top"/>
                     </Grid>
                     <Grid Grid.Row="4" Width="350" HorizontalAlignment="Left">
@@ -149,6 +150,7 @@
                                     md:HintAssist.Hint="Add Attendee"
                                     Margin="10 0"
                                     Width="120"
+                                    TextChanged="NewAttendee_TextChanged"
                                     BorderThickness="0"
                                     Background="Transparent"
                                     VerticalContentAlignment="Center"/>

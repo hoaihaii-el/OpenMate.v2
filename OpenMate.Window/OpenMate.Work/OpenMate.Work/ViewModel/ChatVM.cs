@@ -111,7 +111,6 @@ namespace OpenMate.Work.ViewModel
                 new Message()
                 {
                     IsFromUser = false,
-                    Text = "Thế có blocker gì không ???",
                     Sender = "Sếp",
                     ImageUrl = "https://kenh14cdn.com/2017/images685542-a-1489655177057.jpg"
                 },
