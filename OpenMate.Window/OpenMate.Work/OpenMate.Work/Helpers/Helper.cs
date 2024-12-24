@@ -34,14 +34,14 @@ namespace OpenMate.Work.Helpers
             }
         }
 
-        public static void ResizeImage(RichTextBox richTxtBox)
+        public static void ResizeImage(RichTextBox richTxtBox, double maxWidth)
         {
             foreach (var block in richTxtBox.Document.Blocks)
             {
                 if (block is BlockUIContainer blockUI && blockUI.Child is Image image)
                 {
                     var rate = image.Height / image.Width;
-                    image.MaxWidth = 550;
+                    image.MaxWidth = maxWidth;
                     image.MaxHeight = rate * image.MaxWidth;
                 }
             }

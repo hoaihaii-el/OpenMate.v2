@@ -115,7 +115,7 @@ namespace OpenMate.Work.Views.Boards
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                Helper.ResizeImage(richTextBox);
+                Helper.ResizeImage(richTextBox, 550);
             }));
         }
     }

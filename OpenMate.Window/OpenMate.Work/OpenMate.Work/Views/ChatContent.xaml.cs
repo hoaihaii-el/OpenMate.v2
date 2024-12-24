@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using OpenMate.Work.Helpers;
+using System;
+using System.Windows.Controls;
 
 namespace OpenMate.Work.Views
 {
@@ -10,6 +12,14 @@ namespace OpenMate.Work.Views
         public ChatContent()
         {
             InitializeComponent();
+        }
+
+        private void InputRichTextBox_Pasting(object sender, System.Windows.DataObjectPastingEventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                Helper.ResizeImage(InputRichTextBox, 100);
+            }));
         }
     }
 }

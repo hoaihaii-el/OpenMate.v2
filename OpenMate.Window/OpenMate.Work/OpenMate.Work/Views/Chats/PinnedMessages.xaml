@@ -1,0 +1,100 @@
+﻿<Window x:Class="OpenMate.Work.Views.Chats.PinnedMessages"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenMate.Work.Views.Chats"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        FontFamily="{StaticResource Nunito}"
+        TextElement.FontFamily="{StaticResource Nunito}"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="ImageDetails" Height="650" Width="500">
+    <Border
+        Background="White" 
+        CornerRadius="5"
+        BorderBrush="#004225"
+        BorderThickness="4">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Background="#EEEEEE" CornerRadius="5" Margin="0 0 0 5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        x:Name="LabelTitle"
+                        Content="PINNED MESSAGES"
+                        Margin="10 0 0 0"
+                        FontSize="17"
+                        Foreground="{StaticResource Primary}"
+                        VerticalAlignment="Center"/>
+                    <Label
+                        Grid.Column="1"
+                        Style="{StaticResource CloseWindow}"
+                        MouseDown="Label_MouseDown">
+                        <fa:ImageAwesome
+                        Icon="PowerOff"
+                        Foreground="{StaticResource Primary}"/>
+                    </Label>
+                </Grid>
+            </Border>
+            <Label
+                Grid.Row="1" FontSize="16"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Content="No data yet">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding PinnedMessages.Count}" Value="0">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+            <ScrollViewer
+                x:Name="PinnedMessagesScrollViewer" Grid.Row="1"
+                VerticalScrollBarVisibility="Auto"
+                Loaded="PinnedMessagesScrollViewer_Loaded"
+                HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl
+                        ItemsSource="{Binding PinnedMessages}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="#eee" CornerRadius="5" Margin="0 5">
+                                <StackPanel Orientation="Vertical" Margin="5 0">
+                                    <TextBlock
+                                        Margin="0 5 0 0"
+                                        FontSize="17"
+                                        TextWrapping="Wrap"
+                                        Text="{Binding}"/>
+                                    <TextBlock
+                                        Margin="0 5"
+                                        FontSize="14"
+                                        Text="14:00 21/12/2024"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Window>

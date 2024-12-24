@@ -88,7 +88,9 @@
     <Compile Include="ViewModel\Boards\BoardDetailVM.cs" />
     <Compile Include="ViewModel\BoardVM.cs" />
     <Compile Include="ViewModel\CalendarVM.cs" />
-    <Compile Include="ViewModel\ChatVM.cs" />
+    <Compile Include="ViewModel\Chats\ChatVM.AddNewChat.cs" />
+    <Compile Include="ViewModel\Chats\ChatVM.cs" />
+    <Compile Include="ViewModel\Chats\ChatVM.Details.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="Views\BoardContent.xaml.cs">
       <DependentUpon>BoardContent.xaml</DependentUpon>
@@ -116,6 +118,15 @@
     </Compile>
     <Compile Include="Views\ChatContent.xaml.cs">
       <DependentUpon>ChatContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\ImageDetails.xaml.cs">
+      <DependentUpon>ImageDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\NewConversation.xaml.cs">
+      <DependentUpon>NewConversation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\PinnedMessages.xaml.cs">
+      <DependentUpon>PinnedMessages.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -210,6 +221,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ChatContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\ImageDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\NewConversation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\PinnedMessages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

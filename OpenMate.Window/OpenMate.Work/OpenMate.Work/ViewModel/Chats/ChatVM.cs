@@ -2,9 +2,9 @@
 using OpenMate.Work.Resources.Uitilities;
 using System.Collections.ObjectModel;
 
-namespace OpenMate.Work.ViewModel
+namespace OpenMate.Work.ViewModel.Chats
 {
-    public class ChatVM : BaseViewModel
+    public partial class ChatVM : BaseViewModel
     {
         private ObservableCollection<User> _Users = new ObservableCollection<User>();
         public ObservableCollection<User> Users
@@ -43,8 +43,13 @@ namespace OpenMate.Work.ViewModel
             }
         }
 
+
         public ChatVM()
         {
+            HanldeAddNewChat();
+            HandleImageDetail();
+            HandlePinnedMessages();
+
             Users = new ObservableCollection<User>()
             {
                 new User()

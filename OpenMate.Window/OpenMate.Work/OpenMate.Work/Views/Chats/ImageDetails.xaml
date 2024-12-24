@@ -1,0 +1,100 @@
+﻿<Window x:Class="OpenMate.Work.Views.Chats.ImageDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenMate.Work.Views.Chats"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        FontFamily="{StaticResource Nunito}"
+        TextElement.FontFamily="{StaticResource Nunito}"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="ImageDetails" Height="850" Width="600">
+    <Border
+        Background="White" 
+        CornerRadius="5"
+        BorderBrush="#004225"
+        BorderThickness="4">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Background="#EEEEEE" CornerRadius="5" Margin="0 0 0 5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        x:Name="LabelTitle"
+                        Content="ALL IMAGE"
+                        Margin="10 0 0 0"
+                        FontSize="17"
+                        Foreground="{StaticResource Primary}"
+                        VerticalAlignment="Center"/>
+                    <Label
+                        Grid.Column="1"
+                        Style="{StaticResource CloseWindow}"
+                        MouseDown="Label_MouseDown">
+                        <fa:ImageAwesome
+                            Icon="PowerOff"
+                            Foreground="{StaticResource Primary}"/>
+                    </Label>
+                </Grid>
+            </Border>
+            <Border Background="#EEEEEE" CornerRadius="5" Grid.Row="1">
+                <ScrollViewer
+                    x:Name="ImagesScrollViewer"
+                    Loaded="ImagesScrollViewer_Loaded"
+                    Margin="5 0"
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Disabled">
+                    <ItemsControl
+                        ItemsSource="{Binding Images}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <Image
+                                        Margin="0 6"
+                                        HorizontalAlignment="Center"
+                                        Source="{Binding}"
+                                        MaxWidth="580"/>
+                                    <TextBlock
+                                        Margin="0 5"
+                                        Text="2AM 11/11/2024"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Border>
+            <Label
+                Grid.Row="1" FontSize="16"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Content="No data yet">
+                <Label.Style>
+                    <Style TargetType="Label">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Images.Count}" Value="0">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Label.Style>
+            </Label>
+        </Grid>
+    </Border>
+</Window>

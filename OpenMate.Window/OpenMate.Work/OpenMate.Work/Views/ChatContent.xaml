@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OpenMate.Work.Views"
              mc:Ignorable="d" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              FontFamily="{StaticResource Nunito}"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              d:DesignHeight="750" d:DesignWidth="1540">
@@ -65,12 +66,19 @@
                     ItemTemplate="{StaticResource SpaceTemplate}" d:ItemsSource="{d:SampleData ItemCount=5}">
                 </ListBox>
                 <Grid Grid.Row="2" Background="#f1f1f1" Margin="5 0"/>
-                <Label
-                    Grid.Row="3"
-                    Content="MESSAGES:"
-                    VerticalContentAlignment="Center"
-                    FontSize="16"
-                    Margin="10 0"/>
+                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                    <Label
+                        Content="MESSAGES:"
+                        VerticalContentAlignment="Center"
+                        FontSize="16"
+                        Margin="10 0"
+                        Width="182.5"/>
+                    <Button
+                        Command="{Binding OpenAddNewChatCM}"
+                        Style="{StaticResource IconButtonStyle}">
+                        <fa:FontAwesome Icon="Plus" FontSize="20"/>
+                    </Button>
+                </StackPanel>
                 <ListBox 
                     Grid.Row="4"
                     SelectedItem="{Binding SelectedBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -84,7 +92,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="60"/>
                     <RowDefinition/>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="80"/>
                 </Grid.RowDefinitions>
                 <Border 
                     Background="#f1f1f1"
@@ -95,6 +103,8 @@
                             <ColumnDefinition Width="550"/>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
@@ -112,18 +122,37 @@
                             VerticalContentAlignment="Center"/>
                         <fa:FontAwesome 
                             Grid.Column="3"
-                            Cursor="Hand"
                             Icon="Group"
                             Width="30"
                             VerticalAlignment="Center"
                             FontSize="18"/>
-                        <fa:FontAwesome 
-                            Grid.Column="4"
-                            Cursor="Hand"
-                            Icon="FileImageOutline"
-                            Width="30"
-                            VerticalAlignment="Center"
-                            FontSize="18"/>
+                        <Button 
+                            Grid.Column="4" 
+                            Command="{Binding OpenImageDetailCM}"
+                            Style="{StaticResource IconButtonStyle}">
+                            <fa:FontAwesome
+                                Icon="FileImageOutline"
+                                Width="30"
+                                VerticalAlignment="Center"
+                                FontSize="18"/>
+                        </Button>
+                        <Button 
+                            Grid.Column="5" 
+                            Command="{Binding OpenPinnedMessagesCM}"
+                            Style="{StaticResource IconButtonStyle}">
+                            <fa:FontAwesome
+                                Icon="MapPin"
+                                Width="30"
+                                VerticalAlignment="Center"
+                                FontSize="18"/>
+                        </Button>
+                        <Button Grid.Column="6" Style="{StaticResource IconButtonStyle}">
+                            <fa:FontAwesome
+                                Icon="Info"
+                                Width="30"
+                                VerticalAlignment="Center"
+                                FontSize="18"/>
+                        </Button>
                     </Grid>
                 </Border>
                 <Border
@@ -146,58 +175,32 @@
                     <Grid Margin="10 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5*"/>
-                            <ColumnDefinition/>
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
-                        <Label
-                            FontSize="15"
-                            Content="Type something"
-                            VerticalContentAlignment="Center"
-                            Foreground="Gray">
-                            <Label.Style>
-                                <Style TargetType="Label">
-                                    <Setter Property="Visibility" Value="Hidden"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding ElementName=ChatBox, Path=Text}" Value="">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Label.Style>
-                        </Label>
-                        <TextBox
-                            Style="{x:Null}"
-                            x:Name="ChatBox"
-                            Background="Transparent"
-                            VerticalContentAlignment="Center"
-                            FontSize="15"
-                            TextWrapping="Wrap"
-                            AcceptsReturn="True"
-                            BorderThickness="0"/>
-                        <fa:FontAwesome 
-                            Grid.Column="2"
-                            Icon="FileImageOutline"
-                            Cursor="Hand"
-                            Width="30"
-                            VerticalAlignment="Center"
-                            FontSize="18"/>
-                        <fa:FontAwesome 
-                            Grid.Column="3"
-                            Icon="ArrowUp"
-                            Cursor="Hand"
-                            Width="30"
-                            VerticalAlignment="Center"
-                            FontSize="18"/>
-                        <fa:FontAwesome 
-                            Grid.Column="4"
-                            Icon="ArrowRight"
-                            Cursor="Hand"
-                            Foreground="#77CDFF"
-                            Width="30"
-                            VerticalAlignment="Center"
-                            FontSize="18"/>
+                        <RichTextBox
+                            x:Name="InputRichTextBox"
+                            Padding="0 10" FontSize="16"
+                            md:HintAssist.Hint="Type here"
+                            DataObject.Pasting="InputRichTextBox_Pasting"
+                            md:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0"/>
+                        <Button Grid.Column="2" Style="{StaticResource IconButtonStyle}">
+                            <fa:FontAwesome 
+                                Icon="ArrowUp"
+                                Width="30"
+                                VerticalAlignment="Center"
+                                FontSize="18"/>
+                        </Button>
+                        <Button Grid.Column="3" Style="{StaticResource IconButtonStyle}">
+                            <fa:FontAwesome 
+                                Icon="ArrowRight"
+                                Cursor="Hand"
+                                Foreground="#77CDFF"
+                                Width="30"
+                                VerticalAlignment="Center"
+                                FontSize="18"/>
+                        </Button>
                     </Grid>
                 </Border>
             </Grid>
