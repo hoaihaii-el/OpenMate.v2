@@ -74,7 +74,7 @@
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Hidden"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Participants}" Value="{x:Null}">
+                                    <DataTrigger Binding="{Binding Participants.Count}" Value="0">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>

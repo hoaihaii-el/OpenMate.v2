@@ -70,6 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviors\ImageBehavior.cs" />
     <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Model\Attendee.cs" />
     <Compile Include="Model\CustomDateTime.cs" />
@@ -119,14 +120,14 @@
     <Compile Include="Views\ChatContent.xaml.cs">
       <DependentUpon>ChatContent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Chats\ImageDetails.xaml.cs">
-      <DependentUpon>ImageDetails.xaml</DependentUpon>
+    <Compile Include="Views\Chats\ChatDetails.xaml.cs">
+      <DependentUpon>ChatDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Chats\NewConversation.xaml.cs">
       <DependentUpon>NewConversation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Chats\PinnedMessages.xaml.cs">
-      <DependentUpon>PinnedMessages.xaml</DependentUpon>
+    <Compile Include="Views\ImageViewer.xaml.cs">
+      <DependentUpon>ImageViewer.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -224,7 +225,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Chats\ImageDetails.xaml">
+    <Page Include="Views\Chats\ChatDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,7 +233,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Chats\PinnedMessages.xaml">
+    <Page Include="Views\ImageViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

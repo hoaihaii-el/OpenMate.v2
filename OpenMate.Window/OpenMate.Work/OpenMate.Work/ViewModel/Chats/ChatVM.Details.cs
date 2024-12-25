@@ -7,8 +7,6 @@ namespace OpenMate.Work.ViewModel.Chats
 {
     public partial class ChatVM : BaseViewModel
     {
-        public ICommand OpenImageDetailCM { get; set; }
-
         private ObservableCollection<string> _Images;
         public ObservableCollection<string> Images
         {
@@ -16,8 +14,8 @@ namespace OpenMate.Work.ViewModel.Chats
             set => SetProperty(ref _Images, value);
         }
 
-
-        public ICommand OpenPinnedMessagesCM { get; set; }
+        public ICommand OpenChatDetailCM { get; set; }
+        public ICommand RemoveCurParticipantCM { get; set; }
 
         private ObservableCollection<string> _PinnedMessages;
         public ObservableCollection<string> PinnedMessages
@@ -26,27 +24,23 @@ namespace OpenMate.Work.ViewModel.Chats
             set => SetProperty(ref _PinnedMessages, value);
         }
 
-        public void HandleImageDetail()
+        private ObservableCollection<string> _CurParticipants;
+        public ObservableCollection<string> CurParticipants
         {
-            OpenImageDetailCM = new RelayCommand<object>((p) => true, (p) =>
+            get => _CurParticipants;
+            set => SetProperty(ref _CurParticipants, value);
+        }
+
+        public void HandleChatDetail()
+        {
+            OpenChatDetailCM = new RelayCommand<object>((p) => true, (p) =>
             {
-                var imageDetail = new ImageDetails();
                 Images = new ObservableCollection<string>()
                 {
                     "https://images8.alphacoders.com/133/1336966.jpeg",
                     "https://images8.alphacoders.com/133/1336966.jpeg",
                     "https://images8.alphacoders.com/133/1336966.jpeg"
                 };
-                imageDetail.DataContext = this;
-                imageDetail.ShowDialog();
-            });
-        }
-
-        public void HandlePinnedMessages()
-        {
-            OpenPinnedMessagesCM = new RelayCommand<object>((p) => true, (p) =>
-            {
-                var pinnedMessages = new PinnedMessages();
                 PinnedMessages = new ObservableCollection<string>()
                 {
                     "Real Madrid",
@@ -54,8 +48,24 @@ namespace OpenMate.Work.ViewModel.Chats
                     "Li Europan lingues es membres del sam familie. Lor separat existentie es un myth.",
                     "Li Europan lingues es membres del sam familie. Lor separat existentie es un myth.",
                 };
-                pinnedMessages.DataContext = this;
-                pinnedMessages.ShowDialog();
+                CurParticipants = new ObservableCollection<string>()
+                {
+                    "Bray",
+                    "YoungH",
+                    "Dlow",
+                };
+
+                var chatDetail = new ChatDetails();
+                chatDetail.DataContext = this;
+                chatDetail.ShowDialog();
+            });
+
+            RemoveCurParticipantCM = new RelayCommand<string>((p) => true, (p) =>
+            {
+                if (CurParticipants.Contains(p))
+                {
+                    CurParticipants.Remove(p);
+                }
             });
         }
     }

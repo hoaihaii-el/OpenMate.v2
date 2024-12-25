@@ -102,10 +102,6 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="550"/>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="30"/>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
                         <Label
@@ -114,39 +110,10 @@
                             Margin="10 0"
                             VerticalContentAlignment="Center"/>
                         <Grid Grid.Column="1"/>
-                        <Label
-                            Grid.Column="2"
-                            Content="15"
-                            FontSize="15"
-                            HorizontalContentAlignment="Center"
-                            VerticalContentAlignment="Center"/>
-                        <fa:FontAwesome 
-                            Grid.Column="3"
-                            Icon="Group"
-                            Width="30"
-                            VerticalAlignment="Center"
-                            FontSize="18"/>
                         <Button 
-                            Grid.Column="4" 
-                            Command="{Binding OpenImageDetailCM}"
+                            Grid.Column="2" 
+                            Command="{Binding OpenChatDetailCM}"
                             Style="{StaticResource IconButtonStyle}">
-                            <fa:FontAwesome
-                                Icon="FileImageOutline"
-                                Width="30"
-                                VerticalAlignment="Center"
-                                FontSize="18"/>
-                        </Button>
-                        <Button 
-                            Grid.Column="5" 
-                            Command="{Binding OpenPinnedMessagesCM}"
-                            Style="{StaticResource IconButtonStyle}">
-                            <fa:FontAwesome
-                                Icon="MapPin"
-                                Width="30"
-                                VerticalAlignment="Center"
-                                FontSize="18"/>
-                        </Button>
-                        <Button Grid.Column="6" Style="{StaticResource IconButtonStyle}">
                             <fa:FontAwesome
                                 Icon="Info"
                                 Width="30"

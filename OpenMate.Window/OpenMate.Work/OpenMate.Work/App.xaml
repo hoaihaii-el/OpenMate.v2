@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:OpenMate.Work"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:behavior="clr-namespace:OpenMate.Work.Behaviors"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -24,7 +25,11 @@
 
             <FontFamily x:Key="Nunito">./Resources/Fonts/Nunito-SemiBold.ttf#Nunito</FontFamily>
             <FontFamily x:Key="NunitoLight">./Resources/Fonts/Nunito-Regular.ttf#Nunito</FontFamily>
-
+            <Style TargetType="Image">
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="behavior:ImageBehavior.EnableImagePreview" Value="True" />
+            </Style>
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

@@ -4,11 +4,11 @@ using System.Windows.Input;
 namespace OpenMate.Work.Views.Chats
 {
     /// <summary>
-    /// Interaction logic for ImageDetails.xaml
+    /// Interaction logic for ChatDetails.xaml
     /// </summary>
-    public partial class ImageDetails : Window
+    public partial class ChatDetails : Window
     {
-        public ImageDetails()
+        public ChatDetails()
         {
             InitializeComponent();
         }
@@ -18,9 +18,10 @@ namespace OpenMate.Work.Views.Chats
             this.Close();
         }
 
-        private void ImagesScrollViewer_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ImagesScrollViewer.ScrollToEnd();
+            PinnedMessagesScrollViewer.ScrollToEnd();
         }
     }
 }

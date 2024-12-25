@@ -47,8 +47,7 @@ namespace OpenMate.Work.ViewModel.Chats
         public ChatVM()
         {
             HanldeAddNewChat();
-            HandleImageDetail();
-            HandlePinnedMessages();
+            HandleChatDetail();
 
             Users = new ObservableCollection<User>()
             {
