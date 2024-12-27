@@ -1,4 +1,5 @@
 ﻿using OpenMate.Work.ViewModel;
+using OpenMate.Work.ViewModel.Boards;
 using OpenMate.Work.ViewModel.Chats;
 using System.Windows;
 using System.Windows.Input;

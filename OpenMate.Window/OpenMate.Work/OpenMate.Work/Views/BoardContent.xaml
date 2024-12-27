@@ -83,6 +83,19 @@
                     </Grid>
                 </menu:NavigateButton>
 
+                <menu:NavigateButton
+                    Cursor="Hand"
+                    x:Name="BackLog"
+                    GroupName="Sprint"
+                    Style="{StaticResource ButtonStyle}"
+                    Checked="NavigateButton_Checked">
+                    <Grid>
+                        <TextBlock
+                            Text="BackLog"
+                            Style="{StaticResource Text_Style}"/>
+                    </Grid>
+                </menu:NavigateButton>
+
                 <Grid Height="30"/>
 
                 <Button
@@ -93,6 +106,8 @@
             </StackPanel>
             <board:KanbanBoard x:Name="Board" Grid.Column="1"/>
             <board:Sprints x:Name="SprintList" Grid.Column="1" Visibility="Hidden"/>
+            <board:ProjectDetail x:Name="ProjectDetail" Grid.Column="1" Visibility="Hidden"/>
+            <board:BackLog x:Name="BackLogs" Grid.Column="1" Visibility="Hidden"/>
         </Grid>
     </Border>
 </UserControl>

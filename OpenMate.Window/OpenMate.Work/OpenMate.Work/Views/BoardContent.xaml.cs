@@ -28,12 +28,26 @@ namespace OpenMate.Work.Views
                 case "ActiveSprint":
                     Board.Visibility = Visibility.Visible;
                     SprintList.Visibility = Visibility.Hidden;
+                    ProjectDetail.Visibility = Visibility.Hidden;
+                    BackLogs.Visibility = Visibility.Hidden;
                     break;
                 case "Sprints":
                     Board.Visibility = Visibility.Hidden;
                     SprintList.Visibility = Visibility.Visible;
+                    ProjectDetail.Visibility = Visibility.Hidden;
+                    BackLogs.Visibility = Visibility.Hidden;
                     break;
-                case "Chart":
+                case "Information":
+                    Board.Visibility = Visibility.Hidden;
+                    SprintList.Visibility = Visibility.Hidden;
+                    ProjectDetail.Visibility = Visibility.Visible;
+                    BackLogs.Visibility = Visibility.Hidden;
+                    break;
+                case "BackLog":
+                    Board.Visibility = Visibility.Hidden;
+                    SprintList.Visibility = Visibility.Hidden;
+                    ProjectDetail.Visibility = Visibility.Hidden;
+                    BackLogs.Visibility = Visibility.Visible;
                     break;
             }
         }

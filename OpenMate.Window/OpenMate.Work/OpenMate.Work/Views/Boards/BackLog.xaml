@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="OpenMate.Work.Views.Boards.BackLog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpenMate.Work.Views.Boards"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="800">
+    <Grid>
+        <ScrollViewer
+            Margin="35 0 0 0"
+            VerticalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding BackLogs}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#eee" CornerRadius="5" Padding="5 15" Margin="5">
+                            <Grid>
+                                <Grid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem 
+                                        Header="Move to next sprint" 
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding DataContext.MoveToNextSprintCM, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                        <MenuItem 
+                                        Header="Move to active sprint" 
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding DataContext.MoveToActiveSprintCM, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                    </ContextMenu>
+                                </Grid.ContextMenu>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                Grid.Column="0"
+                                Margin="10 0 0 0"
+                                Text="{Binding Id}"
+                                Foreground="{StaticResource Primary}"/>
+                                <TextBlock
+                                Grid.Column="1"
+                                Text="|"
+                                Margin="5 0"/>
+                                <TextBlock
+                                Grid.Column="2"
+                                Text="{Binding Title}"
+                                Margin="5 0"/>
+                                <TextBlock
+                                Grid.Column="3"
+                                Text="|"
+                                Margin="5 0"/>
+                                <TextBlock
+                                Grid.Column="4"
+                                Text="{Binding Assignee}"
+                                Margin="5 0"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

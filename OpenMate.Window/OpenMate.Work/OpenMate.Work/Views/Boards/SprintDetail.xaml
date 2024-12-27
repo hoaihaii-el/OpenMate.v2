@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OpenMate.Work.Views.Boards"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:lvc="clr-namespace:LiveCharts;assembly=LiveCharts" 
+        xmlns:chart="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="SprintDetail"
         AllowsTransparency="True"
@@ -13,29 +15,81 @@
         WindowStartupLocation="CenterScreen"
         Height="700" 
         Width="1250">
-    <Border Background="#f1f1f1" CornerRadius="6"
-            BorderBrush="#000" BorderThickness="2">
-        <Grid>
+    <Border
+        Background="White" 
+        CornerRadius="5"
+        BorderBrush="#004225"
+        BorderThickness="4">
+        <Grid Margin="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="50"/>
-                </Grid.ColumnDefinitions>
-                <fa:FontAwesome
-                    MouseDown="PowerOff_MouseDown"
-                    Grid.Column="1"
-                    VerticalAlignment="Center"
-                    FontSize="24"
-                    Cursor="Hand"
-                    Icon="PowerOff"/>
-            </Grid>
-            <TextBlock
-                Grid.Row="1"
-                Text="{Binding Sprint.SprintName}"/>
+            <Border Background="#EEEEEE" CornerRadius="5" Margin="0 0 0 5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="60"/>
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        x:Name="LabelTitle"
+                        Content="SPRINT DETAIL"
+                        Margin="10 0 0 0"
+                        FontSize="17"
+                        Foreground="{StaticResource Primary}"
+                        VerticalAlignment="Center"/>
+                    <Label
+                        Grid.Column="1"
+                        Style="{StaticResource CloseWindow}"
+                        MouseDown="PowerOff_MouseDown">
+                        <fa:ImageAwesome
+                            Icon="PowerOff"
+                            Foreground="{StaticResource Primary}"/>
+                    </Label>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Background="#eee" CornerRadius="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <chart:CartesianChart
+                        Grid.Column="0" Margin="10"
+                        Background="Transparent"
+                        Series="{Binding StoryPointSeries}">
+                        <chart:CartesianChart.AxisX>
+                            <chart:Axis Title="Sprints" FontSize="15" Labels="{Binding SprintLabels}"/>
+                        </chart:CartesianChart.AxisX>
+                        <chart:CartesianChart.AxisY>
+                            <chart:Axis Title="Story Points" FontSize="15"/>
+                        </chart:CartesianChart.AxisY>
+                    </chart:CartesianChart>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label 
+                            FontSize="17"
+                            Content="Bug Statistic"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"/>
+                        <chart:PieChart
+                            Grid.Row="1"
+                            Margin="30" InnerRadius="30"
+                            LegendLocation="Bottom"
+                            Series="{Binding DefectSeries}">
+                            <chart:PieChart.ChartLegend>
+                                <chart:DefaultLegend BulletSize="25"/>
+                            </chart:PieChart.ChartLegend>
+                            <chart:PieChart.DataTooltip>
+                                <chart:DefaultTooltip BulletSize="25"/>
+                            </chart:PieChart.DataTooltip>
+                        </chart:PieChart>
+                    </Grid>
+                </Grid>
+            </Border>
         </Grid>
     </Border>
 </Window>

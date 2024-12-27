@@ -40,6 +40,12 @@
     <Reference Include="FontAwesome.WPF, Version=4.7.0.37774, Culture=neutral, PublicKeyToken=0758b07a11a4f466, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.WPF.4.7.0.9\lib\net40\FontAwesome.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=3.1.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.3.1.0\lib\net462\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -77,6 +83,7 @@
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\ProjectMember.cs" />
     <Compile Include="Model\Sprint.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\User.cs" />
@@ -86,8 +93,10 @@
     <Compile Include="UCNavigator\MainNavigator.xaml.cs">
       <DependentUpon>MainNavigator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Boards\BoardDetailVM.cs" />
-    <Compile Include="ViewModel\BoardVM.cs" />
+    <Compile Include="ViewModel\Boards\BoardVM.BackLog.cs" />
+    <Compile Include="ViewModel\Boards\BoardVM.cs" />
+    <Compile Include="ViewModel\Boards\BoardVM.Detail.cs" />
+    <Compile Include="ViewModel\Boards\BoardVM.Information.cs" />
     <Compile Include="ViewModel\CalendarVM.cs" />
     <Compile Include="ViewModel\Chats\ChatVM.AddNewChat.cs" />
     <Compile Include="ViewModel\Chats\ChatVM.cs" />
@@ -99,11 +108,17 @@
     <Compile Include="Views\Boards\AddBackLog.xaml.cs">
       <DependentUpon>AddBackLog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Boards\BackLog.xaml.cs">
+      <DependentUpon>BackLog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Boards\KanbanBoard.xaml.cs">
       <DependentUpon>KanbanBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Boards\NewProject.xaml.cs">
       <DependentUpon>NewProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Boards\ProjectDetail.xaml.cs">
+      <DependentUpon>ProjectDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Boards\SprintDetail.xaml.cs">
       <DependentUpon>SprintDetail.xaml</DependentUpon>
@@ -197,11 +212,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Boards\BackLog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Boards\KanbanBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Boards\NewProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Boards\ProjectDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

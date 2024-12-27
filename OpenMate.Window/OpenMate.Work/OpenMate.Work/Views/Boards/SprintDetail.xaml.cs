@@ -15,12 +15,6 @@ namespace OpenMate.Work.Views.Boards
             InitializeComponent();
         }
 
-        public SprintDetail(Sprint sprint)
-        {
-            InitializeComponent();
-            this.DataContext = new BoardDetailVM(sprint);
-        }
-
         private void PowerOff_MouseDown(object sender, MouseButtonEventArgs e)
         {
             this.Close();

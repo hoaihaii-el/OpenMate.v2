@@ -3,7 +3,7 @@
                     xmlns:fa="http://schemas.fontawesome.io/icons/"
                     xmlns:behavior="clr-namespace:OpenMate.Work.Behaviors">
     <DataTemplate x:Key="CardTemplate">
-        <Border AllowDrop="True" Width="308" Cursor="Hand" Margin="5 2" CornerRadius="6" Background="#f1f1f1">
+        <Border AllowDrop="True" Width="298" Cursor="Hand" Margin="5 2" CornerRadius="6" Background="#f1f1f1">
             <StackPanel>
                 <Label 
                     Content="{Binding Name}" FontSize="16"

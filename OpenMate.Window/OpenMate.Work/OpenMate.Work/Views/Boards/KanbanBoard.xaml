@@ -40,7 +40,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="35 0 0 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -73,7 +73,7 @@
             </ListBox>
             <Button
                 Style="{StaticResource NormalButton}"
-                Content="Add BackLog"
+                Content="Add Task"
                 Command="{Binding AddBackLogCM}"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1">

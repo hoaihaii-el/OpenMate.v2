@@ -4,9 +4,9 @@ using OpenMate.Work.Views.Boards;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace OpenMate.Work.ViewModel
+namespace OpenMate.Work.ViewModel.Boards
 {
-    public class BoardVM : BaseViewModel
+    public partial class BoardVM : BaseViewModel
     {
         private ObservableCollection<Task> _Log;
         public ObservableCollection<Task> Log
@@ -57,6 +57,9 @@ namespace OpenMate.Work.ViewModel
 
         public BoardVM()
         {
+            HandleProjectMember();
+            InitBackLog();
+
             SprintItemClickCM = new RelayCommand<Sprint>((p) => true, (p) =>
             {
                 OpenSprintDetail(p);
@@ -87,17 +90,17 @@ namespace OpenMate.Work.ViewModel
             {
                 new Task()
                 {
-                    Name = "Task1",
+                    Title = "Task1",
                     Status = "Log"
                 },
                 new Task()
                 {
-                    Name = "Task2",
+                    Title = "Task2",
                     Status = "Log"
                 },
                 new Task()
                 {
-                    Name = "Task1",
+                    Title = "Task1",
                     Status = "Log"
                 }
             };
@@ -105,12 +108,12 @@ namespace OpenMate.Work.ViewModel
             {
                 new Task()
                 {
-                    Name = "Task1",
+                    Title = "Task1",
                     Status = "Doing"
                 },
                 new Task()
                 {
-                    Name = "Task1",
+                    Title = "Task1",
                     Status = "Doing"
                 }
             };
@@ -118,17 +121,17 @@ namespace OpenMate.Work.ViewModel
             {
                 new Task()
                 {
-                    Name = "Task1",
+                    Title = "Task1",
                     Status = "Review"
                 },
                 new Task()
                 {
-                    Name = "Task2",
+                    Title = "Task2",
                     Status = "Review"
                 },
                 new Task()
                 {
-                    Name = "Task3",
+                    Title = "Task3",
                     Status = "Review"
                 }
             };
@@ -136,22 +139,22 @@ namespace OpenMate.Work.ViewModel
             {
                 new Task()
                 {
-                    Name = "Task1",
+                    Title = "Task1",
                     Status = "Finish"
                 },
                 new Task()
                 {
-                    Name = "Task2",
+                    Title = "Task2",
                     Status = "Finish"
                 },
                 new Task()
                 {
-                    Name = "Task3",
+                    Title = "Task3",
                     Status = "Finish"
                 },
                 new Task()
                 {
-                    Name = "Task4",
+                    Title = "Task4",
                     Status = "Finish"
                 }
             };
@@ -228,7 +231,10 @@ namespace OpenMate.Work.ViewModel
 
         private void OpenSprintDetail(Sprint spr)
         {
-            var detailSprint = new SprintDetail(spr);
+            var detailSprint = new SprintDetail();
+            detailSprint.DataContext = this;
+            SelectedSprint = spr;
+            LoadStoryPointStatistics();
             detailSprint.ShowDialog();
         }
 

@@ -1,5 +1,5 @@
 ﻿using OpenMate.Work.Model;
-using OpenMate.Work.ViewModel;
+using OpenMate.Work.ViewModel.Boards;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -77,7 +77,7 @@ namespace OpenMate.Work.Views.Boards
             }
 
             _IsDragging = false;
-            var vm = this.DataContext as BoardVM;
+            var vm = this.DataContext as BoardVM;   
 
             if (vm == null)
             {
