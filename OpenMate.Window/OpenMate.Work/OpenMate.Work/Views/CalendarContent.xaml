@@ -24,9 +24,6 @@
                 <Calendar x:Name="Calendar"/>
                 <Grid Grid.Row="1">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Event Type:" Margin="15 0"/>
-                        <CheckBox Content="General" Margin="30 5"/>
-                        <CheckBox Content="Personal" Margin="30 5"/>
                         <Label Content="Day type:" Margin="15 0"/>
                         <Grid>
                             <Grid.ColumnDefinitions>

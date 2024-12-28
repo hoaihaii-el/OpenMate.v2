@@ -108,6 +108,9 @@
     <Compile Include="Views\Boards\AddBackLog.xaml.cs">
       <DependentUpon>AddBackLog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Boards\AddMember.xaml.cs">
+      <DependentUpon>AddMember.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Boards\BackLog.xaml.cs">
       <DependentUpon>BackLog.xaml</DependentUpon>
     </Compile>
@@ -209,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Boards\AddBackLog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Boards\AddMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

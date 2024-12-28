@@ -12,53 +12,61 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="55"/>
             <RowDefinition/>
-            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Vertical">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
                 <TextBox
-                    Height="65"
+                    Grid.Row="0"
                     Style="{StaticResource FloatingTextBox}"
                     md:HintAssist.Hint="Project Name"/>
                 <TextBox
-                    Height="65"
+                    Grid.Row="1"
                     Style="{StaticResource FloatingTextBox}"
                     md:HintAssist.Hint="Customer Name"/>
-                <Grid>
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <DatePicker
-                        Height="65"
                         Grid.Column="0"
                         md:HintAssist.Hint="Start Date"
                         Margin="15 0 5 0"
                         Style="{StaticResource FloatingDatePicker}"/>
                     <DatePicker
-                        Height="65"
                         Grid.Column="1"
                         md:HintAssist.Hint="End Date"
                         Margin="5 0 15 0"
                         Style="{StaticResource FloatingDatePicker}"/>
                 </Grid>
                 <TextBox
-                    Height="65"
+                    Grid.Row="3"
                     md:HintAssist.Hint="Description"
                     Style="{StaticResource FloatingTextBox}"/>
                 <ComboBox
+                    Grid.Row="4"
                     Margin="15 0"
-                    Height="65"
                     FontSize="18"
                     IsEditable="True"
                     md:HintAssist.Hint="Project Manager"
                     Style="{StaticResource FloatingComboBox}"/>
                 <ComboBox
-                    Height="65"
+                    Grid.Row="5"
                     IsEditable="True"
                     FontSize="18"
                     Margin="15 0"
@@ -69,51 +77,71 @@
                     <ComboBoxItem Content="Desktop App"/>
                 </ComboBox>
                 <ComboBox
-                    Height="65"
+                    Grid.Row="6"
                     IsEditable="True"
                     FontSize="18"
                     Margin="15 0"
                     md:HintAssist.Hint="Technologies"
                     Style="{StaticResource FloatingComboBox}"/>
-            </StackPanel>
-            <ScrollViewer 
-                Grid.Column="1"
-                VerticalScrollBarVisibility="Auto"
-                HorizontalScrollBarVisibility="Disabled">
-                <ItemsControl
-                    ItemsSource="{Binding Members}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox
-                                    Height="65"
-                                    md:HintAssist.Hint="Member Name"
-                                    Text="{Binding Name}"
-                                    Style="{StaticResource FloatingTextBox}"/>
-                                <TextBox
-                                    Height="65"
-                                    Grid.Column="1"
-                                    md:HintAssist.Hint="Effort"
-                                    Text="{Binding Effort}"
-                                    Style="{StaticResource FloatingTextBox}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+                <Button
+                    Grid.Row="8" Content="Update"
+                    Width="200" HorizontalAlignment="Left"
+                    Style="{StaticResource NormalButton}"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="420"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer 
+                    Grid.Row="0"
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Disabled">
+                    <ItemsControl ItemsSource="{Binding Members}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0" Height="60">
+                                        <TextBox
+                                            md:HintAssist.Hint="Member Name"
+                                            Text="{Binding Name}"
+                                            Style="{StaticResource FloatingTextBox}"/>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <TextBox
+                                            md:HintAssist.Hint="Role"
+                                            Text="{Binding Role}"
+                                            Style="{StaticResource FloatingTextBox}"/>
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <TextBox
+                                            md:HintAssist.Hint="Effort"
+                                            Text="{Binding Effort}"
+                                            Style="{StaticResource FloatingTextBox}"/>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+                <Button
+                    Grid.Row="2"
+                    Width="200"
+                    Content="Add member"
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource NormalButton}"/>
+            </Grid>
         </Grid>
-        <Button
-            Grid.Row="2" Content="Update"
-            Width="150" HorizontalAlignment="Left"
-            Style="{StaticResource NormalButton}"/>
     </Grid>
 </UserControl>

@@ -24,13 +24,13 @@
                                 <Grid.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem 
-                                        Header="Move to next sprint" 
-                                        CommandParameter="{Binding}"
-                                        Command="{Binding DataContext.MoveToNextSprintCM, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            Header="Move to next sprint" 
+                                            CommandParameter="{Binding}"
+                                            Command="{Binding DataContext.MoveToNextSprintCM, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                         <MenuItem 
-                                        Header="Move to active sprint" 
-                                        CommandParameter="{Binding}"
-                                        Command="{Binding DataContext.MoveToActiveSprintCM, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                            Header="Move to active sprint" 
+                                            CommandParameter="{Binding}"
+                                            Command="{Binding DataContext.MoveToActiveSprintCM, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                     </ContextMenu>
                                 </Grid.ContextMenu>
                                 <Grid.ColumnDefinitions>
@@ -41,26 +41,26 @@
                                     <ColumnDefinition Width="200"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock
-                                Grid.Column="0"
-                                Margin="10 0 0 0"
-                                Text="{Binding Id}"
-                                Foreground="{StaticResource Primary}"/>
+                                    Grid.Column="0"
+                                    Margin="10 0 0 0"
+                                    Text="{Binding Id}"
+                                    Foreground="{StaticResource Primary}"/>
                                 <TextBlock
-                                Grid.Column="1"
-                                Text="|"
-                                Margin="5 0"/>
+                                    Grid.Column="1"
+                                    Text="|"
+                                    Margin="5 0"/>
                                 <TextBlock
-                                Grid.Column="2"
-                                Text="{Binding Title}"
-                                Margin="5 0"/>
+                                    Grid.Column="2"
+                                    Text="{Binding Title}"
+                                    Margin="5 0"/>
                                 <TextBlock
-                                Grid.Column="3"
-                                Text="|"
-                                Margin="5 0"/>
+                                    Grid.Column="3"
+                                    Text="|"
+                                    Margin="5 0"/>
                                 <TextBlock
-                                Grid.Column="4"
-                                Text="{Binding Assignee}"
-                                Margin="5 0"/>
+                                    Grid.Column="4"
+                                    Text="{Binding Assignee}"
+                                    Margin="5 0"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

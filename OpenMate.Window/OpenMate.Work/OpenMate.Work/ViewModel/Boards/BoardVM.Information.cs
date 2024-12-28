@@ -20,12 +20,14 @@ namespace OpenMate.Work.ViewModel.Boards
                 new ProjectMember
                 {
                     Name = "Hoai Hai",
-                    Effort = 0.5
+                    Effort = 0.5,
+                    Role = "Backend Developer"
                 },
                 new ProjectMember
                 {
                     Name = "Hoai Nhan",
-                    Effort = 1
+                    Effort = 1,
+                    Role = "Frontend Developer"
                 },
             };
         }

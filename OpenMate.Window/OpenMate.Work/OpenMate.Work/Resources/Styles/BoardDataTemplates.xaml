@@ -6,7 +6,7 @@
         <Border AllowDrop="True" Width="298" Cursor="Hand" Margin="5 2" CornerRadius="6" Background="#f1f1f1">
             <StackPanel>
                 <Label 
-                    Content="{Binding Name}" FontSize="16"
+                    Content="{Binding Title}" FontSize="16"
                     VerticalContentAlignment="Center"
                     Margin="8 4 8 0"/>
                 <Label 
