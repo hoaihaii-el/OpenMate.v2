@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMate.API.Infrastructure", "OpenMate.API.Infrastructure\OpenMate.API.Infrastructure.csproj", "{D998E15C-36ED-40CC-AAF1-C73050FC2AEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMate.API.ChatService", "OpenMate.API.ChatService\OpenMate.API.ChatService.csproj", "{13A37279-0187-43D8-A5EA-AF8EDCCAE7D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMate.API.Domain", "OpenMate.API.Domain\OpenMate.API.Domain.csproj", "{441DD6D4-DB7C-4EA0-9583-B192C16ECFA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMate.API.BoardService", "OpenMate.API.BoardService\OpenMate.API.BoardService.csproj", "{FACBD62D-D236-4D29-912F-32C29E7FA3F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMate.API.ChatService", "OpenMate.API.ChatService\OpenMate.API.ChatService.csproj", "{13A37279-0187-43D8-A5EA-AF8EDCCAE7D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMate.API.CalendarService", "OpenMate.API.CalendarService\OpenMate.API.CalendarService.csproj", "{65C18F2F-ADBF-4240-8D17-D5A0C0C37B53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMate.API.BoardService", "OpenMate.API.BoardService\OpenMate.API.BoardService.csproj", "{FACBD62D-D236-4D29-912F-32C29E7FA3F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMate.API.Infrastructure", "OpenMate.API.Infrastructure\OpenMate.API.Infrastructure.csproj", "{6B5FDFBA-DA4E-4B61-8CF9-5FF3BC2EE72B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMate.API.CalendarService", "OpenMate.API.CalendarService\OpenMate.API.CalendarService.csproj", "{65C18F2F-ADBF-4240-8D17-D5A0C0C37B53}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMate.API.Domain", "OpenMate.API.Domain\OpenMate.API.Domain.csproj", "{F29C8EE8-53CA-4B19-ABD9-A53C83E9F276}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D998E15C-36ED-40CC-AAF1-C73050FC2AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D998E15C-36ED-40CC-AAF1-C73050FC2AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D998E15C-36ED-40CC-AAF1-C73050FC2AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D998E15C-36ED-40CC-AAF1-C73050FC2AEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{441DD6D4-DB7C-4EA0-9583-B192C16ECFA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{441DD6D4-DB7C-4EA0-9583-B192C16ECFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{441DD6D4-DB7C-4EA0-9583-B192C16ECFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{441DD6D4-DB7C-4EA0-9583-B192C16ECFA0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{13A37279-0187-43D8-A5EA-AF8EDCCAE7D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{13A37279-0187-43D8-A5EA-AF8EDCCAE7D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13A37279-0187-43D8-A5EA-AF8EDCCAE7D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +31,14 @@ Global
 		{65C18F2F-ADBF-4240-8D17-D5A0C0C37B53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65C18F2F-ADBF-4240-8D17-D5A0C0C37B53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65C18F2F-ADBF-4240-8D17-D5A0C0C37B53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B5FDFBA-DA4E-4B61-8CF9-5FF3BC2EE72B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B5FDFBA-DA4E-4B61-8CF9-5FF3BC2EE72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B5FDFBA-DA4E-4B61-8CF9-5FF3BC2EE72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B5FDFBA-DA4E-4B61-8CF9-5FF3BC2EE72B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F29C8EE8-53CA-4B19-ABD9-A53C83E9F276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29C8EE8-53CA-4B19-ABD9-A53C83E9F276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29C8EE8-53CA-4B19-ABD9-A53C83E9F276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29C8EE8-53CA-4B19-ABD9-A53C83E9F276}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
