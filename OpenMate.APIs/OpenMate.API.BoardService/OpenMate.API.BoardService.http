@@ -1,0 +1,6 @@
+@OpenMate.API.BoardService_HostAddress = http://localhost:5273
+
+GET {{OpenMate.API.BoardService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

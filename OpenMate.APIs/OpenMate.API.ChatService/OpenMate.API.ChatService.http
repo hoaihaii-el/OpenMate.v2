@@ -1,0 +1,6 @@
+@OpenMate.API.ChatService_HostAddress = http://localhost:5029
+
+GET {{OpenMate.API.ChatService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

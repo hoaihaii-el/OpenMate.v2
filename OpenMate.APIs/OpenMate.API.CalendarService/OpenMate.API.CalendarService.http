@@ -1,0 +1,6 @@
+@OpenMate.API.CalendarService_HostAddress = http://localhost:5038
+
+GET {{OpenMate.API.CalendarService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
