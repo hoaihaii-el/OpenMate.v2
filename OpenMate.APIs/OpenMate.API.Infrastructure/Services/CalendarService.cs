@@ -2,6 +2,7 @@
 using OpenMate.API.Domain.DTOs;
 using OpenMate.API.Domain.Entities.Calendar;
 using OpenMate.API.Domain.Interfaces;
+using OpenMate.API.Domain.Responses;
 using OpenMate.API.Infrastructure.Data;
 
 namespace OpenMate.API.Infrastructure.Services
@@ -26,9 +27,9 @@ namespace OpenMate.API.Infrastructure.Services
             context.Events.Add(newEvent);
             await context.SaveChangesAsync();
 
-            if (eventDto.AttendeesId != null)
+            if (eventDto.Attendees != null)
             {
-                foreach (var attendeeId in eventDto.AttendeesId)
+                foreach (var attendeeId in eventDto.Attendees)
                 {
                     var newAttendee = new EventParticipants
                     {
@@ -63,27 +64,50 @@ namespace OpenMate.API.Infrastructure.Services
             }
         }
 
-        public async Task<IEnumerable<EventDto>> GetEvents(DateTime? start, DateTime? end)
+        public async Task<IEnumerable<EventRes>> GetEvents(DateTime? start, DateTime? end)
         {
             var min = start != null ? start : DateTime.MinValue;
             var max = end != null ? end : DateTime.MaxValue;
 
-            return await context.Events.Where(e => e.Start >= min && e.End <= max)
-                .Select(e => new EventDto
+            var events = await context.Events
+                .Where(e => e.Start >= min && e.End <= max)
+                .ToListAsync();
+
+            var eventRes = new List<EventRes>();
+            foreach (var evt in events)
+            {
+                var attendeesId = await context.EventParticipants
+                    .Where(a => a.EventId == evt.Id)
+                    .Select(a => a.UserId)
+                    .ToListAsync();
+
+                var attendees = new List<AttendeeRes>();
+                foreach (var attId in attendeesId)
                 {
-                    Title = e.Title,
-                    Description = e.Description,
-                    Start = e.Start,
-                    End = e.End,
-                    Location = e.Location,
-                    CreatedBy = e.CreatedBy,
-                    MeetingUrl = e.MeetingUrl,
-                    RemindBefore = e.RemindBefore,
-                    AttendeesId = context.EventParticipants
-                        .Where(ep => ep.EventId == e.Id)
-                        .Select(ep => ep.UserId)
-                        .ToList()
-                }).ToListAsync();
+                    var user = await context.Users.FindAsync(attId);
+                    attendees.Add(new AttendeeRes
+                    {
+                        ID = user!.Id,
+                        Name = user.Name,
+                    });
+                }
+
+                eventRes.Add(new EventRes
+                {
+                    ID = evt.Id,
+                    Title = evt.Title,
+                    Description = evt.Description,
+                    StartTime = evt.Start,
+                    EndTime = evt.End,
+                    Location = evt.Location,
+                    CreatedBy = evt.CreatedBy,
+                    MeetingUrl = evt.MeetingUrl,
+                    RemindBefore = evt.RemindBefore,
+                    Attendees = attendees
+                });
+            }
+
+            return eventRes;
         }
     }
 }

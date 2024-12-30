@@ -14,7 +14,7 @@
         Title="EventDetail" 
         FontFamily="{StaticResource Nunito}"
         FontSize="17"
-        Height="450" 
+        Height="540" 
         Width="400">
     <Border 
         Background="White"
@@ -53,6 +53,7 @@
             <Border Grid.Row="1" Background="#eeeeee" CornerRadius="5">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -99,22 +100,10 @@
                         Margin="10 0"
                         Style="{StaticResource FloatingTextBox}"
                         md:HintAssist.Hint="Meeting URL"/>
-                    <Grid Grid.Row="4">
-                        <ComboBox
-                            x:Name="SuggestionCombo"
-                            Margin="10 0"
-                            Text="{Binding NewAttendee, UpdateSourceTrigger=PropertyChanged}"
-                            md:TextFieldAssist.UnderlineBrush="Transparent"
-                            ItemsSource="{Binding AttendeeSuggestions, UpdateSourceTrigger=PropertyChanged}"
-                            IsEditable="True"
-                            IsTextSearchEnabled="True"
-                            SelectionChanged="ComboBox_SelectionChanged"/>
-                        <Border Background="#eeeeee" Width="350" HorizontalAlignment="Left" Height="43" VerticalAlignment="Top"/>
-                    </Grid>
-                    <Grid Grid.Row="4" Width="350" HorizontalAlignment="Left">
+                    <Grid Grid.Row="4" HorizontalAlignment="Left" Margin="5 0">
                         <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
                             <StackPanel Orientation="Horizontal">
-                                <ItemsControl Margin="0 -5 0 0" ItemsSource="{Binding Attendees}">
+                                <ItemsControl ItemsSource="{Binding Attendees}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Horizontal"/>
@@ -143,21 +132,19 @@
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                                <TextBox
-                                    x:Name="NewAttendee"
-                                    Text="{Binding NewAttendee, UpdateSourceTrigger=PropertyChanged}"
-                                    md:TextFieldAssist.UnderlineBrush="Transparent"
-                                    md:HintAssist.Hint="Add Attendee"
-                                    Margin="10 0"
-                                    Width="120"
-                                    TextChanged="NewAttendee_TextChanged"
-                                    BorderThickness="0"
-                                    Background="Transparent"
-                                    VerticalContentAlignment="Center"/>
                             </StackPanel>
                         </ScrollViewer>
                     </Grid>
-                    <Grid Grid.Row="5">
+                    <ComboBox
+                        x:Name="SuggestionCombo"
+                        Margin="10 0" Grid.Row="5"
+                        Text="{Binding NewAttendee, UpdateSourceTrigger=PropertyChanged}"
+                        md:TextFieldAssist.UnderlineBrush="Transparent"
+                        ItemsSource="{Binding AttendeeSuggestions, UpdateSourceTrigger=PropertyChanged}"
+                        IsEditable="True" FontSize="18"
+                        md:HintAssist.Hint="Add attendee"
+                        SelectionChanged="ComboBox_SelectionChanged"/>
+                    <Grid Grid.Row="6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>

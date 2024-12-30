@@ -10,6 +10,6 @@
         public string? CreatedBy { get; set; }
         public string? MeetingUrl { get; set; }
         public int RemindBefore { get; set; } = 15;
-        public List<string?>? AttendeesId { get; set; }
+        public List<string?>? Attendees { get; set; }
     }
 }

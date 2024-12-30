@@ -1,5 +1,6 @@
 ﻿using OpenMate.Work.Model;
 using OpenMate.Work.Resources.Uitilities;
+using OpenMate.Work.Services;
 using OpenMate.Work.Views.Calendars;
 using System;
 using System.Collections.ObjectModel;
@@ -11,6 +12,7 @@ namespace OpenMate.Work.ViewModel
 {
     public class CalendarVM : BaseViewModel
     {
+        private CalendarService _calendarService = new CalendarService();
         public ObservableCollection<string> Hours { get; set; } = new ObservableCollection<string>()
         {
             "1AM","2AM","3AM","4AM","5AM","6AM","7AM","8AM","9AM","10AM","11AM","12PM",
@@ -45,45 +47,52 @@ namespace OpenMate.Work.ViewModel
 
         public CalendarVM()
         {
-            Events.Add(new Event()
-            {
-                Title = "Checking todo list",
-                StartTime = new DateTime(2024, 11, 20, 7, 00, 0),
-                EndTime = new DateTime(2024, 11, 20, 7, 30, 0),
-                EventType = "Personal",
-                Attendees = new ObservableCollection<Attendee>
-                {
-                    new Attendee()
-                    {
-                        ID = "1",
-                        Name = "Alex"
-                    },
-                    new Attendee()
-                    {
-                        ID = "2",
-                        Name = "Hoai Hai"
-                    }
-                }
-            });
-            Events.Add(new Event()
-            {
-                Title = "Weekly grooming",
-                StartTime = new DateTime(2024, 11, 21, 10, 0, 0),
-                EndTime = new DateTime(2024, 11, 21, 11, 0, 0)
-            });
-            Events.Add(new Event()
-            {
-                Title = "Daily meeting",
-                StartTime = new DateTime(2024, 11, 22, 9, 0, 0),
-                EndTime = new DateTime(2024, 11, 22, 9, 30, 0)
-            });
+            InitializeWeek();
+            GetEventsData();
 
             EventItemClickCM = new RelayCommand<Event>((p) => true, (p) =>
             {
                 OpenEventDetail(p);
             });
+        }
 
-            InitializeWeek();
+        public async void GetEventsData()
+        {
+            Events.Clear();
+
+            Events = new ObservableCollection<Event>(await _calendarService.GetEventsData());
+
+            //Events.Add(new Event()
+            //{
+            //    Title = "Checking todo list",
+            //    StartTime = new DateTime(2024, 11, 20, 7, 00, 0),
+            //    EndTime = new DateTime(2024, 11, 20, 7, 30, 0),
+            //    Attendees = new ObservableCollection<Attendee>
+            //    {
+            //        new Attendee()
+            //        {
+            //            ID = "1",
+            //            Name = "Alex"
+            //        },
+            //        new Attendee()
+            //        {
+            //            ID = "2",
+            //            Name = "Hoai Hai"
+            //        }
+            //    }
+            //});
+            //Events.Add(new Event()
+            //{
+            //    Title = "Weekly grooming",
+            //    StartTime = new DateTime(2024, 11, 21, 10, 0, 0),
+            //    EndTime = new DateTime(2024, 11, 21, 11, 0, 0)
+            //});
+            //Events.Add(new Event()
+            //{
+            //    Title = "Daily meeting",
+            //    StartTime = new DateTime(2024, 11, 22, 9, 0, 0),
+            //    EndTime = new DateTime(2024, 11, 22, 9, 30, 0)
+            //});
         }
 
         public void OpenEventDetail(Event e)
@@ -111,7 +120,7 @@ namespace OpenMate.Work.ViewModel
                 e.StartTime = eventDetail.EventSaved.StartTime;
                 e.EndTime = eventDetail.EventSaved.EndTime;
             }
-            else 
+            else
             if (eventDetail.IsDelete)
             {
                 Events.Remove(e);
@@ -147,7 +156,7 @@ namespace OpenMate.Work.ViewModel
 
             OpenEventDetail(Events.LastOrDefault());
         }
-        
+
         public DateTime PrevWeek()
         {
             var dt = CurrentWeek.FirstOrDefault().Date;

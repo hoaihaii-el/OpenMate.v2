@@ -1,4 +1,5 @@
 ﻿using OpenMate.API.Domain.DTOs;
+using OpenMate.API.Domain.Responses;
 
 namespace OpenMate.API.Domain.Interfaces
 {
@@ -7,6 +8,6 @@ namespace OpenMate.API.Domain.Interfaces
         Task AddEvent(EventDto eventDto);
         Task DeleteEvent(int id);
         Task DeleteAttendee(int eventId, string userId);
-        Task<IEnumerable<EventDto>> GetEvents(DateTime? start, DateTime? end);
+        Task<IEnumerable<EventRes>> GetEvents(DateTime? start, DateTime? end);
     }
 }

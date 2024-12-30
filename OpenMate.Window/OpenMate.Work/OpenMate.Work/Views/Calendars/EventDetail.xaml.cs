@@ -56,20 +56,20 @@ namespace OpenMate.Work.Views.Calendars
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var combo = sender as ComboBox;
-            if (combo.SelectedItem == null)
-            {
-                return;
-            }
+            //var combo = sender as ComboBox;
+            //if (combo.SelectedItem == null)
+            //{
+            //    return;
+            //}
 
-            var vm = this.DataContext as Event;
-            vm.Attendees.Add(new Attendee
-            {
-                ID = "1",
-                Name = combo.SelectedItem.ToString()
-            });
+            //var vm = this.DataContext as Event;
+            //vm.Attendees.Add(new Attendee
+            //{
+            //    ID = "1",
+            //    Name = combo.SelectedItem.ToString()
+            //});
 
-            vm.NewAttendee = "";
+            //vm.NewAttendee = "";
         }
 
         private void NewAttendee_TextChanged(object sender, TextChangedEventArgs e)

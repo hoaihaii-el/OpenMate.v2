@@ -61,6 +61,13 @@ namespace OpenMate.Work.Model
             set => SetProperty(ref _MeetingURL, value);
         }
 
+        private int _RemindBefore;
+        public int RemindBefore
+        {
+            get => _RemindBefore;
+            set => SetProperty(ref _RemindBefore, value);
+        }
+
         private ObservableCollection<Attendee> _Attendees = new ObservableCollection<Attendee>();
         public ObservableCollection<Attendee> Attendees
         {
@@ -70,12 +77,6 @@ namespace OpenMate.Work.Model
 
         public ICommand RemoveAttendeeCM { get; set; }
 
-        private string _EventType = "General";
-        public string EventType
-        {
-            get => _EventType;
-            set => SetProperty(ref _EventType, value);
-        }
         public double Top
         {
             get => StartTime.Hour * 60 + StartTime.Minute;
