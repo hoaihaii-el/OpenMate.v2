@@ -10,10 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DataContext>(opt =>
 {
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), builder => builder.MigrationsAssembly("OpenMate.API.Infrastructure"));
 });
 
 builder.Services.AddScoped(typeof(IUserService), typeof(UserService));
+builder.Services.AddScoped(typeof(IChatService), typeof(ChatService));
 
 var app = builder.Build();
 

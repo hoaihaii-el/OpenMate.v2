@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OpenMate.API.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using OpenMate.API.Infrastructure.Data;
 namespace OpenMate.API.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250101171918_AddProjectRelatedTable")]
+    partial class AddProjectRelatedTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,18 +130,12 @@ namespace OpenMate.API.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
                     b.Property<string>("ProjectID")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Status")
                         .HasMaxLength(50)
@@ -290,85 +287,6 @@ namespace OpenMate.API.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EventParticipants");
-                });
-
-            modelBuilder.Entity("OpenMate.API.Domain.Entities.Chat.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsPinned")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MediaType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MediaUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoomId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SenderId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("OpenMate.API.Domain.Entities.Chat.Participant", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("RoomId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Participants");
-                });
-
-            modelBuilder.Entity("OpenMate.API.Domain.Entities.Chat.Room", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("OpenMate.API.Domain.Entities.User", b =>

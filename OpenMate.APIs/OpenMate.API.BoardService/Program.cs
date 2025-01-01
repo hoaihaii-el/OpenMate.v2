@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using OpenMate.API.Domain.Interfaces;
 using OpenMate.API.Infrastructure.Data;
+using OpenMate.API.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,8 @@ builder.Services.AddDbContext<DataContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IBoardService, BoardService>();
 
 var app = builder.Build();
 
