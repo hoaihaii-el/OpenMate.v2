@@ -4,27 +4,10 @@
         <Label Content="{Binding}" Padding="0" VerticalContentAlignment="Bottom" HorizontalAlignment="Center" Height="60"/>
     </DataTemplate>
 
-    <DataTemplate x:Key="SlotTimeLine">
-        <Border>
-            <Border.Style>
-                <Style TargetType="Border">
-                    <Setter Property="BorderThickness" Value="1 1 0 0"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding}" Value="LastHour">
-                            <Setter Property="BorderThickness" Value="1 1 0 1"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding}" Value="LastDay">
-                            <Setter Property="BorderThickness" Value="1 1 1 0"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding}" Value="LastSlot">
-                            <Setter Property="BorderThickness" Value="1 1 1 1"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Style>
-        </Border>
+    <DataTemplate x:Key="AttendeeSuggestion">
+        <Label Width="200" Content="{Binding Name}" Margin="5 0"/>
     </DataTemplate>
-
+    
     <DataTemplate x:Key="EventTemplate">
         <Border Cursor="Hand" Margin="3 0 0 0" Width="150" Height="{Binding Height}" CornerRadius="5">
             <Border.Style>

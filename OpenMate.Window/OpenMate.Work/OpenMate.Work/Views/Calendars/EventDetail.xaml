@@ -135,15 +135,33 @@
                             </StackPanel>
                         </ScrollViewer>
                     </Grid>
-                    <ComboBox
-                        x:Name="SuggestionCombo"
-                        Margin="10 0" Grid.Row="5"
+                    <TextBox
+                        x:Name="NewAttendee"
+                        Grid.Row="5"
+                        Margin="10 0"
                         Text="{Binding NewAttendee, UpdateSourceTrigger=PropertyChanged}"
-                        md:TextFieldAssist.UnderlineBrush="Transparent"
-                        ItemsSource="{Binding AttendeeSuggestions, UpdateSourceTrigger=PropertyChanged}"
-                        IsEditable="True" FontSize="18"
-                        md:HintAssist.Hint="Add attendee"
-                        SelectionChanged="ComboBox_SelectionChanged"/>
+                        Style="{StaticResource FloatingTextBox}"
+                        md:HintAssist.Hint="New attendee"/>
+                    <Popup
+                        PlacementTarget="{Binding ElementName=NewAttendee}"
+                        Placement="Top">
+                        <Popup.Style>
+                            <Style TargetType="Popup">
+                                <Setter Property="IsOpen" Value="True"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Suggestions.Count}" Value="0">
+                                        <Setter Property="IsOpen" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Popup.Style>
+                        <ListBox
+                            Background="White"
+                            SelectionChanged="Suggestions_SelectionChanged"
+                            ItemsSource="{Binding Suggestions}"
+                            ItemTemplate="{StaticResource AttendeeSuggestion}">
+                        </ListBox>
+                    </Popup>
                     <Grid Grid.Row="6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>

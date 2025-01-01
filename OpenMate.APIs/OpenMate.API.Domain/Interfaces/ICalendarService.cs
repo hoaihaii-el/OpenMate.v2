@@ -9,5 +9,7 @@ namespace OpenMate.API.Domain.Interfaces
         Task DeleteEvent(int id);
         Task DeleteAttendee(int eventId, string userId);
         Task<IEnumerable<EventRes>> GetEvents(DateTime? start, DateTime? end);
+        Task UpdateEvent(int id, EventDto eventDto);
+        Task<IEnumerable<AttendeeRes>> GetSuggestion(string? att);
     }
 }

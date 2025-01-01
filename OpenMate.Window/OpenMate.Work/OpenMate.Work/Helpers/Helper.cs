@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using OpenMate.Work.Model;
 
 namespace OpenMate.Work.Helpers
 {
@@ -46,5 +47,64 @@ namespace OpenMate.Work.Helpers
                 }
             }
         }
+
+        public static List<Attendee> Attendees = new List<Attendee>()
+        {
+            new Attendee()
+            {
+                ID = "24001",
+                Name = "Hoài Hải"
+            },
+            new Attendee()
+            {
+                ID = "24002",
+                Name = "Hoài Nhân"
+            },
+            new Attendee()
+            {
+                ID = "24003",
+                Name = "Hải Đăng"
+            },
+            new Attendee()
+            {
+                ID = "24004",
+                Name = "Minh Ngọc"
+            },
+            new Attendee()
+            {
+                ID = "24005",
+                Name = "Khải Hoàn"
+            },
+            new Attendee()
+            {
+                ID = "24006",
+                Name = "Hoài An"
+            },
+            new Attendee()
+            {
+                ID = "24007",
+                Name = "Tú Quỳnh"
+            },
+            new Attendee()
+            {
+                ID = "24008",
+                Name = "Thanh Bảo"
+            },
+            new Attendee()
+            {
+                ID = "24009",
+                Name = "Hồng Nhung"
+            },
+            new Attendee()
+            {
+                ID = "24010",
+                Name = "Xuân Son"
+            },
+            new Attendee()
+            {
+                ID = "24011",
+                Name = "Khởi Nghĩa"
+            },
+        };
     }
 }

@@ -54,41 +54,17 @@ namespace OpenMate.Work.Views.Calendars
             this.Close();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Suggestions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //var combo = sender as ComboBox;
-            //if (combo.SelectedItem == null)
-            //{
-            //    return;
-            //}
-
-            //var vm = this.DataContext as Event;
-            //vm.Attendees.Add(new Attendee
-            //{
-            //    ID = "1",
-            //    Name = combo.SelectedItem.ToString()
-            //});
-
-            //vm.NewAttendee = "";
-        }
-
-        private void NewAttendee_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var txtBox = sender as TextBox;
-
-            if (txtBox == null)
+            var listBox = sender as ListBox;
+            if (listBox.SelectedItem == null)
             {
                 return;
             }
 
-            if (txtBox.Text.Length > 0)
-            {
-                SuggestionCombo.IsDropDownOpen = true;
-            }
-            else
-            {
-                SuggestionCombo.IsDropDownOpen = false;
-            }
+            var vm = this.DataContext as Event;
+            vm.Attendees.Add(listBox.SelectedItem as Attendee);
+            vm.NewAttendee = "";
         }
     }
 }

@@ -5,6 +5,7 @@ using OpenMate.Work.Views.Calendars;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -60,42 +61,14 @@ namespace OpenMate.Work.ViewModel
         {
             Events.Clear();
 
-            Events = new ObservableCollection<Event>(await _calendarService.GetEventsData());
-
-            //Events.Add(new Event()
-            //{
-            //    Title = "Checking todo list",
-            //    StartTime = new DateTime(2024, 11, 20, 7, 00, 0),
-            //    EndTime = new DateTime(2024, 11, 20, 7, 30, 0),
-            //    Attendees = new ObservableCollection<Attendee>
-            //    {
-            //        new Attendee()
-            //        {
-            //            ID = "1",
-            //            Name = "Alex"
-            //        },
-            //        new Attendee()
-            //        {
-            //            ID = "2",
-            //            Name = "Hoai Hai"
-            //        }
-            //    }
-            //});
-            //Events.Add(new Event()
-            //{
-            //    Title = "Weekly grooming",
-            //    StartTime = new DateTime(2024, 11, 21, 10, 0, 0),
-            //    EndTime = new DateTime(2024, 11, 21, 11, 0, 0)
-            //});
-            //Events.Add(new Event()
-            //{
-            //    Title = "Daily meeting",
-            //    StartTime = new DateTime(2024, 11, 22, 9, 0, 0),
-            //    EndTime = new DateTime(2024, 11, 22, 9, 30, 0)
-            //});
+            Events = new ObservableCollection<Event>(
+                await _calendarService.GetEventsData(
+                    CurrentWeek.First().Date, 
+                    CurrentWeek.Last().Date)
+                );
         }
 
-        public void OpenEventDetail(Event e)
+        public async void OpenEventDetail(Event e, bool isAddNew = false)
         {
             var eventDetail = new EventDetail(e);
             eventDetail.DataContext = e;
@@ -117,14 +90,25 @@ namespace OpenMate.Work.ViewModel
                 e.Title = eventDetail.EventSaved.Title;
                 e.Location = eventDetail.EventSaved.Location;
                 e.MeetingURL = eventDetail.EventSaved.MeetingURL;
-                e.StartTime = eventDetail.EventSaved.StartTime;
-                e.EndTime = eventDetail.EventSaved.EndTime;
+                e.StartTime = e.StartTime.Date + eventDetail.EventSaved.StartTime.TimeOfDay;
+                e.EndTime = e.EndTime.Date + eventDetail.EventSaved.EndTime.TimeOfDay;
+
+                if (isAddNew)
+                {
+                    await _calendarService.AddEvent(e);
+                }
+                else
+                {
+                    await _calendarService.UpdateEvent(e);
+                }
             }
             else
             if (eventDetail.IsDelete)
             {
-                Events.Remove(e);
+                await _calendarService.DeleteEvent(e.ID);
             }
+
+            //GetEventsData();
         }
 
         public void InitializeWeek()
@@ -154,7 +138,7 @@ namespace OpenMate.Work.ViewModel
                 EndTime = new DateTime(date.Year, date.Month, date.Day, hour + 1, min, 0),
             });
 
-            OpenEventDetail(Events.LastOrDefault());
+            OpenEventDetail(Events.LastOrDefault(), true);
         }
 
         public DateTime PrevWeek()
@@ -169,6 +153,8 @@ namespace OpenMate.Work.ViewModel
                     Date = dt.AddDays(i * -1)
                 });
             }
+
+            GetEventsData();
 
             return CurrentWeek.FirstOrDefault().Date;
         }
@@ -185,6 +171,8 @@ namespace OpenMate.Work.ViewModel
                     Date = dt.AddDays(i)
                 });
             }
+
+            GetEventsData();
 
             return CurrentWeek.FirstOrDefault().Date;
         }

@@ -2,6 +2,7 @@
 using OpenMate.Work.Resources.Uitilities;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace OpenMate.Work.Model
@@ -114,20 +115,30 @@ namespace OpenMate.Work.Model
             get => _NewAttendee;
             set
             {
-                if (value != null)
+                _NewAttendee = value;
+                if (!string.IsNullOrEmpty(value))
                 {
-                    _NewAttendee = value;
-                    OnPropertyChanged(nameof(NewAttendee));
-                    AttendeeSuggestions.Add(value);
+                    Suggestions = new ObservableCollection<Attendee>
+                        (Helper.Attendees
+                            .Where(p => p.Name.ToLower().Contains(value.ToLower()) || p.ID.Contains(value))
+                            .ToList()
+                        );
                 }
+                else
+                {
+                    Suggestions.Clear();
+                }
+                OnPropertyChanged(nameof(NewAttendee));
+                OnPropertyChanged(nameof(Suggestions));
             }
         }
 
-        private ObservableCollection<string> _AttendeeSuggestions = new ObservableCollection<string>();
-        public ObservableCollection<string> AttendeeSuggestions
+        private ObservableCollection<Attendee> _Suggestions = new ObservableCollection<Attendee>();
+
+        public ObservableCollection<Attendee> Suggestions
         {
-            get => _AttendeeSuggestions;
-            set => SetProperty(ref _AttendeeSuggestions, value);
+            get => _Suggestions;
+            set => SetProperty(ref _Suggestions, value);
         }
 
         public Event()

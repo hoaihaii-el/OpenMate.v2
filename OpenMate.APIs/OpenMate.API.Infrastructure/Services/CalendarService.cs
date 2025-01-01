@@ -15,8 +15,8 @@ namespace OpenMate.API.Infrastructure.Services
             {
                 Title = eventDto.Title,
                 Description = eventDto.Description,
-                Start = eventDto.Start,
-                End = eventDto.End,
+                Start = eventDto.StartTime,
+                End = eventDto.EndTime,
                 Location = eventDto.Location,
                 CreatedBy = eventDto.CreatedBy,
                 CreatedAt = DateTime.Now,
@@ -29,12 +29,12 @@ namespace OpenMate.API.Infrastructure.Services
 
             if (eventDto.Attendees != null)
             {
-                foreach (var attendeeId in eventDto.Attendees)
+                foreach (var attendee in eventDto.Attendees)
                 {
                     var newAttendee = new EventParticipants
                     {
                         EventId = newEvent.Id,
-                        UserId = attendeeId
+                        UserId = attendee.ID
                     };
 
                     context.EventParticipants.Add(newAttendee);
@@ -108,6 +108,61 @@ namespace OpenMate.API.Infrastructure.Services
             }
 
             return eventRes;
+        }
+
+        public async Task<IEnumerable<AttendeeRes>> GetSuggestion(string? att)
+        {
+            if (string.IsNullOrEmpty(att))
+            {
+                return new List<AttendeeRes>().AsEnumerable();
+            }
+
+            return await context.Users
+                .Where(u => u.Name!.Contains(att))
+                .Select(u => new AttendeeRes
+                {
+                    ID = u.Id,
+                    Name = u.Name
+                })
+                .ToListAsync();
+        }
+
+        public async Task UpdateEvent(int id, EventDto eventDto)
+        {
+            var evt = await context.Events.FindAsync(id);
+
+            if (evt != null)
+            {
+                evt.Title = eventDto.Title;
+                evt.Description = eventDto.Description;
+                evt.Start = eventDto.StartTime;
+                evt.End = eventDto.EndTime;
+                evt.Location = eventDto.Location;
+                evt.MeetingUrl = eventDto.MeetingUrl;
+                evt.RemindBefore = eventDto.RemindBefore;
+
+                var attendees = await context.EventParticipants
+                    .Where(a => a.EventId == evt.Id)
+                    .ToListAsync();
+
+                context.EventParticipants.RemoveRange(attendees);
+
+                if (eventDto.Attendees != null)
+                {
+                    foreach (var attendee in eventDto.Attendees)
+                    {
+                        var newAttendee = new EventParticipants
+                        {
+                            EventId = evt.Id,
+                            UserId = attendee.ID
+                        };
+
+                        context.EventParticipants.Add(newAttendee);
+                    }
+                }
+
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

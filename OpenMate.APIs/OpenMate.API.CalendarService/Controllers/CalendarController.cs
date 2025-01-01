@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OpenMate.API.Domain.DTOs;
 using OpenMate.API.Domain.Interfaces;
 
@@ -22,6 +21,13 @@ namespace OpenMate.API.CalendarService.Controllers
             return Ok("Done");
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] EventDto eventDto)
+        {
+            await service.UpdateEvent(id, eventDto);
+            return Ok("Done");
+        }
+
         [HttpDelete("{eventId}")]
         public async Task<IActionResult> Delete(int eventId)
         {
@@ -34,6 +40,12 @@ namespace OpenMate.API.CalendarService.Controllers
         {
             await service.DeleteAttendee(eventId, userId);
             return Ok("Done");
+        }
+
+        [HttpGet("suggestion")]
+        public async Task<IActionResult> GetSuggestion(string? att)
+        {
+            return Ok(await service.GetSuggestion(att));
         }
     }
 }
