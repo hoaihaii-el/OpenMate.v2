@@ -89,11 +89,14 @@
     <Compile Include="Model\ProjectMember.cs" />
     <Compile Include="Model\Sprint.cs" />
     <Compile Include="Model\Task.cs" />
-    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\Room.cs" />
+    <Compile Include="Requests\FileReq.cs" />
+    <Compile Include="Requests\RoomReq.cs" />
     <Compile Include="Resources\Uitilities\BaseViewModel.cs" />
     <Compile Include="Resources\Uitilities\NavigateButton.cs" />
     <Compile Include="Resources\Uitilities\RelayCommand.cs" />
     <Compile Include="Services\CalendarService.cs" />
+    <Compile Include="Services\ChatService.cs" />
     <Compile Include="UCNavigator\MainNavigator.xaml.cs">
       <DependentUpon>MainNavigator.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,9 @@
     </Compile>
     <Compile Include="Views\Chats\NewConversation.xaml.cs">
       <DependentUpon>NewConversation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chats\VideoViewer.xaml.cs">
+      <DependentUpon>VideoViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ImageViewer.xaml.cs">
       <DependentUpon>ImageViewer.xaml</DependentUpon>
@@ -264,6 +270,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Chats\NewConversation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chats\VideoViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

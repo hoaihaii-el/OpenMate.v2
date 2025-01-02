@@ -1,4 +1,5 @@
-﻿using OpenMate.Work.Resources.Uitilities;
+﻿using OpenMate.Work.Helpers;
+using OpenMate.Work.Resources.Uitilities;
 using System;
 
 namespace OpenMate.Work.Model
@@ -7,17 +8,31 @@ namespace OpenMate.Work.Model
     {
         public int Id { get; set; }
         public string Text { get; set; }
-        public int SenderId { get; set; }
-        public string Sender { get; set; }
-        public string ImageUrl { get; set; }
 
-        public string SenderUrl { get; set; }
+        private string _SenderId;
+        public string SenderId
+        {
+            get => _SenderId;
+            set
+            {
+                _SenderId = value;
+                OnPropertyChanged(nameof(SenderId));
+                OnPropertyChanged(nameof(IsFromUser));
+            }
+        }
 
-        private bool _IsFromUser;
+        private string _Sender;
+        public string Sender
+        {
+            get => _Sender;
+            set => SetProperty(ref _Sender, value);
+        }
+        public string MediaUrl { get; set; }
+        public string MediaType { get; set; }
+
         public bool IsFromUser
         {
-            get => _IsFromUser;
-            set => SetProperty(ref _IsFromUser, value);
+            get => SenderId == Helper.CurrentUserId;
         }
 
         private bool _IsPinned;

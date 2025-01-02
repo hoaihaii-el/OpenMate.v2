@@ -8,5 +8,6 @@ namespace OpenMate.API.Domain.Entities.Chat
         public int Id { get; set; }
         public int? RoomId { get; set; }
         public string? UserId { get; set; }
+        public int UnReadCount { get; set; }
     }
 }

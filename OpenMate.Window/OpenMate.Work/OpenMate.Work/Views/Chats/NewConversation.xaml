@@ -95,7 +95,7 @@
                                 <DataTemplate>
                                     <Border Margin="0 0 5 0" CornerRadius="5" Height="35" Background="#d1d1d1">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock FontSize="15" Text="{Binding}" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                            <TextBlock FontSize="15" Text="{Binding Name}" Margin="10 0 0 0" VerticalAlignment="Center"/>
                                             <Button 
                                                 Command="{Binding DataContext.RemoveParticipantCM, RelativeSource={RelativeSource AncestorType=Window}}"
                                                 CommandParameter="{Binding}"
@@ -115,19 +115,35 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </ScrollViewer>
-                    <ComboBox 
+                    <Popup
+                        PlacementTarget="{Binding ElementName=NewParticipant}"
+                        Placement="Top">
+                        <Popup.Style>
+                            <Style TargetType="Popup">
+                                <Setter Property="IsOpen" Value="True"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Suggestions.Count}" Value="0">
+                                        <Setter Property="IsOpen" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Popup.Style>
+                        <ListBox
+                            Background="White"
+                            SelectionChanged="ListBox_SelectionChanged"
+                            ItemsSource="{Binding Suggestions}"
+                            ItemTemplate="{StaticResource AttendeeSuggestion}">
+                        </ListBox>
+                    </Popup>
+                    <TextBox
                         Grid.Row="2"
-                        IsEditable="True"
-                        SelectedItem="{Binding NewParticipant, UpdateSourceTrigger=PropertyChanged}"
-                        ItemsSource="{Binding Suggestions}"
-                        x:Name="AddParticipantCombo"
-                        IsTextSearchEnabled="True"
-                        IsTextSearchCaseSensitive="True"
-                        Style="{StaticResource FloatingComboBox}"
+                        x:Name="NewParticipant"
+                        Text="{Binding NewParticipant, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource FloatingTextBox}"
                         md:HintAssist.Hint="Add Participant"/>
                     <Button
                         Grid.Row="3"
-                        Command="{Binding AddNewChatCM}"
+                        Click="Button_Click"
                         Style="{StaticResource NormalButton}"
                         Content="Add Conversation"/>
                 </Grid>

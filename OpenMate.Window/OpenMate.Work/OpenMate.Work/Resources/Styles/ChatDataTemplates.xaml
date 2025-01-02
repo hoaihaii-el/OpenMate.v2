@@ -11,10 +11,10 @@
                             <Style TargetType="Path">
                                 <Setter Property="Data" Value="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Name}" Value="BOARD">
+                                    <DataTrigger Binding="{Binding Title}" Value="BOARD">
                                         <Setter Property="Data" Value="M20,4H4A3,3,0,0,0,1,7V17a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V7A3,3,0,0,0,20,4Zm1,13a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1V7A1,1,0,0,1,4,6H20a1,1,0,0,1,1,1ZM16,9a3,3,0,0,0-2.82,4H10.82A3,3,0,1,0,8,15h8a3,3,0,0,0,0-6ZM8,13a1,1,0,1,1,1-1A1,1,0,0,1,8,13Zm8,0a1,1,0,1,1,1-1A1,1,0,0,1,16,13Z"/>
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding Name}" Value="CALENDAR">
+                                    <DataTrigger Binding="{Binding Title}" Value="CALENDAR">
                                         <Setter Property="Data" Value="M20,4H4A3,3,0,0,0,1,7V17a3,3,0,0,0,3,3H20a3,3,0,0,0,3-3V7A3,3,0,0,0,20,4Zm1,13a1,1,0,0,1-1,1H4a1,1,0,0,1-1-1V7A1,1,0,0,1,4,6H20a1,1,0,0,1,1,1ZM16,9a3,3,0,0,0-2.82,4H10.82A3,3,0,1,0,8,15h8a3,3,0,0,0,0-6ZM8,13a1,1,0,1,1,1-1A1,1,0,0,1,8,13Zm8,0a1,1,0,1,1,1-1A1,1,0,0,1,16,13Z"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -23,7 +23,7 @@
                     </Path>
                 </Viewbox>
                 <Label 
-                    Content="{Binding Name}" FontSize="16"
+                    Content="{Binding Title}" FontSize="16"
                     Width="155" VerticalContentAlignment="Center"
                     Margin="10 0 0 0">
                     <Label.Style>
@@ -57,7 +57,7 @@
             <StackPanel Orientation="Horizontal">
                 <fa:FontAwesome Margin="10 7 0 7" Icon="Globe" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 <Label 
-                    Content="{Binding Name}" FontSize="16"
+                    Content="{Binding Title}" FontSize="16"
                     Width="155" VerticalContentAlignment="Center"
                     Margin="10 0 0 0">
                     <Label.Style>
@@ -88,7 +88,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="MessageTemplate">
-        <StackPanel Orientation="Vertical" Width="1255">
+        <StackPanel Orientation="Vertical" Width="1235">
             <TextBlock Text="{Binding Sender}" FontSize="12" Margin="5 3">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
@@ -128,21 +128,55 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
-                    <Image Source="{Binding ImageUrl}" MaxWidth="500" Stretch="UniformToFill" HorizontalAlignment="Center">
+                    <Image Source="{Binding MediaUrl}" MaxWidth="500" Stretch="UniformToFill" HorizontalAlignment="Center">
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Setter Property="Cursor" Value="Hand"/>
                                 <Setter Property="behavior:ImageBehavior.EnableImagePreview" Value="True"/>
-                                <Setter Property="Visibility" Value="Visible"/>
+                                <Setter Property="Visibility" Value="Collapsed"/>
                                 <Setter Property="Margin" Value="5"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ImageUrl}" Value="{x:Null}">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    <DataTrigger Binding="{Binding MediaType}" Value="Image">
+                                        <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Image.Style>
                     </Image>
+                    <Button
+                        Width="240"
+                        Height="50"
+                        FontSize="14"
+                        Background="#BAD8B6"
+                        Content="Click to open video viewer"
+                        CommandParameter="{Binding}"
+                        Command="{Binding DataContext.OpenVideoViewerCM, RelativeSource={RelativeSource AncestorType=ListBox}}">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding MediaType}" Value="Video">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <TextBlock>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding MediaType}" Value="File">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Hyperlink NavigateUri="{Binding MediaUrl}">
+                            Download File
+                        </Hyperlink>
+                    </TextBlock>
                 </StackPanel>
             </Border>
         </StackPanel>

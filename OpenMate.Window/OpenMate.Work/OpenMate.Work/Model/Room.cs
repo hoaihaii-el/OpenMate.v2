@@ -2,11 +2,11 @@
 
 namespace OpenMate.Work.Model
 {
-    public class User : BaseViewModel
+    public class Room : BaseViewModel
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string ImageUrl { get; set; }
+        public string Title { get; set; }
+        public int ParticipantCount { get; set; }
 
         private bool _IsSelected;
         public bool IsSelected

@@ -89,7 +89,7 @@ namespace OpenMate.Work.Views.Boards
             {
                 if (block is Paragraph para)
                 {
-
+                    
                 }
                 else if (block is BlockUIContainer blockUI)
                 {

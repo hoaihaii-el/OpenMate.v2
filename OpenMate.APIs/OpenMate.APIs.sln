@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMate.API.BoardService",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMate.API.CalendarService", "OpenMate.API.CalendarService\OpenMate.API.CalendarService.csproj", "{65C18F2F-ADBF-4240-8D17-D5A0C0C37B53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMate.API.Infrastructure", "OpenMate.API.Infrastructure\OpenMate.API.Infrastructure.csproj", "{6B5FDFBA-DA4E-4B61-8CF9-5FF3BC2EE72B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMate.API.Infrastructure", "OpenMate.API.Infrastructure\OpenMate.API.Infrastructure.csproj", "{6B5FDFBA-DA4E-4B61-8CF9-5FF3BC2EE72B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMate.API.Domain", "OpenMate.API.Domain\OpenMate.API.Domain.csproj", "{F29C8EE8-53CA-4B19-ABD9-A53C83E9F276}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMate.API.Domain", "OpenMate.API.Domain\OpenMate.API.Domain.csproj", "{F29C8EE8-53CA-4B19-ABD9-A53C83E9F276}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenMate.API.Gateway", "OpenMate.API.Gateway\OpenMate.API.Gateway.csproj", "{F954A36C-474C-422F-B6A8-1934D4EBA010}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenMate.API.Gateway", "OpenMate.API.Gateway\OpenMate.API.Gateway.csproj", "{F954A36C-474C-422F-B6A8-1934D4EBA010}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

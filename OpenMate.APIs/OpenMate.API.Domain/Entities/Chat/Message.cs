@@ -6,7 +6,7 @@ namespace OpenMate.API.Domain.Entities.Chat
     {
         [Key]
         public int Id { get; set; }
-        public string? RoomId { get; set; }
+        public int? RoomId { get; set; }
         public string? SenderId { get; set; }
         public string? Text { get; set; }
         public string? MediaUrl { get; set; }

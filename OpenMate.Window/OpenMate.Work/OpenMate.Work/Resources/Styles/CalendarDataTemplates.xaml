@@ -5,7 +5,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="AttendeeSuggestion">
-        <Label Width="200" Content="{Binding Name}" Margin="5 0"/>
+        <Label Width="200" Content="{Binding Name}" FontSize="15" Margin="5 0"/>
     </DataTemplate>
     
     <DataTemplate x:Key="EventTemplate">

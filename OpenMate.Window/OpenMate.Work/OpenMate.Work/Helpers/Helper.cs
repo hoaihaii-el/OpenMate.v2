@@ -5,12 +5,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using OpenMate.Work.Model;
+using System.Net.Http;
+using OpenMate.Work.Requests;
+using Newtonsoft.Json;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OpenMate.Work.Helpers
 {
     public class Helper
     {
+        private static HttpClient _HttpClient = new HttpClient();
+
         public static double CeelWidth = 164.857;
+
+        public static string CurrentUserId = "24001";
 
         public static Dictionary<DayOfWeek, double> DayOfWeekWidth = new Dictionary<DayOfWeek, double>
         {
@@ -35,6 +44,54 @@ namespace OpenMate.Work.Helpers
             }
         }
 
+        public static async Task<Message> GetMessageFromRichTextBox(RichTextBox richTextBox)
+        {
+            string text = "";
+            string imageUrl = "";
+            foreach (var block in richTextBox.Document.Blocks)
+            {
+                if (block is Paragraph para)
+                {
+                    foreach (var inline in para.Inlines)
+                    {
+                        if (inline is Run run)
+                        {
+                            text += run.Text + "\n";
+                        }
+                    }
+                }
+                else if (block is BlockUIContainer blockUI)
+                {
+                    var image = blockUI.Child as Image;
+
+                    if (image == null)
+                    {
+                        continue;
+                    }
+
+                    var bitmapSrc = image.Source as BitmapSource;
+
+                    if (bitmapSrc != null)
+                    {
+                        var base64 = Helper.ConvertImageToBase64(bitmapSrc);
+                        imageUrl = await GetFileUrl(new FileReq() 
+                        {
+                            Base64 = base64,
+                            FileName = Guid.NewGuid().ToString()
+                        });
+                    }
+                }
+            }
+
+            return new Message()
+            {
+                Text = text.Trim(),
+                MediaUrl = imageUrl,
+                MediaType = imageUrl.Length > 0 ? "Image" : "",
+                SenderId = CurrentUserId,
+            };
+        }
+
         public static void ResizeImage(RichTextBox richTxtBox, double maxWidth)
         {
             foreach (var block in richTxtBox.Document.Blocks)
@@ -45,6 +102,21 @@ namespace OpenMate.Work.Helpers
                     image.MaxWidth = maxWidth;
                     image.MaxHeight = rate * image.MaxWidth;
                 }
+            }
+        }
+
+        public static async Task<string> GetFileUrl(FileReq file)
+        {
+            try
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(file), Encoding.UTF8, "application/json");
+                var response = await _HttpClient.PostAsync("https://localhost:5000/chat/file", content);
+                var imageUrl = await response.Content.ReadAsStringAsync();
+                return imageUrl;
+            }
+            catch
+            {
+                return "";
             }
         }
 

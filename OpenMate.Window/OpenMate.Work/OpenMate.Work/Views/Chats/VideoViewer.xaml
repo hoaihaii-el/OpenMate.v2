@@ -1,0 +1,52 @@
+﻿<Window x:Class="OpenMate.Work.Views.Chats.VideoViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OpenMate.Work.Views.Chats"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        WindowState="Maximized"
+        FontFamily="{StaticResource Nunito}"
+        TextElement.FontFamily="{StaticResource Nunito}"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterScreen"
+        Title="VideoViewer" Height="550" Width="800">
+    <Border MouseDown="Border_MouseDown" Background="#66000000">
+        <StackPanel VerticalAlignment="Center" MaxWidth="1500" Orientation="Vertical">
+            <MediaElement 
+                MaxWidth="1500"
+                x:Name="mediaElement"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                LoadedBehavior="Manual"
+                UnloadedBehavior="Stop"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button 
+                    Height="40"
+                    Width="80"
+                    Content="Play"
+                    Click="Button_Click"
+                    Foreground="White"
+                    Style="{StaticResource IconButtonStyle}"/>
+                <Button 
+                    Height="40"
+                    Width="80"
+                    Content="Pause"
+                    Click="Button_Click_1"
+                    Foreground="White"
+                    Style="{StaticResource IconButtonStyle}"/>
+                <Button 
+                    Height="40"
+                    Width="80"
+                    Content="Reset"
+                    Click="Button_Click_2"
+                    Foreground="White"
+                    Style="{StaticResource IconButtonStyle}"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

@@ -36,7 +36,7 @@ namespace OpenMate.API.ChatService.Controllers
         }
 
         [HttpGet("messages/{roomId}")]
-        public async Task<IActionResult> GetMessages(string roomId)
+        public async Task<IActionResult> GetMessages(int roomId)
         {
             var messages = await chatService.GetMessages(roomId);
             return Ok(messages);
@@ -61,6 +61,48 @@ namespace OpenMate.API.ChatService.Controllers
         {
             await chatService.ReadMessage(messageId);
             return Ok();
+        }
+
+        [HttpPost("user/calendar/{userId}")]
+        public async Task<IActionResult> CreateUserCalendar(string userId)
+        {
+            await chatService.CreateUserCalendar(userId);
+            return Ok();
+        }
+
+        [HttpPost("user/board/{userId}")]
+        public async Task<IActionResult> CreateUserBoard(string userId)
+        {
+            await chatService.CreateUserBoard(userId);
+            return Ok();
+        }
+
+        [HttpPost("notification/board/{userId}")]
+        public async Task<IActionResult> AddBoardNotification(string userId, string content)
+        {
+            await chatService.AddBoardNotification(userId, content);
+            return Ok();
+        }
+
+        [HttpPost("notification/calendar/{userId}")]
+        public async Task<IActionResult> AddCalendarNotification(string userId, string content)
+        {
+            await chatService.AddCalendarNotification(userId, content);
+            return Ok();
+        }
+
+        [HttpGet("messages/pinned/{roomId}")]
+        public async Task<IActionResult> GetPinnedMessages(int roomId)
+        {
+            var messages = await chatService.GetPinnedMessages(roomId);
+            return Ok(messages);
+        }
+
+        [HttpPost("file")]
+        public async Task<IActionResult> UploadFile(FileDto file)
+        {
+            var url = await chatService.UploadFile(file);
+            return Ok(url);
         }
     }
 }

@@ -1,6 +1,10 @@
-﻿using OpenMate.Work.Resources.Uitilities;
+﻿using OpenMate.Work.Helpers;
+using OpenMate.Work.Model;
+using OpenMate.Work.Requests;
+using OpenMate.Work.Resources.Uitilities;
 using OpenMate.Work.Views.Chats;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace OpenMate.Work.ViewModel.Chats
@@ -21,23 +25,33 @@ namespace OpenMate.Work.ViewModel.Chats
             set
             {
                 _NewParticipant = value;
-                if (Suggestions.Contains(_NewParticipant))
+                if (!string.IsNullOrEmpty(value))
                 {
-                    Participants.Add(_NewParticipant);
+                    Suggestions = new ObservableCollection<Attendee>
+                        (Helper.Attendees
+                            .Where(p => p.Name.ToLower().Contains(value.ToLower()) || p.ID.Contains(value))
+                            .ToList()
+                        );
                 }
+                else
+                {
+                    Suggestions.Clear();
+                }
+                OnPropertyChanged(nameof(NewParticipant));
+                OnPropertyChanged(nameof(Suggestions));
                 OnPropertyChanged();
             }
         }
 
-        private ObservableCollection<string> _Participants;
-        public ObservableCollection<string> Participants
+        private ObservableCollection<Attendee> _Participants;
+        public ObservableCollection<Attendee> Participants
         {
             get => _Participants;
             set => SetProperty(ref _Participants, value);
         }
 
-        private ObservableCollection<string> _Suggestions;
-        public ObservableCollection<string> Suggestions
+        private ObservableCollection<Attendee> _Suggestions = new ObservableCollection<Attendee>();
+        public ObservableCollection<Attendee> Suggestions
         {
             get => _Suggestions;
             set => SetProperty(ref _Suggestions, value);
@@ -49,21 +63,15 @@ namespace OpenMate.Work.ViewModel.Chats
 
         public void HanldeAddNewChat()
         {
-            Suggestions = new ObservableCollection<string>()
-            {
-                "3912_Hoài Hải",
-                "3098_Hải Đăng"
-            };
-
             OpenAddNewChatCM = new RelayCommand<object>((p) => true, (p) =>
             {
                 var newChat = new NewConversation();
                 newChat.DataContext = this;
-                Participants = new ObservableCollection<string>();
+                Participants = new ObservableCollection<Attendee>();
                 newChat.ShowDialog();
             });
 
-            RemoveParticipantCM = new RelayCommand<string>((p) => true, (p) =>
+            RemoveParticipantCM = new RelayCommand<Attendee>((p) => true, (p) =>
             {
                 if (Participants.Contains(p))
                 {
@@ -72,13 +80,14 @@ namespace OpenMate.Work.ViewModel.Chats
             });
         }
 
-        public void AddNewParticipant()
+        public void AddNewChat()
         {
-            if (!string.IsNullOrEmpty(NewParticipant))
+            chatService.AddRoom(new RoomReq()
             {
-                Participants.Add(NewParticipant);
-            }
-            NewParticipant = "";
+                Title = NewChatName,
+                CreatedBy = Helper.CurrentUserId,
+                Participants = Participants.ToList()
+            });
         }
     }
 }

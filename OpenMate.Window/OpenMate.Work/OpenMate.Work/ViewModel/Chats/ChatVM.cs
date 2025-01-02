@@ -1,20 +1,30 @@
-﻿using OpenMate.Work.Model;
+﻿using Microsoft.Win32;
+using OpenMate.Work.Helpers;
+using OpenMate.Work.Model;
+using OpenMate.Work.Requests;
 using OpenMate.Work.Resources.Uitilities;
+using OpenMate.Work.Services;
+using OpenMate.Work.Views.Chats;
+using System;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows.Input;
 
 namespace OpenMate.Work.ViewModel.Chats
 {
     public partial class ChatVM : BaseViewModel
     {
-        private ObservableCollection<User> _Users = new ObservableCollection<User>();
-        public ObservableCollection<User> Users
+        private ChatService chatService = new ChatService();
+
+        private ObservableCollection<Room> _Rooms = new ObservableCollection<Room>();
+        public ObservableCollection<Room> Rooms
         {
-            get => _Users;
-            set => SetProperty(ref _Users, value);
+            get => _Rooms;
+            set => SetProperty(ref _Rooms, value);
         }
 
-        private ObservableCollection<User> _Spaces = new ObservableCollection<User>();
-        public ObservableCollection<User> Spaces
+        private ObservableCollection<Room> _Spaces = new ObservableCollection<Room>();
+        public ObservableCollection<Room> Spaces
         {
             get => _Spaces;
             set => SetProperty(ref _Spaces, value);
@@ -27,8 +37,8 @@ namespace OpenMate.Work.ViewModel.Chats
             set => SetProperty(ref _Messages, value);
         }
 
-        private User _SelectedBox;
-        public User SelectedBox
+        private Room _SelectedBox;
+        public Room SelectedBox
         {
             get => _SelectedBox;
             set
@@ -39,92 +49,107 @@ namespace OpenMate.Work.ViewModel.Chats
                 }
                 value.IsSelected = true;
                 _SelectedBox = value;
+
+                GetMessages(value.Id);
+                OnPropertyChanged(nameof(Messages));
                 OnPropertyChanged(nameof(SelectedBox));
             }
         }
 
+        public ICommand UploadFileCM { get; set; }
+        public ICommand OpenVideoViewerCM { get; set; }
 
         public ChatVM()
         {
             HanldeAddNewChat();
             HandleChatDetail();
 
-            Users = new ObservableCollection<User>()
+            Spaces = new ObservableCollection<Room>()
             {
-                new User()
+                new Room()
                 {
                     Id = 1,
-                    Name = "BOARD"
+                    Title = "GENERAL"
                 },
-                new User()
+                new Room()
                 {
-                    Id = 1,
-                    Name = "CALENDAR"
+                    Id = 2,
+                    Title = "ACTIVITIES"
                 },
-                new User()
+                new Room()
                 {
-                    Id = 1,
-                    Name = "Hoai Hai"
+                    Id = 3,
+                    Title = "Q & A"
                 },
-                new User()
-                {
-                    Id = 1,
-                    Name = "Khai Hoan"
-                },
-                new User()
-                {
-                    Id = 1,
-                    Name = "Cong Phuong"
-                },
-            };
-            SelectedBox = Users[0];
-
-            Spaces = new ObservableCollection<User>()
-            {
-                new User()
-                {
-                    Id = 1,
-                    Name = "General",
-                },
-                new User()
-                {
-                    Id = 1,
-                    Name = "Activities"
-                },
-                new User()
-                {
-                    Id = 1,
-                    Name = "Knowledge"
-                }
             };
 
-            Messages = new ObservableCollection<Message>
+            GetRooms();
+
+            UploadFileCM = new RelayCommand<object>((p) => true, (p) =>
             {
-                new Message()
+                UploadFile();
+            });
+
+            OpenVideoViewerCM = new RelayCommand<Message>((p) => true, (p) =>
+            {
+                var videoViewer = new VideoViewer(p.MediaUrl);
+                videoViewer.ShowDialog();
+            });
+        }
+
+        public async void GetRooms()
+        {
+            Rooms = new ObservableCollection<Room>(await chatService.GetRooms("24001"));
+
+            if (Rooms.Count > 0)
+            {
+                SelectedBox = Rooms[0];
+            }
+        }
+
+        public async void GetMessages(int roomId)
+        {
+            Messages = new ObservableCollection<Message>(await chatService.GetMessages(roomId));
+        }
+
+        public void SendMessage(Message msg)
+        {
+            msg.RoomId = SelectedBox.Id;
+            chatService.SendMessage(msg);
+            GetMessages(SelectedBox.Id);
+        }
+
+        public async void UploadFile()
+        {
+            var ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == true)
+            {
+                byte[] fileBytes = File.ReadAllBytes(ofd.FileName);
+                string base64String = Convert.ToBase64String(fileBytes);
+
+                var fileUrl = await Helper.GetFileUrl(new FileReq
                 {
-                    IsFromUser = false,
-                    Text = "Task YUN-019 sao rồi chú??",
-                    Sender = "Sếp"
-                },
-                new Message()
+                    Base64 = base64String,
+                    FileName = Path.GetFileName(ofd.FileName),
+                    FileType = IsVideo(ofd.FileName) ? "Video" : "File"
+                });
+
+                var msg = new Message()
                 {
-                    IsFromUser = true,
-                    Text = "Dạ em bắt đầu start từ chiều hôm qua rồi ạ",
-                    Sender = "Culi"
-                },
-                new Message()
-                {
-                    IsFromUser = false,
-                    Sender = "Sếp",
-                    ImageUrl = "https://kenh14cdn.com/2017/images685542-a-1489655177057.jpg"
-                },
-                new Message()
-                {
-                    IsFromUser = true,
-                    Text = "Dạ đang ổn anh ơi, có gì em báo ngay ạ",
-                    Sender = "Culi"
-                },
-            };
+                    SenderId = Helper.CurrentUserId,
+                    RoomId = SelectedBox.Id,
+                    MediaType = IsVideo(ofd.FileName) ? "Video" : "File",
+                    MediaUrl = fileUrl,
+                };
+                chatService.SendMessage(msg);
+                GetMessages(SelectedBox.Id);
+            }
+        }
+
+        public bool IsVideo(string fileName)
+        {
+            var ext = Path.GetExtension(fileName).ToLower();
+            return ext == ".mp4" || ext == ".avi" || ext == ".mov" || ext == ".wmv";
         }
     }
 }
