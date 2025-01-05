@@ -11,36 +11,49 @@ namespace OpenMate.API.Infrastructure.Services
     {
         public async Task AddEvent(EventDto eventDto)
         {
-            var newEvent = new EventOM
+            if (eventDto.Recurring == "")
             {
-                Title = eventDto.Title,
-                Description = eventDto.Description,
-                Start = eventDto.StartTime,
-                End = eventDto.EndTime,
-                Location = eventDto.Location,
-                CreatedBy = eventDto.CreatedBy,
-                CreatedAt = DateTime.Now,
-                MeetingUrl = eventDto.MeetingUrl,
-                RemindBefore = eventDto.RemindBefore
-            };
+                eventDto.EndDate = eventDto.EndTime;
+            }
 
-            context.Events.Add(newEvent);
-            await context.SaveChangesAsync();
-
-            if (eventDto.Attendees != null)
+            for (var dt = eventDto.StartTime; dt.Date <= eventDto.EndDate.Date; dt = eventDto.Recurring == "Daily" ? dt.AddDays(1) : eventDto.Recurring == "Weekly" ? dt.AddDays(7) : dt.AddDays(10))
             {
-                foreach (var attendee in eventDto.Attendees)
+                if ((dt.Date.DayOfWeek == DayOfWeek.Saturday || dt.Date.DayOfWeek == DayOfWeek.Sunday) && eventDto.Recurring == "Daily")
                 {
-                    var newAttendee = new EventParticipants
-                    {
-                        EventId = newEvent.Id,
-                        UserId = attendee.ID
-                    };
-
-                    context.EventParticipants.Add(newAttendee);
+                    continue;
                 }
 
+                var newEvent = new EventOM
+                {
+                    Title = eventDto.Title,
+                    Description = eventDto.Description,
+                    Start = new DateTime(dt.Year, dt.Month, dt.Day, eventDto.StartTime.Hour, eventDto.StartTime.Minute, eventDto.StartTime.Second),
+                    End = new DateTime(dt.Year, dt.Month, dt.Day, eventDto.EndTime.Hour, eventDto.EndTime.Minute, eventDto.EndTime.Second),
+                    Location = eventDto.Location,
+                    CreatedBy = eventDto.CreatedBy,
+                    CreatedAt = DateTime.Now,
+                    MeetingUrl = eventDto.MeetingUrl,
+                    RemindBefore = eventDto.RemindBefore
+                };
+
+                context.Events.Add(newEvent);
                 await context.SaveChangesAsync();
+
+                if (eventDto.Attendees != null)
+                {
+                    foreach (var attendee in eventDto.Attendees)
+                    {
+                        var newAttendee = new EventParticipants
+                        {
+                            EventId = newEvent.Id,
+                            UserId = attendee.ID
+                        };
+
+                        context.EventParticipants.Add(newAttendee);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
             }
         }
 

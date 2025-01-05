@@ -13,5 +13,7 @@ namespace OpenMate.API.Domain.DTOs
         public string? MeetingUrl { get; set; }
         public int RemindBefore { get; set; } = 15;
         public List<AttendeeRes>? Attendees { get; set; }
+        public string Recurring { get; set; } = "";
+        public DateTime EndDate { get; set; } 
     }
 }

@@ -92,6 +92,9 @@
     <Compile Include="Model\Room.cs" />
     <Compile Include="Requests\FileReq.cs" />
     <Compile Include="Requests\RoomReq.cs" />
+    <Compile Include="Resources\PushNotification.xaml.cs">
+      <DependentUpon>PushNotification.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Uitilities\BaseViewModel.cs" />
     <Compile Include="Resources\Uitilities\NavigateButton.cs" />
     <Compile Include="Resources\Uitilities\RelayCommand.cs" />
@@ -169,6 +172,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\PushNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles\BoardDataTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

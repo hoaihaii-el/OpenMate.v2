@@ -88,7 +88,25 @@
     </DataTemplate>
 
     <DataTemplate x:Key="MessageTemplate">
-        <StackPanel Orientation="Vertical" Width="1235">
+        <StackPanel Orientation="Vertical" Width="1235" Margin="0 5 0 0">
+            <!--<StackPanel.ContextMenu>
+                <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                    <MenuItem
+                        CommandParameter="{Binding}"
+                        Command="{Binding DataContext.PinMessageCM, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+                        <MenuItem.Style>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Header" Value="Pin Message"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsPinned}">
+                                        <Setter Property="Header" Value="Unpin Messages"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </MenuItem.Style>
+                    </MenuItem>
+                </ContextMenu>
+            </StackPanel.ContextMenu>-->
             <TextBlock Text="{Binding Sender}" FontSize="12" Margin="5 3">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
@@ -147,10 +165,10 @@
                         Width="240"
                         Height="50"
                         FontSize="14"
+                        Cursor="Hand"
                         Background="#BAD8B6"
-                        Content="Click to open video viewer"
                         CommandParameter="{Binding}"
-                        Command="{Binding DataContext.OpenVideoViewerCM, RelativeSource={RelativeSource AncestorType=ListBox}}">
+                        Command="{Binding DataContext.OpenVideoViewerCM, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -161,6 +179,12 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <fa:FontAwesome Icon="Play" Margin="5 0" Width="40"/>
+                                <TextBlock Text="{Binding Text}"/>
+                            </StackPanel>
+                        </Button.Content>
                     </Button>
                     <TextBlock>
                         <TextBlock.Style>
@@ -173,8 +197,14 @@
                                 </Style.Triggers>
                             </Style>
                         </TextBlock.Style>
-                        <Hyperlink NavigateUri="{Binding MediaUrl}">
-                            Download File
+                        <Hyperlink 
+                            NavigateUri="{Binding MediaUrl}" 
+                            CommandParameter="{Binding}"
+                            Command="{Binding DataContext.OpenFileUrlCM, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:FontAwesome Icon="FilePdfOutline" Margin="5 0" Width="40"/>
+                                <TextBlock Text="{Binding Text}"/>
+                            </StackPanel>
                         </Hyperlink>
                     </TextBlock>
                 </StackPanel>

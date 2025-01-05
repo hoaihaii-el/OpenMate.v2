@@ -1,70 +1,41 @@
-﻿using OpenMate.Work.Resources.Uitilities;
+﻿using OpenMate.Work.Model;
+using OpenMate.Work.Resources.Uitilities;
 using OpenMate.Work.Views.Chats;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace OpenMate.Work.ViewModel.Chats
 {
     public partial class ChatVM : BaseViewModel
     {
-        private ObservableCollection<string> _Images;
-        public ObservableCollection<string> Images
+        public ObservableCollection<Message> Images
         {
-            get => _Images;
-            set => SetProperty(ref _Images, value);
+            get => new ObservableCollection<Message>(Messages.Where(m => m.MediaType == "Image"));
         }
 
         public ICommand OpenChatDetailCM { get; set; }
         public ICommand RemoveCurParticipantCM { get; set; }
 
-        private ObservableCollection<string> _PinnedMessages;
-        public ObservableCollection<string> PinnedMessages
+        public ObservableCollection<Message> PinnedMessages
         {
-            get => _PinnedMessages;
-            set => SetProperty(ref _PinnedMessages, value);
-        }
-
-        private ObservableCollection<string> _CurParticipants;
-        public ObservableCollection<string> CurParticipants
-        {
-            get => _CurParticipants;
-            set => SetProperty(ref _CurParticipants, value);
+            get => new ObservableCollection<Message>(Messages.Where(m => m.IsPinned));
         }
 
         public void HandleChatDetail()
         {
             OpenChatDetailCM = new RelayCommand<object>((p) => true, (p) =>
             {
-                Images = new ObservableCollection<string>()
-                {
-                    "https://images8.alphacoders.com/133/1336966.jpeg",
-                    "https://images8.alphacoders.com/133/1336966.jpeg",
-                    "https://images8.alphacoders.com/133/1336966.jpeg"
-                };
-                PinnedMessages = new ObservableCollection<string>()
-                {
-                    "Real Madrid",
-                    "Li Europan lingues es membres del sam familie. Lor separat existentie es un myth.",
-                    "Li Europan lingues es membres del sam familie. Lor separat existentie es un myth.",
-                    "Li Europan lingues es membres del sam familie. Lor separat existentie es un myth.",
-                };
-                CurParticipants = new ObservableCollection<string>()
-                {
-                    "Bray",
-                    "YoungH",
-                    "Dlow",
-                };
-
                 var chatDetail = new ChatDetails();
                 chatDetail.DataContext = this;
                 chatDetail.ShowDialog();
             });
 
-            RemoveCurParticipantCM = new RelayCommand<string>((p) => true, (p) =>
+            RemoveCurParticipantCM = new RelayCommand<Attendee>((p) => true, (p) =>
             {
-                if (CurParticipants.Contains(p))
+                if (SelectedBox.Participants.Contains(p))
                 {
-                    CurParticipants.Remove(p);
+                    SelectedBox.Participants.Remove(p);
                 }
             });
         }

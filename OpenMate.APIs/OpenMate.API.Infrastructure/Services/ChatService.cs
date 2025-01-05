@@ -212,10 +212,25 @@ namespace OpenMate.API.Infrastructure.Services
                     Title = r.Title,
                     CreatedBy = r.CreatedBy,
                     CreatedAt = r.CreatedAt,
-                    ParticipantsCount = context.Participants.Count(p => p.RoomId == r.Id),
                     IsRead = context.Participants.FirstOrDefault(p => p.RoomId == r.Id && p.UserId == userId)!.UnReadCount == 0
                 })
                 .ToListAsync();
+
+
+            foreach (var r in rooms)
+            {
+                r.Participants = await context.Participants
+                        .Where(p => p.RoomId == r.Id)
+                        .Select(p => new AttendeeRes
+                        {
+                            ID = p.UserId,
+                        })
+                        .ToListAsync();
+                foreach (var p in r.Participants)
+                {
+                    p.Name = (await context.Users.FindAsync(p.ID))!.Name;
+                }
+            }
 
             return rooms;
         }

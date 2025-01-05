@@ -83,7 +83,7 @@
                                             <Image
                                                 Margin="0 6"
                                                 HorizontalAlignment="Center"
-                                                Source="{Binding}"
+                                                Source="{Binding MediaUrl}"
                                                 MaxWidth="580"/>
                                             <TextBlock
                                                 Margin="0 5"
@@ -139,7 +139,7 @@
                                                 Margin="0 5 0 0"
                                                 FontSize="17"
                                                 TextWrapping="Wrap"
-                                                Text="{Binding}"/>
+                                                Text="{Binding Text}"/>
                                             <TextBlock
                                                 Margin="0 5 0 10"
                                                 FontSize="14"
@@ -172,7 +172,7 @@
                         <Style TargetType="Border">
                             <Setter Property="Visibility" Value="Visible"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding CurParticipants.Count}" Value="0">
+                                <DataTrigger Binding="{Binding SelectedBox.Participants.Count}" Value="0">
                                     <Setter Property="Visibility" Value="Collapsed"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -184,7 +184,7 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <TextBlock
-                            Text="{Binding CurParticipants.Count}" FontSize="15" Margin="10 0"
+                            Text="{Binding SelectedBox.Participants.Count}" FontSize="15" Margin="10 0"
                             Foreground="{StaticResource Primary}"
                             VerticalAlignment="Center"/>
                         <ScrollViewer
@@ -192,7 +192,7 @@
                             VerticalScrollBarVisibility="Auto"
                             HorizontalScrollBarVisibility="Disabled">
                             <ItemsControl
-                                ItemsSource="{Binding CurParticipants}">
+                                ItemsSource="{Binding SelectedBox.Participants}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Vertical"/>
@@ -206,7 +206,7 @@
                                                     Margin="0 5 0 0"
                                                     FontSize="17" Width="140"
                                                     TextWrapping="Wrap"
-                                                    Text="{Binding}"/>
+                                                    Text="{Binding Name}"/>
                                                 <Button 
                                                     Command="{Binding DataContext.RemoveCurParticipantCM, RelativeSource={RelativeSource AncestorType=Window}}"
                                                     CommandParameter="{Binding}"

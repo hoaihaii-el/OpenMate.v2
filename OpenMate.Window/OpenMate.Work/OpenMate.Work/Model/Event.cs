@@ -148,5 +148,8 @@ namespace OpenMate.Work.Model
                 Attendees.Remove(p);
             });
         }
+
+        public string Recurring { get; set; } = "";
+        public DateTime EndDate { get; set; }
     }
 }

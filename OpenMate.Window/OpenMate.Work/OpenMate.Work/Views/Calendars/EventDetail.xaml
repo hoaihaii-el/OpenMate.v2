@@ -14,7 +14,7 @@
         Title="EventDetail" 
         FontFamily="{StaticResource Nunito}"
         FontSize="17"
-        Height="540" 
+        Height="570" 
         Width="400">
     <Border 
         Background="White"
@@ -53,6 +53,7 @@
             <Border Grid.Row="1" Background="#eeeeee" CornerRadius="5">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -162,7 +163,35 @@
                             ItemTemplate="{StaticResource AttendeeSuggestion}">
                         </ListBox>
                     </Popup>
-                    <Grid Grid.Row="6">
+                    <Grid 
+                        Grid.Row="6" 
+                        x:Name="Routine"
+                        Visibility="Hidden">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <CheckBox
+                            x:Name="Daily"
+                            Checked="Daily_Checked"
+                            HorizontalAlignment="Center"
+                            Content="Daily"/>
+                        <CheckBox
+                            x:Name="Weekly"
+                            Grid.Column="1"
+                            Checked="Weekly_Checked"
+                            HorizontalAlignment="Center"
+                            Content="Weekly"/>
+                        <DatePicker
+                            Grid.Column="2"
+                            x:Name="EndDate"
+                            Height="40"
+                            FontSize="16"
+                            Margin="5 0"
+                            md:HintAssist.Hint="End Date"/>
+                    </Grid>
+                    <Grid Grid.Row="7">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>

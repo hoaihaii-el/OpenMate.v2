@@ -1,4 +1,5 @@
-﻿using OpenMate.Work.Model;
+﻿using OpenMate.Work.Helpers;
+using OpenMate.Work.Model;
 using OpenMate.Work.Resources.Uitilities;
 using OpenMate.Work.Services;
 using OpenMate.Work.Views.Calendars;
@@ -83,6 +84,12 @@ namespace OpenMate.Work.ViewModel
             {
                 eventDetail.Top = MainWindow.LastMouseClickPostition.Y;
             }
+
+            if (isAddNew)
+            {
+                eventDetail.Routine.Visibility = Visibility.Visible;
+            }
+
             eventDetail.ShowDialog();
 
             if (eventDetail.IsSave)
@@ -95,6 +102,17 @@ namespace OpenMate.Work.ViewModel
 
                 if (isAddNew)
                 {
+                    if (eventDetail.Daily.IsChecked == true)
+                    {
+                        e.Recurring = "Daily";
+                    }
+                    else
+                    if (eventDetail.Weekly.IsChecked == true)
+                    {
+                        e.Recurring = "Weekly";
+                    }
+                    e.EndDate = eventDetail.EventSaved.EndDate;
+
                     await _calendarService.AddEvent(e);
                 }
                 else
@@ -105,10 +123,21 @@ namespace OpenMate.Work.ViewModel
             else
             if (eventDetail.IsDelete)
             {
-                await _calendarService.DeleteEvent(e.ID);
+                Events.Remove(e);
+                try
+                {
+                    await _calendarService.DeleteEvent(e.ID);
+                }
+                catch
+                {
+                    return;
+                }
             }
 
-            //GetEventsData();
+            if (e.Recurring != "")
+            {
+                GetEventsData();
+            }
         }
 
         public void InitializeWeek()

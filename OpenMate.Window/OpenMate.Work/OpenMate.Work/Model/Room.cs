@@ -1,4 +1,5 @@
 ﻿using OpenMate.Work.Resources.Uitilities;
+using System.Collections.ObjectModel;
 
 namespace OpenMate.Work.Model
 {
@@ -6,7 +7,13 @@ namespace OpenMate.Work.Model
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public int ParticipantCount { get; set; }
+
+        private ObservableCollection<Attendee> _Participants;
+        public ObservableCollection<Attendee> Participants
+        {
+            get => _Participants;
+            set => SetProperty(ref _Participants, value);
+        }
 
         private bool _IsSelected;
         public bool IsSelected

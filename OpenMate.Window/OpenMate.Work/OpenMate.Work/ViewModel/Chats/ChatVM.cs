@@ -7,7 +7,9 @@ using OpenMate.Work.Services;
 using OpenMate.Work.Views.Chats;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
+using System.Security.Policy;
 using System.Windows.Input;
 
 namespace OpenMate.Work.ViewModel.Chats
@@ -34,7 +36,13 @@ namespace OpenMate.Work.ViewModel.Chats
         public ObservableCollection<Message> Messages
         {
             get => _Messages;
-            set => SetProperty(ref _Messages, value);
+            set
+            {
+                _Messages = value;
+                OnPropertyChanged(nameof(Messages));
+                OnPropertyChanged(nameof(Images));
+                OnPropertyChanged(nameof(PinnedMessages));
+            }
         }
 
         private Room _SelectedBox;
@@ -58,6 +66,8 @@ namespace OpenMate.Work.ViewModel.Chats
 
         public ICommand UploadFileCM { get; set; }
         public ICommand OpenVideoViewerCM { get; set; }
+        public ICommand OpenFileUrlCM { get; set; }
+        public ICommand PinMessageCM { get; set; }
 
         public ChatVM()
         {
@@ -95,15 +105,37 @@ namespace OpenMate.Work.ViewModel.Chats
                 var videoViewer = new VideoViewer(p.MediaUrl);
                 videoViewer.ShowDialog();
             });
+
+            OpenFileUrlCM = new RelayCommand<Message>((p) => true, (p) =>
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = p.MediaUrl,
+                    UseShellExecute = true
+                });
+            });
+
+            //PinMessageCM = new RelayCommand<object>((p) => true, (p) =>
+            //{
+            //    p.IsPinned = !p.IsPinned;
+            //    OnPropertyChanged(nameof(Messages));
+            //});
         }
 
         public async void GetRooms()
         {
-            Rooms = new ObservableCollection<Room>(await chatService.GetRooms("24001"));
-
-            if (Rooms.Count > 0)
+            try
             {
-                SelectedBox = Rooms[0];
+                Rooms = new ObservableCollection<Room>(await chatService.GetRooms(Helper.CurrentUserId));
+
+                if (Rooms.Count > 0)
+                {
+                    SelectedBox = Rooms[0];
+                }
+            }
+            catch
+            {
+
             }
         }
 
@@ -138,6 +170,7 @@ namespace OpenMate.Work.ViewModel.Chats
                 {
                     SenderId = Helper.CurrentUserId,
                     RoomId = SelectedBox.Id,
+                    Text = ofd.FileName,
                     MediaType = IsVideo(ofd.FileName) ? "Video" : "File",
                     MediaUrl = fileUrl,
                 };

@@ -46,15 +46,7 @@ namespace OpenMate.Work.Views
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //ListBoxChat.ScrollIntoView(ListBoxChat.Items[ListBoxChat.Items.Count - 1]);
-        }
-
-        private void ListBoxChat_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (ListBoxChat.Items.Count > 0)
-            {
-                ListBoxChat.ScrollIntoView(ListBoxChat.Items[ListBoxChat.Items.Count - 1]);
-            }
+            ChatScrollViewer.ScrollToEnd();
         }
     }
 }

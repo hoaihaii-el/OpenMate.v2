@@ -44,6 +44,7 @@ namespace OpenMate.Work.Views.Calendars
                 MeetingURL = MeetingURL.Text,
                 StartTime = Start.SelectedTime.Value,
                 EndTime = End.SelectedTime.Value,
+                EndDate = EndDate.SelectedDate.Value
             };
             this.Close();
         }
@@ -65,6 +66,16 @@ namespace OpenMate.Work.Views.Calendars
             var vm = this.DataContext as Event;
             vm.Attendees.Add(listBox.SelectedItem as Attendee);
             vm.NewAttendee = "";
+        }
+
+        private void Daily_Checked(object sender, RoutedEventArgs e)
+        {
+            Weekly.IsChecked = false;
+        }
+
+        private void Weekly_Checked(object sender, RoutedEventArgs e)
+        {
+            Daily.IsChecked = false;
         }
     }
 }

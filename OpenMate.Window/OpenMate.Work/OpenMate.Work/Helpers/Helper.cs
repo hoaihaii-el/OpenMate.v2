@@ -10,6 +10,7 @@ using OpenMate.Work.Requests;
 using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
+using OpenMate.Work.Resources;
 
 namespace OpenMate.Work.Helpers
 {
@@ -118,6 +119,12 @@ namespace OpenMate.Work.Helpers
             {
                 return "";
             }
+        }
+
+        public static void ShowPushNoti(string noti)
+        {
+            var pushNoti = new PushNotification(noti);
+            pushNoti.Show();
         }
 
         public static List<Attendee> Attendees = new List<Attendee>()
