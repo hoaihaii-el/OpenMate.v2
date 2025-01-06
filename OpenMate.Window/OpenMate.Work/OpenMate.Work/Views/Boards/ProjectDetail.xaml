@@ -27,15 +27,18 @@
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="60"/>
                     <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition/>
                     <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
                 <TextBox
                     Grid.Row="0"
+                    Text="{Binding SelectedProject.Name}"
                     Style="{StaticResource FloatingTextBox}"
                     md:HintAssist.Hint="Project Name"/>
                 <TextBox
                     Grid.Row="1"
+                    Text="{Binding SelectedProject.CustomerName}"
                     Style="{StaticResource FloatingTextBox}"
                     md:HintAssist.Hint="Customer Name"/>
                 <Grid Grid.Row="2">
@@ -47,44 +50,60 @@
                         Grid.Column="0"
                         md:HintAssist.Hint="Start Date"
                         Margin="15 0 5 0"
+                        SelectedDate="{Binding SelectedProject.StartDate}"
                         Style="{StaticResource FloatingDatePicker}"/>
                     <DatePicker
                         Grid.Column="1"
                         md:HintAssist.Hint="End Date"
                         Margin="5 0 15 0"
+                        SelectedDate="{Binding SelectedProject.EndDate}"
                         Style="{StaticResource FloatingDatePicker}"/>
                 </Grid>
                 <TextBox
                     Grid.Row="3"
                     md:HintAssist.Hint="Description"
+                    Text="{Binding SelectedProject.Description}"
                     Style="{StaticResource FloatingTextBox}"/>
                 <ComboBox
                     Grid.Row="4"
-                    Margin="15 0"
+                    Margin="10 0"
                     FontSize="18"
                     IsEditable="True"
+                    Text="{Binding SelectedProject.ProjectManager.Name}"
                     md:HintAssist.Hint="Project Manager"
                     Style="{StaticResource FloatingComboBox}"/>
                 <ComboBox
                     Grid.Row="5"
                     IsEditable="True"
                     FontSize="18"
-                    Margin="15 0"
+                    Margin="10 0"
                     md:HintAssist.Hint="Product Type"
+                    Text="{Binding SelectedProject.ProductType}"
                     Style="{StaticResource FloatingComboBox}">
                     <ComboBoxItem Content="Mobile"/>
                     <ComboBoxItem Content="Web"/>
                     <ComboBoxItem Content="Desktop App"/>
                 </ComboBox>
-                <ComboBox
+                <TextBox
                     Grid.Row="6"
+                    md:HintAssist.Hint="Technologies"
+                    Text="{Binding SelectedProject.Technologies}"
+                    Style="{StaticResource FloatingTextBox}"/>
+                <ComboBox
+                    Grid.Row="7"
                     IsEditable="True"
                     FontSize="18"
-                    Margin="15 0"
-                    md:HintAssist.Hint="Technologies"
-                    Style="{StaticResource FloatingComboBox}"/>
+                    Margin="10 0"
+                    md:HintAssist.Hint="Status"
+                    Text="{Binding SelectedProject.Status}"
+                    Style="{StaticResource FloatingComboBox}">
+                    <ComboBoxItem Content="Not Started"/>
+                    <ComboBoxItem Content="In Progress"/>
+                    <ComboBoxItem Content="Finish"/>
+                </ComboBox>
                 <Button
-                    Grid.Row="8" Content="Update"
+                    Grid.Row="9" Content="Update"
+                    Command="{Binding UpdateProjectCM}"
                     Width="200" HorizontalAlignment="Left"
                     Style="{StaticResource NormalButton}"/>
             </Grid>
@@ -98,7 +117,7 @@
                     Grid.Row="0"
                     VerticalScrollBarVisibility="Auto"
                     HorizontalScrollBarVisibility="Disabled">
-                    <ItemsControl ItemsSource="{Binding Members}">
+                    <ItemsControl ItemsSource="{Binding SelectedProject.Members}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Vertical"/>
@@ -140,6 +159,7 @@
                     Width="200"
                     Content="Add member"
                     HorizontalAlignment="Left"
+                    Command="{Binding OpenAddMemberCM}"
                     Style="{StaticResource NormalButton}"/>
             </Grid>
         </Grid>

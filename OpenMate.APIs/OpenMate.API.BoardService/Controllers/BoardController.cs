@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OpenMate.API.Domain.DTOs;
 using OpenMate.API.Domain.Interfaces;
 
@@ -9,7 +8,7 @@ namespace OpenMate.API.BoardService.Controllers
     [ApiController]
     public class BoardController(IBoardService service) : ControllerBase
     {
-        [HttpGet("projects")]
+        [HttpGet("projects/{userId}")]
         public async Task<IActionResult> GetProjects(string userId)
         {
             var projects = await service.GetProjects(userId);
@@ -37,10 +36,10 @@ namespace OpenMate.API.BoardService.Controllers
             return Ok();
         }
 
-        [HttpPut("project/{id}")]
-        public async Task<IActionResult> UpdateProject(string id, ProjectDto projectDto)
+        [HttpPut("project")]
+        public async Task<IActionResult> UpdateProject(ProjectDto projectDto)
         {
-            await service.UpdateProject(id, projectDto);
+            await service.UpdateProject(projectDto);
             return Ok();
         }
 
@@ -52,10 +51,17 @@ namespace OpenMate.API.BoardService.Controllers
         }
 
         [HttpPost("sprint")]
-        public async Task<IActionResult> CreateSprint(string projectID, int order)
+        public async Task<IActionResult> CreateSprint(SprintDto dto)
         {
-            await service.CreateSprint(projectID, order);
+            await service.CreateSprint(dto);
             return Ok();
+        }
+
+        [HttpGet("sprint/stats/{sprintId}")]
+        public async Task<IActionResult> GetSprintStatistics(int sprintId)
+        {
+            var stats = await service.GetSprintStatistics(sprintId);
+            return Ok(stats);
         }
 
         [HttpGet("tasks/{sprintId}")]
@@ -72,11 +78,25 @@ namespace OpenMate.API.BoardService.Controllers
             return Ok();
         }
 
+        [HttpPut("task")]
+        public async Task<IActionResult> UpdateTask(TaskDto taskDto)
+        {
+            await service.UpdateTask(taskDto);
+            return Ok();
+        }
+
         [HttpPost("task/description")]
-        public async Task<IActionResult> AddTaskDescription(TaskDesDto taskDesDto)
+        public async Task<IActionResult> AddTaskDescription([FromBody] List<TaskDesDto> taskDesDto)
         {
             await service.AddTaskDescription(taskDesDto);
             return Ok();
+        }
+
+        [HttpGet("task/description/{taskId}")]
+        public async Task<IActionResult> GetDescriptions(string taskId)
+        {
+            var descriptions = await service.GetDescriptions(taskId);
+            return Ok(descriptions);
         }
     }
 }

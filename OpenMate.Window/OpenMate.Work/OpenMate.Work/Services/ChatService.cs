@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using OpenMate.Work.Model;
 using OpenMate.Work.Requests;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
@@ -23,6 +24,11 @@ namespace OpenMate.Work.Services
             try
             {
                 var response = await _httpClient.GetAsync($"https://localhost:5000/chat/rooms/{userId}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception("Cannot get rooms");
+                }
+                
                 var content = await response.Content.ReadAsStringAsync();
                 var rooms = JsonConvert.DeserializeObject<List<Room>>(content);
 
@@ -34,18 +40,23 @@ namespace OpenMate.Work.Services
                 {
                     new Room()
                     {
-                        Id = 1,
+                        Id = 0,
                         Title = "BOARD"
                     },
                     new Room()
                     {
-                        Id = 1,
+                        Id = 0,
                         Title = "CALENDAR"
                     },
                     new Room()
                     {
                         Id = 1,
                         Title = "Hoài Nhân"
+                    },
+                    new Room()
+                    {
+                        Id = 1,
+                        Title = "Khải Hoàn"
                     },
                 };
             }
@@ -56,6 +67,11 @@ namespace OpenMate.Work.Services
             try
             {
                 var response = await _httpClient.GetAsync($"https://localhost:5000/chat/messages/{roomId}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception("Cannot get rooms");
+                }
+
                 var content = await response.Content.ReadAsStringAsync();
                 var messages = JsonConvert.DeserializeObject<List<Message>>(content);
                 return messages;

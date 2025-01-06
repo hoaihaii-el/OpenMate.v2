@@ -9,7 +9,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Security.Policy;
 using System.Windows.Input;
 
 namespace OpenMate.Work.ViewModel.Chats
@@ -78,17 +77,17 @@ namespace OpenMate.Work.ViewModel.Chats
             {
                 new Room()
                 {
-                    Id = 1,
+                    Id = -1,
                     Title = "GENERAL"
                 },
                 new Room()
                 {
-                    Id = 2,
+                    Id = -2,
                     Title = "ACTIVITIES"
                 },
                 new Room()
                 {
-                    Id = 3,
+                    Id = -3,
                     Title = "Q & A"
                 },
             };
@@ -135,13 +134,123 @@ namespace OpenMate.Work.ViewModel.Chats
             }
             catch
             {
-
+                return;
             }
         }
 
         public async void GetMessages(int roomId)
         {
-            Messages = new ObservableCollection<Message>(await chatService.GetMessages(roomId));
+            if (roomId == -1)
+            {
+                Messages = new ObservableCollection<Message>()
+                {
+                    new Message()
+                    {
+                        Id = 1,
+                        SenderId = "24001",
+                        Text = "Hello",
+                        Sender = "Hoài Hải",
+                    },
+                    new Message()
+                    {
+                        Id = 1,
+                        SenderId = "24002",
+                        Text = "Đặt trà sữa mọi người ới",
+                        Sender = "Hoài Nhân",
+                    },
+                    new Message()
+                    {
+                        Id = 1,
+                        SenderId = "24004",
+                        Text = "Oke kkkk",
+                        Sender = "Minh Ngọc",
+                    },
+                    new Message()
+                    {
+                        Id = 1,
+                        SenderId = "24001",
+                        Text = "=))))))))",
+                        Sender = "Hoài Hải",
+                    },
+                };
+            }
+            else
+            if (roomId == -2)
+            {
+                Messages = new ObservableCollection<Message>()
+                {
+                    new Message()
+                    {
+                        Id = 1,
+                        SenderId = "24006",
+                        Text = "Chiều nay 6h ra sân nha mọi người",
+                        Sender = "Hoài An",
+                    },
+                    new Message()
+                    {
+                        Id = 1,
+                        SenderId = "24002",
+                        Text = "Sân nào vậy ta",
+                        Sender = "Hoài Nhân",
+                    },
+                    new Message()
+                    {
+                        Id = 1,
+                        SenderId = "24001",
+                        Text = "Sân Chảo Lửa gần sân bay á chú",
+                        MediaUrl = "https://sanbanh.com/wp-content/uploads/2024/12/san-banh-chao-lua.jpg",
+                        MediaType = "Image",
+                        Sender = "Hoài Hải",
+                    },
+                    new Message()
+                    {
+                        Id = 1,
+                        SenderId = "24008",
+                        Text = "Ra sân ăn mừng Việt Nam vô địch =)))))",
+                        Sender = "Thanh Bảo",
+                    },
+                };
+            }
+            else 
+            if (roomId == -3)
+            {
+                Messages = new ObservableCollection<Message>()
+                {
+                    new Message()
+                    {
+                        Id = 1,
+                        SenderId = "24001",
+                        Text = "Mọi người ơi, làm sao để kết nối API trong WPF vậy?",
+                        Sender = "Hoài Hải",
+                    },
+                    new Message()
+                    {
+                        Id = 2,
+                        SenderId = "24002",
+                        Text = "Cậu có thể dùng HttpClient. Tớ có ví dụ nè, để tớ gửi cho.",
+                        Sender = "Hoài Nhân",
+                    },
+                    new Message()
+                    {
+                        Id = 3,
+                        SenderId = "24004",
+                        Text = "Đúng rồi, HttpClient tốt lắm. Nhớ bắt lỗi trường hợp API không phản hồi nữa nhé!",
+                        Sender = "Minh Ngọc",
+                    },
+                    new Message()
+                    {
+                        Id = 4,
+                        SenderId = "24001",
+                        Text = "Cảm ơn mọi người! Tớ sẽ thử ngay. Có gì không hiểu tớ hỏi tiếp nhé!",
+                        Sender = "Hoài Hải",
+                    },
+                };
+
+            }
+            else
+            {
+                Messages = new ObservableCollection<Message>(await chatService.GetMessages(roomId));
+            }
         }
 
         public void SendMessage(Message msg)

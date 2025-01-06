@@ -86,9 +86,11 @@
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\Message.cs" />
+    <Compile Include="Model\Project.cs" />
     <Compile Include="Model\ProjectMember.cs" />
     <Compile Include="Model\Sprint.cs" />
-    <Compile Include="Model\Task.cs" />
+    <Compile Include="Model\SprintStat.cs" />
+    <Compile Include="Model\TaskOM.cs" />
     <Compile Include="Model\Room.cs" />
     <Compile Include="Requests\FileReq.cs" />
     <Compile Include="Requests\RoomReq.cs" />
@@ -100,13 +102,14 @@
     <Compile Include="Resources\Uitilities\RelayCommand.cs" />
     <Compile Include="Services\CalendarService.cs" />
     <Compile Include="Services\ChatService.cs" />
+    <Compile Include="Services\ProjectService.cs" />
     <Compile Include="UCNavigator\MainNavigator.xaml.cs">
       <DependentUpon>MainNavigator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Boards\BoardVM.BackLog.cs" />
     <Compile Include="ViewModel\Boards\BoardVM.cs" />
     <Compile Include="ViewModel\Boards\BoardVM.Detail.cs" />
-    <Compile Include="ViewModel\Boards\BoardVM.Information.cs" />
+    <Compile Include="ViewModel\Boards\BoardVM.Ticket.cs" />
+    <Compile Include="ViewModel\Boards\BoardVM.Sprint.cs" />
     <Compile Include="ViewModel\CalendarVM.cs" />
     <Compile Include="ViewModel\Chats\ChatVM.AddNewChat.cs" />
     <Compile Include="ViewModel\Chats\ChatVM.cs" />
@@ -129,6 +132,9 @@
     </Compile>
     <Compile Include="Views\Boards\NewProject.xaml.cs">
       <DependentUpon>NewProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Boards\NewSprint.xaml.cs">
+      <DependentUpon>NewSprint.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Boards\ProjectDetail.xaml.cs">
       <DependentUpon>ProjectDetail.xaml</DependentUpon>
@@ -245,6 +251,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Boards\NewProject.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Boards\NewSprint.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

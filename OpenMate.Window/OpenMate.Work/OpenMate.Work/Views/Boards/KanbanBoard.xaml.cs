@@ -19,7 +19,7 @@ namespace OpenMate.Work.Views.Boards
 
         private Point _StartPoint;
         private bool _IsDragging = false;
-        private Task _SourceTask;
+        private TaskOM _SourceTask;
 
         private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -45,7 +45,7 @@ namespace OpenMate.Work.Views.Boards
                  || Math.Abs(vector.Y) > SystemParameters.MinimumVerticalDragDistance)
                 {
                     _IsDragging = true;
-                    _SourceTask = list.SelectedItem as Task;
+                    _SourceTask = list.SelectedItem as TaskOM;
                     DragDrop.DoDragDrop(list, list.SelectedItem, DragDropEffects.Move);
                 }
             }
@@ -93,7 +93,7 @@ namespace OpenMate.Work.Views.Boards
             AssignNewStatus(_SourceTask, destination, GetListBoxItemIndex(sender));
         }
 
-        private void AssignNewStatus(Task task, string newStatus, int index)
+        private void AssignNewStatus(TaskOM task, string newStatus, int index)
         {
             var vm = this.DataContext as BoardVM;
 
@@ -105,7 +105,7 @@ namespace OpenMate.Work.Views.Boards
             switch (task.Status)
             {
                 case "Log":
-                    vm.Log.Remove(task);
+                    vm.Todo.Remove(task);
                     break;
                 case "Doing":
                     vm.Doing.Remove(task);
@@ -122,7 +122,7 @@ namespace OpenMate.Work.Views.Boards
             switch (newStatus)
             {
                 case "Log":
-                    vm.Log.Insert(index == -1 ? vm.Log.Count : index, task);
+                    vm.Todo.Insert(index == -1 ? vm.Todo.Count : index, task);
                     break;
                 case "Doing":
                     vm.Doing.Insert(index == -1 ? vm.Doing.Count : index, task);
@@ -145,7 +145,7 @@ namespace OpenMate.Work.Views.Boards
                 return list.Name.Substring(0, list.Name.IndexOf("Column"));
             }
 
-            var task = item.DataContext as Task;
+            var task = item.DataContext as TaskOM;
             if (task == null)
             {
                 return null;
@@ -178,7 +178,7 @@ namespace OpenMate.Work.Views.Boards
                 return;
             }
 
-            vm.OpenTicketDetail(sender as Task);
+            vm.OpenTicketDetail(sender as TaskOM);
         }
     }
 }

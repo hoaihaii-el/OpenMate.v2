@@ -34,6 +34,7 @@
             </ComboBox>
             <Button
                 Grid.Column="2"
+                Command="{Binding OpenNewSprintCM}"
                 Style="{StaticResource NormalButton}"
                 Content="Add Sprint"/>
         </Grid>

@@ -11,6 +11,7 @@ namespace OpenMate.API.Domain.Entities.Board
         [MaxLength(10)]
         public string? ProjectID { get; set; }
         public string? Role { get; set; }
+        public double Effort { get; set; }
         public DateTime JoinDate { get; set; }
         public DateTime LeaveDate { get; set; }
     }

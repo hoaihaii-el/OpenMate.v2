@@ -109,6 +109,7 @@
                             Content="Information"/>
                         <TextBox
                             Grid.Row="1"
+                            IsReadOnly="True"
                             md:HintAssist.Hint="ID"
                             Style="{StaticResource FloatingTextBox}"/>
                         <TextBox

@@ -67,7 +67,7 @@
                 PreviewMouseMove="ListBox_PreviewMouseMove"
                 PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown"
                 MouseLeftButtonUp="ListBox_MouseLeftButtonUp"
-                ItemsSource="{Binding Log, Mode=TwoWay}" 
+                ItemsSource="{Binding Todo, Mode=TwoWay}" 
                 ItemTemplate="{StaticResource CardTemplate}" 
                 d:ItemsSource="{d:SampleData ItemCount=5}">
             </ListBox>

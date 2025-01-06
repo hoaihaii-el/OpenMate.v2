@@ -14,7 +14,7 @@
         WindowStartupLocation="CenterScreen"
         Title="NewProject" 
         FontFamily="{StaticResource Nunito}"
-        Height="650" 
+        Height="680" 
         Width="650">
     <Border 
         Background="White" 
@@ -63,14 +63,17 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <TextBox
+                            Text="{Binding NewProject.Name}"
                             Style="{StaticResource FloatingTextBox}"
                             md:HintAssist.Hint="Project Name"/>
                     </Grid>
                     <Grid Grid.Row="1">
                         <TextBox
+                            Text="{Binding NewProject.CustomerName}"
                             Style="{StaticResource FloatingTextBox}"
                             md:HintAssist.Hint="Customer Name"/>
                     </Grid>
@@ -83,15 +86,18 @@
                             Grid.Column="0"
                             md:HintAssist.Hint="Start Date"
                             Margin="15 0 5 0"
+                            SelectedDate="{Binding NewProject.StartDate}"
                             Style="{StaticResource FloatingDatePicker}"/>
                         <DatePicker
                             Grid.Column="1"
                             md:HintAssist.Hint="End Date"
                             Margin="5 0 15 0"
+                            SelectedDate="{Binding NewProject.EndDate}"
                             Style="{StaticResource FloatingDatePicker}"/>
                     </Grid>
                     <TextBox
                         Grid.Row="3"
+                        Text="{Binding NewProject.Description}"
                         md:HintAssist.Hint="Description"
                         Style="{StaticResource FloatingTextBox}"/>
                     <Grid Grid.Row="4">
@@ -103,19 +109,17 @@
                             IsEditable="True"
                             FontSize="18"
                             Margin="15 0 5 0"
+                            Text="{Binding NewProject.ProductType}"
                             md:HintAssist.Hint="Product Type"
                             Style="{StaticResource FloatingComboBox}">
                             <ComboBoxItem Content="Mobile"/>
                             <ComboBoxItem Content="Web"/>
                             <ComboBoxItem Content="Desktop App"/>
                         </ComboBox>
-                        <ComboBox
+                        <TextBox
                             Grid.Column="1"
-                            IsEditable="True"
-                            FontSize="18"
-                            Margin="5 0 15 0"
                             md:HintAssist.Hint="Technologies"
-                            Style="{StaticResource FloatingComboBox}"/>
+                            Style="{StaticResource FloatingTextBox}"/>
                     </Grid>
                     <ComboBox
                         Grid.Row="5"
@@ -123,16 +127,74 @@
                         FontSize="18"
                         IsEditable="True"
                         md:HintAssist.Hint="Project Manager"
-                        Style="{StaticResource FloatingComboBox}"/>
-                    <ComboBox
-                        Grid.Row="6"
-                        Margin="15 0"
-                        FontSize="18"
-                        IsEditable="True"
-                        md:HintAssist.Hint="Members"
-                        Style="{StaticResource FloatingComboBox}"/>
-                    <Button
+                        Style="{StaticResource FloatingComboBox}">
+                        <ComboBoxItem Content="Hoài An"/>
+                        <ComboBoxItem Content="Thanh Bảo"/>
+                    </ComboBox>
+                    <Grid Grid.Row="6" HorizontalAlignment="Left" Margin="5 0">
+                        <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                            <StackPanel Orientation="Horizontal">
+                                <ItemsControl ItemsSource="{Binding NewProject.Members}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Margin="5 0 0 0" CornerRadius="5" Height="35" Background="#d1d1d1">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock FontSize="15" Text="{Binding Name}" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                                                    <Button 
+                                                        Command="{Binding DataContext.RemoveAttendeeCM, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                        CommandParameter="{Binding}"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"
+                                                        Width="30"
+                                                        Padding="0">
+                                                        <fa:FontAwesome
+                                                            Margin="0"
+                                                            Padding="0"
+                                                            FontSize="15"
+                                                            Icon="Times"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                    <Popup
+                        PlacementTarget="{Binding ElementName=NewMember}"
+                        Placement="Top">
+                        <Popup.Style>
+                            <Style TargetType="Popup">
+                                <Setter Property="IsOpen" Value="True"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Suggestions.Count}" Value="0">
+                                        <Setter Property="IsOpen" Value="False"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Popup.Style>
+                        <ListBox
+                            Background="White"
+                            SelectionChanged="ListBox_SelectionChanged"
+                            ItemsSource="{Binding Suggestions}"
+                            ItemTemplate="{StaticResource AttendeeSuggestion}">
+                        </ListBox>
+                    </Popup>
+                    <TextBox
+                        x:Name="NewMember"
                         Grid.Row="7"
+                        Text="{Binding NewMember, UpdateSourceTrigger=PropertyChanged}"
+                        md:HintAssist.Hint="Add Member"
+                        Style="{StaticResource FloatingTextBox}"/>
+                    <Button
+                        Grid.Row="8"
+                        Click="Button_Click"
                         Style="{StaticResource NormalButton}"
                         Content="Submit"/>
                 </Grid>

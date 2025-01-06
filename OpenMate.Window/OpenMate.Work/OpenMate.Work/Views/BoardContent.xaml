@@ -17,23 +17,22 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Vertical">
-                <!--<Label 
-                    Height="50"
-                    Content="PROJECT:"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"/>-->
-
+                
                 <ComboBox
                     Height="45"
                     BorderThickness="0"
                     Margin="0 20 0 0"
                     FontSize="17"
                     Width="200"
+                    ItemsSource="{Binding Projects}"
+                    SelectedItem="{Binding SelectedProject}"
                     md:HintAssist.Hint="Project:"
                     Style="{StaticResource NonFloatingComboBox}">
-                    <ComboBoxItem Content="SharkTank" IsSelected="True"/>
-                    <ComboBoxItem Content="ParadiseIsland"/>
-                    <ComboBoxItem Content="MoneyBag"/>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
                 </ComboBox>
 
                 <Label 
@@ -83,25 +82,12 @@
                     </Grid>
                 </menu:NavigateButton>
 
-                <menu:NavigateButton
-                    Cursor="Hand"
-                    x:Name="BackLog"
-                    GroupName="Sprint"
-                    Style="{StaticResource ButtonStyle}"
-                    Checked="NavigateButton_Checked">
-                    <Grid>
-                        <TextBlock
-                            Text="BackLog"
-                            Style="{StaticResource Text_Style}"/>
-                    </Grid>
-                </menu:NavigateButton>
-
                 <Grid Height="30"/>
 
                 <Button
                     Content="Add New Project"
                     Style="{StaticResource NormalButton}"
-                    Command="{Binding NewProjectCM}"
+                    Command="{Binding OpenNewProjectCM}"
                     Margin="10 5"/>
             </StackPanel>
             <board:KanbanBoard x:Name="Board" Grid.Column="1"/>

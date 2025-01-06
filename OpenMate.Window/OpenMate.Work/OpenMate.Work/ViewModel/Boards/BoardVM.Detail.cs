@@ -37,45 +37,76 @@ namespace OpenMate.Work.ViewModel.Boards
             set => SetProperty(ref _SprintLabels, value);
         }
 
-        public void LoadStoryPointStatistics()
+        public async void LoadStoryPointStatistics(Sprint spr)
         {
-            SprintLabels = new ObservableCollection<string>()
+            try
             {
-                "Sprint 1",
-                "Sprint 2",
-                "Sprint 3",
-                "Sprint 4",
-            };
-            StoryPointSeries = new SeriesCollection()
-            {
-                new ColumnSeries
+                var stats = await projectService.GetSprintStats(spr.Id);
+                SprintLabels = new ObservableCollection<string>();
+                StoryPointSeries = new SeriesCollection();
+                DefectSeries = new SeriesCollection();
+
+                for (int i = 1; i <= spr.Order; i++)
+                {
+                    SprintLabels.Add($"Sprint {i}");
+                }
+
+                StoryPointSeries.Add(new ColumnSeries
                 {
                     Title = "Story Points",
-                    Values = new ChartValues<int> {30, 34, 36, 37}
-                }
-            };
+                    Values = new ChartValues<int>(stats.StoryPoints)
+                });
 
-            DefectSeries = new SeriesCollection()
+                foreach (var val in stats.Defects)
+                {
+                    DefectSeries.Add(new PieSeries()
+                    {
+                        Title = val.Item1,
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(val.Item2) },
+                        DataLabels = true
+                    });
+                }
+            }
+            catch
             {
-                new PieSeries()
+                SprintLabels = new ObservableCollection<string>()
                 {
-                    Title = "Hoai Hai",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(2) },
-                    DataLabels = true
-                },
-                new PieSeries()
+                    "Sprint 1",
+                    "Sprint 2",
+                    "Sprint 3",
+                    "Sprint 4",
+                };
+                StoryPointSeries = new SeriesCollection()
                 {
-                    Title = "Hoai Nhan",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(4) },
-                    DataLabels = true
-                },
-                new PieSeries()
+                    new ColumnSeries
+                    {
+                        Title = "Story Points",
+                        Values = new ChartValues<int> {30, 34, 36, 37}
+                    }
+                };
+
+                DefectSeries = new SeriesCollection()
                 {
-                    Title = "Minh Ngoc",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(4) },
-                    DataLabels = true
-                },
-            };
+                    new PieSeries()
+                    {
+                        Title = "Hoài Hải",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(2) },
+                        DataLabels = true
+                    },
+                    new PieSeries()
+                    {
+                        Title = "Hoài Nhân",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(4) },
+                        DataLabels = true
+                    },
+                    new PieSeries()
+                    {
+                        Title = "Minh Ngọc",
+                        Values = new ChartValues<ObservableValue> { new ObservableValue(4) },
+                        DataLabels = true
+                    },
+                };
+            }
         }
     }
 }

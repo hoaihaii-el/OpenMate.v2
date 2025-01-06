@@ -1,16 +1,20 @@
 ﻿using OpenMate.Work.Resources.Uitilities;
+using System;
 
 namespace OpenMate.Work.Model
 {
     public class Sprint : BaseViewModel
     {
-        public string SprintName { get; set; }
-        public int BackLogCount { get; set; }
-        public int DoingCount { get; set; }
-        public int ReviewCount { get; set; }
-        public int FinishCount { get; set; }
-        public string StartDate { get; set; }
-        public string EndDate { get; set; }
+        public int Id { get; set; }
+        public int Order { get; set; }
+        public string ProjectID { get; set; }
+        public string SprintName => $"Sprint {Order}";
+        public int Todo { get; set; }
+        public int Doing { get; set; }
+        public int Review { get; set; }
+        public int Finish { get; set; }
+        public DateTime StartDate { get; set; } = DateTime.Today;
+        public DateTime EndDate { get; set; } = DateTime.Today;
 
         private string _Status;
         public string Status

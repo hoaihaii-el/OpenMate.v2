@@ -1,15 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace OpenMate.API.Domain.Entities.Board
+﻿namespace OpenMate.API.Domain.DTOs
 {
-    public class Sprint
+    public class SprintDto
     {
-        [Key]
         public int Id { get; set; }
-        [MaxLength(10)]
         public string? ProjectID { get; set; }
         public int Order { get; set; }
-        [MaxLength(50)]
         public string? Status { get; set; }
         public int Todo { get; set; }
         public int Doing { get; set; }
